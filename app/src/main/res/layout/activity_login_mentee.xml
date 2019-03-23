@@ -24,6 +24,7 @@
         android:padding="16dp"
         android:orientation="vertical">
 
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,6 +59,15 @@
             android:layout_marginTop="10dp"
             />
 
-    </LinearLayout>
 
+    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="330dp"
+        android:background="#9111"
+        android:paddingBottom="340dp"
+        android:layout_marginBottom="1dp"
+        android:visibility="gone"/>
 </RelativeLayout>

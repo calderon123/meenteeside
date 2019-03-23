@@ -2,6 +2,7 @@ package com.example.realtimechatapp.MainActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -16,11 +17,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 
-import com.example.realtimechatapp.Questions.Question1;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -30,15 +38,39 @@ public class MenteeMainActivity extends AppCompatActivity
     private MenuItem logout_btn;
     FirebaseAuth auth = FirebaseAuth.getInstance();
 
+    FirebaseUser firebaseUser;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mentee_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference("UserMentee").child(firebaseUser.getUid());
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserMentee userMentee = dataSnapshot.getValue(UserMentee.class);
+
+                TextView fullname = findViewById(R.id.fullname);
+                TextView email = findViewById(R.id.email);
+
+
+                fullname.setText(userMentee.getFullname());
+                email.setText(userMentee.getEmail());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -77,26 +109,26 @@ public class MenteeMainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.mentor_activity_main_drawer, menu);
+        getMenuInflater().inflate(R.menu.mentor_main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item1) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        int id = item1.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.logout_btn) {
+        if (id == R.id.logout) {
             auth.signOut();
             finish();
             startActivity(new Intent(MenteeMainActivity.this, StartActivity.class));
             finish();
         }
 
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item1);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -106,7 +138,7 @@ public class MenteeMainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.find_mentor) {
-            startActivity(new Intent(MenteeMainActivity.this, Question1.class));
+//            startActivity(new Intent(MenteeMainActivity.this, Question1.class));
         }else if (id == R.id.nav_view){
 
         }else if (id == R.id.nav_slideshow) {

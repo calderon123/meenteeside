@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.HashMap;
+
 public class RegisterMenteeActivity extends AppCompatActivity {
 
     MaterialEditText fullname,email,password,confirmpassword;
@@ -85,9 +87,16 @@ public class RegisterMenteeActivity extends AppCompatActivity {
                             reference = FirebaseDatabase.getInstance().getReference("UserMentee").child(userid);
                             FirebaseAuth auth = FirebaseAuth.getInstance();
 
-                            UserMentee userMentee = new UserMentee(auth.getUid(),fullname,email,password);
+                            HashMap<String,String> hashMap = new HashMap<>();
+                            hashMap.put("id",userid);
+                            hashMap.put("fullname",fullname);
+                            hashMap.put("email",email);
+                            hashMap.put("password",password);
 
-                            reference.setValue(userMentee).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+
+
+                            reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){

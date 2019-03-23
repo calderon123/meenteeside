@@ -8,6 +8,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.realtimechatapp.R;
@@ -22,7 +23,7 @@ public class LoginActivityMentee extends AppCompatActivity {
 
     MaterialEditText email, password;
     AppCompatButton btn_login;
-
+    ProgressBar progressBar;
     FirebaseAuth auth;
 
 
@@ -45,10 +46,11 @@ public class LoginActivityMentee extends AppCompatActivity {
         email = findViewById(R.id.email);
         password =findViewById(R.id.password);
         btn_login = findViewById(R.id.btn_login);
+        progressBar = findViewById(R.id.progressBar);
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
 
                 String txt_email = email.getText().toString();
                 String txt_password = password.getText().toString();
@@ -58,10 +60,14 @@ public class LoginActivityMentee extends AppCompatActivity {
                 if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)){
                     Toast.makeText(LoginActivityMentee.this,"All fields required!", Toast.LENGTH_SHORT).show();
                 }else {
+
+                    progressBar.setVisibility(View.VISIBLE);
                     auth.signInWithEmailAndPassword(txt_email, txt_password)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                    progressBar.setVisibility(view.GONE);
                                     if (task.isSuccessful()){
                                         Intent intent = new Intent(LoginActivityMentee.this, MenteeMainActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
