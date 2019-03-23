@@ -1,4 +1,4 @@
-package com.example.realtimechatapp;
+package com.example.realtimechatapp.MainActivities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
+import com.example.realtimechatapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -19,10 +20,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
-
-import org.w3c.dom.Text;
-
-import java.util.HashMap;
 
 public class RegisterMenteeActivity extends AppCompatActivity {
 
@@ -94,7 +91,7 @@ public class RegisterMenteeActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
-                                       Intent intent = new Intent(RegisterMenteeActivity.this,MenteeMainActivity.class);
+                                       Intent intent = new Intent(RegisterMenteeActivity.this, MenteeMainActivity.class);
                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                        startActivity(intent);
                                        finish();

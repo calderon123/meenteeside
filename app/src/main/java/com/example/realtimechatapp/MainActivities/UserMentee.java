@@ -1,4 +1,4 @@
-package com.example.realtimechatapp;
+package com.example.realtimechatapp.MainActivities;
 
 public class UserMentee  {
 
