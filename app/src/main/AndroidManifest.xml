@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivities.MenteeMainActivity"></activity>
+        <activity android:name=".MainActivities.Question2"></activity>
+        <activity android:name=".MainActivities.Question1" />
+        <activity android:name=".MainActivities.MenteeMainActivity" />
         <activity android:name=".MainActivities.LoginActivityMentee" />
         <activity android:name=".MainActivities.RegisterMenteeActivity" />
         <activity android:name=".MainActivities.StartActivity">

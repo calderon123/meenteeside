@@ -138,7 +138,7 @@ public class MenteeMainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.find_mentor) {
-//            startActivity(new Intent(MenteeMainActivity.this, Question1.class));
+            startActivity(new Intent(MenteeMainActivity.this, Question1.class));
         }else if (id == R.id.nav_view){
 
         }else if (id == R.id.nav_slideshow) {
