@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#63C5BC"
-    tools:context=".MainActivities.MentorListFragment">
+    tools:context=".MainActivities.activities.MentorListFragment">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

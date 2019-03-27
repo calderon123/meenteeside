@@ -11,14 +11,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <TextView
-        android:textAlignment="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Counseling Online"
-        android:textSize="20dp"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"/>
+        <TextView
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Counseling Online"
+            android:textSize="20dp"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"/>
     </LinearLayout>
     <LinearLayout
         android:paddingTop="20dp"
@@ -42,30 +42,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Have you ever been counseling?"/>
+            android:text="Counselors below can help you fix problems and motivate you to be more postive."/>
 
-        <Button
-            android:layout_marginTop="20dp"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/border"
-            android:text="Yes"
-            android:layout_width="match_parent"
-            android:textStyle="bold"
-            android:id="@+id/btn_ans1"
-            android:layout_height="wrap_content" />
-        <Button
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:id="@+id/btn_ans2"
-            android:textColor="@color/colorWhite"
-           android:background="@drawable/border"
-            android:text="No"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+      <android.support.v7.widget.RecyclerView
+          android:id="@+id/recycler_view"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+      </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
     <ProgressBar

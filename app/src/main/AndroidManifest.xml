@@ -9,13 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivities.Question2_1"></activity>
-        <activity android:name=".MainActivities.Question2" />
-        <activity android:name=".MainActivities.Question1" />
-        <activity android:name=".MainActivities.MenteeMainActivity" />
-        <activity android:name=".MainActivities.LoginActivityMentee" />
-        <activity android:name=".MainActivities.RegisterMenteeActivity" />
-        <activity android:name=".MainActivities.StartActivity">
+        <activity android:name=".MainActivities.questions.Question2_1_1_1_1_1"></activity>
+        <activity android:name=".MainActivities.questions.Question2_1_1_1_1" />
+        <activity android:name=".MainActivities.questions.Question2_1_1_1" />
+        <activity android:name=".MainActivities.questions.Question2_1_1" />
+        <activity android:name=".MainActivities.questions.Question2_1" />
+        <activity android:name=".MainActivities.questions.Question2" />
+        <activity android:name=".MainActivities.questions.Question1" />
+        <activity android:name=".MainActivities.activities.MenteeMainActivity" />
+        <activity android:name=".MainActivities.activities.LoginActivityMentee" />
+        <activity android:name=".MainActivities.activities.RegisterMenteeActivity" />
+        <activity android:name=".MainActivities.activities.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
