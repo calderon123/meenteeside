@@ -51,12 +51,12 @@ public class Question2_1_1_1_1_1 extends Activity{
 
     private void readUsers() {
 
-        String rate = "500-1000/hour";
+        String expertise= "Mental Health Counselor";
 
 
        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserMentor");
 
-        databaseReference.orderByChild("rate").equalTo(rate).addValueEventListener(new ValueEventListener() {
+        databaseReference.orderByChild("expertise").equalTo(expertise).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

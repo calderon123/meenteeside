@@ -1,9 +1,5 @@
 package com.example.realtimechatapp.MainActivities.activities;
 
-import android.text.method.DateTimeKeyListener;
-
-import java.sql.Time;
-
 public class UserMentor {
 
     private Long id;
