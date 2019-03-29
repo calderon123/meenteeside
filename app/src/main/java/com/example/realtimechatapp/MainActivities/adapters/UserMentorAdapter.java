@@ -38,6 +38,7 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
         UserMentor userMentor = mUsermentor.get(position);
         viewHolder.fullname.setText(userMentor.getFullname());
         viewHolder.expertise.setText(userMentor.getExpertise());
+        viewHolder.rate.setText(userMentor.getRate());
         viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
     }
 
@@ -47,7 +48,7 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView fullname,expertise;
+        public TextView fullname,expertise,rate;
         public ImageView profile_image;
 
         public ViewHolder(View itemView){
@@ -56,6 +57,7 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
             fullname = itemView.findViewById(R.id.fullname);
             expertise = itemView.findViewById(R.id.expertise);
             profile_image = itemView.findViewById(R.id.profile_image);
+            rate = itemView.findViewById(R.id.rate);
         }
     }
 

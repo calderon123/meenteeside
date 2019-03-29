@@ -67,6 +67,14 @@
           }
         },
         {
+          "client_id": "228148733447-3he5fms84toc4dr97cbbla88l2mgj7om.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.realtimechatapp",
+            "certificate_hash": "6642e9f32e487c388e80325408e7a4d55adf7d22"
+          }
+        },
+        {
           "client_id": "228148733447-3ustqirb0ub8bdjmntbme1b57o8q41i9.apps.googleusercontent.com",
           "client_type": 3
         }

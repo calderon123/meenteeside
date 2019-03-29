@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -38,7 +39,8 @@ public class Question2_1_1_1_1_1 extends Activity{
         setContentView(R.layout.activity_question2_1_1_1_1_1);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
         mUsermentor = new ArrayList<>();
@@ -49,18 +51,19 @@ public class Question2_1_1_1_1_1 extends Activity{
 
     private void readUsers() {
 
-        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserMentor");
+        String rate = "500-1000/hour";
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+
+       final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserMentor");
+
+        databaseReference.orderByChild("rate").equalTo(rate).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                mUsermentor.clear();
+
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
                     UserMentor userMentor = snapshot.getValue(UserMentor.class);
 
                     mUsermentor.add(userMentor);
-
                 }
                 userMentorAdapter = new UserMentorAdapter(getApplicationContext(),mUsermentor);
                 recyclerView.setAdapter(userMentorAdapter);

@@ -1,31 +1,45 @@
 package com.example.realtimechatapp.MainActivities.activities;
 
+import android.text.method.DateTimeKeyListener;
+
+import java.sql.Time;
+
 public class UserMentor {
 
-    private String id;
+    private Long id;
     private String fullname;
     private String expertise;
     private String rate;
     private String availability;
     private String email;
+    private String date_reg;
 
-    public UserMentor(String id, String fullname, String expertise, String rate, String availability, String email) {
+    public UserMentor(Long id, String fullname, String expertise, String rate, String availability,String date_reg, String email) {
         this.id = id;
         this.fullname = fullname;
         this.expertise = expertise;
         this.rate = rate;
         this.availability = availability;
+        this.date_reg = date_reg;
         this.email = email;
     }
     public UserMentor(){
 
     }
 
-    public String getId() {
+    public String getDate_reg() {
+        return date_reg;
+    }
+
+    public void setDate_reg(String date_reg) {
+        this.date_reg = date_reg;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
