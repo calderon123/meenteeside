@@ -16,35 +16,27 @@
         android:orientation="vertical"
         android:layout_centerVertical="true"
         android:layout_toEndOf="@+id/profile_image">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="fullname"
-        android:id="@+id/fullname"
-        android:maxLines="1"
-        android:textStyle="bold"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/expertise"
-        android:textStyle="bold"
-        android:text="ex"
-       />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="rate"
-        android:id="@+id/rate"
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="fullname"
+            android:id="@+id/fullname"
+            android:maxLines="1"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/expertise"
+            android:textStyle="bold"
+            android:text="ex"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="rate"
+            android:id="@+id/rate"
+            />
     </LinearLayout>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:id="@+id/btn_add"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="@color/colorWhite"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"/>
+
 </RelativeLayout>

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
@@ -8,17 +7,28 @@
     android:background="@color/colorPrimaryDark"
     android:layout_height="match_parent"
     tools:context=".MainActivities.questions.Question1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="HOME"
+        android:textStyle="bold"
+        android:id="@+id/home"
+        android:textAlignment="textEnd"
+        android:textColor="@color/colorWhite"
+        android:textSize="20dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
-            android:textAlignment="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Counseling Online"
-            android:textSize="20dp"
+            android:textAlignment="center"
             android:textColor="@color/colorWhite"
-            android:textStyle="bold"/>
+            android:textSize="20dp"
+            android:textStyle="bold" />
     </LinearLayout>
     <LinearLayout
         android:paddingTop="20dp"

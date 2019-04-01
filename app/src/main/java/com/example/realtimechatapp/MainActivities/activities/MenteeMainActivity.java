@@ -4,13 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +18,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 
 import com.example.realtimechatapp.MainActivities.questions.Question1;
 import com.example.realtimechatapp.R;
@@ -62,6 +61,7 @@ public class MenteeMainActivity extends AppCompatActivity
                 TextView email = findViewById(R.id.email);
 
 
+                assert userMentee != null;
                 fullname.setText(userMentee.getFullname());
                 email.setText(userMentee.getEmail());
             }
@@ -139,11 +139,9 @@ public class MenteeMainActivity extends AppCompatActivity
 
         if (id == R.id.find_mentor) {
             startActivity(new Intent(MenteeMainActivity.this, Question1.class));
-        }else if (id == R.id.nav_view){
+        }else if (id == R.id.send_report) {
 
-        }else if (id == R.id.nav_slideshow) {
-
-        }else if (id == R.id.nav_gallery) {
+        }else if (id == R.id.view_profile) {
 
         }else if (id == R.id.logout_btn){
             auth.signOut();
