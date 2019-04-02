@@ -23,8 +23,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.List;
 
-//import com.example.realtimechatapp.MainActivities.activities.MentorListFragment;
-//import com.example.realtimechatapp.MainActivities.activities.MentorListFragment;
+//import com.example.realtimechatapp.MainActivities.fragments.MentorListFragment;
+//import com.example.realtimechatapp.MainActivities.fragments.MentorListFragment;
 
 public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.ViewHolder> {
 
@@ -73,20 +73,21 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
 
                     HashMap<String,String> hashMap = new HashMap<>();
                     hashMap.put("id",userMentor.getId().toString());
+                    hashMap.put("image",userMentor.getImage());
                     hashMap.put("fullname",userMentor.getFullname());
                     hashMap.put("expertise",userMentor.getExpertise());
                     hashMap.put("availability",userMentor.getAvailability());
                     hashMap.put("rate", userMentor.getRate());
-
+                    String userid =  userMentor.getId().toString();
                     FirebaseDatabase.getInstance().getReference().child("Add").child(firebaseUser.getUid()).child("counselor")
-                            .child(userMentor.getId().toString()).setValue(hashMap);
+                            .child(userid).setValue(hashMap);
 
                     FirebaseDatabase.getInstance().getReference().child("Add").child(userMentor.getId().toString()).child("mentees")
                             .child(firebaseUser.getUid()).setValue(true);
                 }else {
-
+                    String userid =  userMentor.getId().toString();
                     FirebaseDatabase.getInstance().getReference().child("Add").child(firebaseUser.getUid()).child("counselor")
-                            .child(userMentor.getId().toString()).removeValue();
+                            .child(userid).removeValue();
                     FirebaseDatabase.getInstance().getReference().child("Add").child(userMentor.getId().toString()).child("mentees")
                             .child(firebaseUser.getUid()).removeValue();
                 }

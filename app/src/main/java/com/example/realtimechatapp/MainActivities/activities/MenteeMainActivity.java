@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.realtimechatapp.MainActivities.fragments.MessagesFragment;
 import com.example.realtimechatapp.MainActivities.questions.Question1;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -98,7 +99,7 @@ public class MenteeMainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {

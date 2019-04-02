@@ -3,6 +3,20 @@ package com.example.realtimechatapp.MainActivities.activities;
 public class UserMentor {
 
     private Long id;
+
+    public UserMentor(Long id) {
+        this.id = id;
+    }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
+    }
+
+    private String Image;
     private String fullname;
     private String expertise;
     private String rate;
@@ -10,7 +24,7 @@ public class UserMentor {
     private String email;
     private String date_reg;
 
-    public UserMentor(Long id, String fullname, String expertise, String rate, String availability,String date_reg, String email) {
+    public UserMentor(Long id, String fullname, String expertise, String rate, String availability, String date_reg, String email) {
         this.id = id;
         this.fullname = fullname;
         this.expertise = expertise;

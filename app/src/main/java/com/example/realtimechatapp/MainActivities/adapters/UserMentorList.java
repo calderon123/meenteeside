@@ -1,6 +1,7 @@
 package com.example.realtimechatapp.MainActivities.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,12 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.realtimechatapp.MainActivities.activities.Counselors;
+import com.example.realtimechatapp.MainActivities.activities.MessageActivity;
+import com.example.realtimechatapp.MainActivities.activities.UserMentor;
 import com.example.realtimechatapp.R;
 
 import java.util.List;
 
 public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHolder> {
 
+    private UserMentor userMentor;
     private Context mContext;
     private List<Counselors> mUsers;
 
@@ -34,7 +38,7 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Counselors counselors= mUsers.get(i);
+        final Counselors counselors = mUsers.get(i);
         viewHolder.fullname.setText(counselors.getFullname());
         viewHolder.rate.setText(counselors.getRate());
         viewHolder.expertise.setText(counselors.getExpertise());
@@ -44,6 +48,16 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
 //        }else{
 //            Glide.with(mContext).load(userMentor.getImage()).into(viewHolder.profile_image);
 //        }
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(mContext, MessageActivity.class);
+                intent.putExtra("id", counselors.getCounselorid());
+                mContext.startActivity(intent );
+            }
+        });
     }
 
     @Override
