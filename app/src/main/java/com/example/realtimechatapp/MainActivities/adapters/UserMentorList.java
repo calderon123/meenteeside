@@ -54,7 +54,7 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
             public void onClick(View view) {
 
                 Intent intent = new Intent(mContext, MessageActivity.class);
-                intent.putExtra("id", counselors.getCounselorid());
+                intent.putExtra("id", counselors.getId());
                 mContext.startActivity(intent );
             }
         });

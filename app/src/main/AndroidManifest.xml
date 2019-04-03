@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MainActivities.adapters.Counselors_List"></activity>
+        <activity android:name=".MainActivities.activities.MessageActivity" />
         <activity android:name=".MainActivities.questions.Question2_1_1_1_1_1" />
         <activity android:name=".MainActivities.questions.Question2_1_1_1_1" />
         <activity android:name=".MainActivities.questions.Question2_1_1_1" />
@@ -18,7 +20,7 @@
         <activity android:name=".MainActivities.questions.Question1" />
         <activity android:name=".MainActivities.activities.LoginActivityMentee" />
         <activity android:name=".MainActivities.activities.MenteeMainActivity" />
-        <activity android:name=".MainActivities.activities.MessageActivity"/>
+        <activity android:name=".MainActivities.activities.MessageActivity" />
         <activity android:name=".MainActivities.activities.StartActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
