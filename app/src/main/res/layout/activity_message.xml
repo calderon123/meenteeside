@@ -55,6 +55,7 @@
         android:layout_below="@+id/bar_layout"
         android:layout_above="@+id/bottom"
         android:layout_width="match_parent"
+        android:id="@+id/recycler_view"
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>

@@ -3,6 +3,20 @@ package com.example.realtimechatapp.MainActivities.activities;
 public class Counselors {
 
     private String id;
+    private  String imageurl;
+
+    public String getImageurl() {
+        return imageurl;
+    }
+
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
+    }
+
+    public Counselors(String id) {
+        this.id = id;
+    }
+
     private  String fullname;
     private  String rate;
     private  String expertise;
