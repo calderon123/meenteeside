@@ -6,29 +6,23 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/find_mentor"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_search_black_24dp"
             android:title="Find mentor" />
         <item
             android:id="@+id/send_report"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_report_problem_black_24dp"
             android:title="Send Report" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
     </group>
 
     <item android:title="Account">
         <menu>
             <item
                 android:id="@+id/view_profile"
+                android:icon="@drawable/ic_account_circle_black_24dp"
                 android:title="View Profile" />
             <item
                 android:id="@+id/logout_btn"
+                android:icon="@drawable/ic_exit_to_app_black_24dp"
                 android:title="Sign Out" />
         </menu>
 
