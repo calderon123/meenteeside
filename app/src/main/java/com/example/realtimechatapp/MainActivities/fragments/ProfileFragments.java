@@ -1,17 +1,15 @@
-package com.example.realtimechatapp.MainActivities.activities;
+package com.example.realtimechatapp.MainActivities.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.realtimechatapp.MainActivities.models.UserMentee;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,10 +25,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileFragments extends Fragment {
 
     private TextView fullname,email;
-    CircleImageView profile_image;
+    private CircleImageView profile_image;
 
-    FirebaseUser firebaseUser;
-    DatabaseReference databaseReference;
+    private FirebaseUser firebaseUser;
+    private DatabaseReference databaseReference;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,14 +49,9 @@ public class ProfileFragments extends Fragment {
                 UserMentee userMentee = dataSnapshot.getValue(UserMentee.class);
 
                 assert userMentee != null;
-                fullname.setText(userMentee.getFullname());
+                fullname.setText(firebaseUser.getDisplayName());
                 email.setText(userMentee.getEmail());
-//                if (userMentee.getImage().equals("default")){
-                    profile_image.setImageResource(R.mipmap.ic_launcher);
-//                }else{
-//                    Glide.with(getContext()).load(userMentee.getImage()).into(profile_image);
-//                }
-//
+                Glide.with(getContext()).load(firebaseUser.getPhotoUrl()).into(profile_image);
               }
 
             @Override

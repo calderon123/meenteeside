@@ -10,13 +10,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.bumptech.glide.Glide;
 import com.example.realtimechatapp.MainActivities.adapters.MessageAdapter;
+import com.example.realtimechatapp.MainActivities.models.Chat;
+import com.example.realtimechatapp.MainActivities.models.Counselors;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -63,7 +63,8 @@ public class MessageActivity extends AppCompatActivity {
         toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                startActivity(new Intent(MessageActivity.this, MenteeMainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 

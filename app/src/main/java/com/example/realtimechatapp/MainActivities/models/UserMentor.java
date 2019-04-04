@@ -1,4 +1,4 @@
-package com.example.realtimechatapp.MainActivities.activities;
+package com.example.realtimechatapp.MainActivities.models;
 
 public class UserMentor {
 
@@ -16,6 +16,19 @@ public class UserMentor {
         Image = image;
     }
 
+    public UserMentor(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    private String status;
     private String Image;
     private String fullname;
     private String expertise;

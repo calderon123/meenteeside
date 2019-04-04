@@ -1,4 +1,4 @@
-package com.example.realtimechatapp.MainActivities.activities;
+package com.example.realtimechatapp.MainActivities.models;
 
 public class Counselors {
 

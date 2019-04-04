@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.realtimechatapp.MainActivities.activities.Counselors;
+import com.example.realtimechatapp.MainActivities.models.Counselors;
 import com.example.realtimechatapp.MainActivities.adapters.UserMentorList;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -70,7 +70,7 @@ public class MentorListFragment extends Fragment {
                         mUsers.add(counselors);
 
                 }
-                userMentorList = new UserMentorList(getContext(), mUsers);
+                userMentorList = new UserMentorList(getContext(), mUsers, false);
                 recyclerView.setAdapter(userMentorList);
             }
 

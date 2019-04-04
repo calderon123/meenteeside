@@ -1,7 +1,6 @@
 package com.example.realtimechatapp.MainActivities.fragments;
 
 import android.os.Bundle;
-import android.os.UserHandle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.realtimechatapp.MainActivities.activities.Chat;
-import com.example.realtimechatapp.MainActivities.activities.Counselors;
+import com.example.realtimechatapp.MainActivities.models.Chat;
+import com.example.realtimechatapp.MainActivities.models.Counselors;
 import com.example.realtimechatapp.MainActivities.adapters.UserMentorList;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -110,7 +109,7 @@ public class MessagesFragment extends Fragment {
 
                     }
                 }
-                userMentorList = new UserMentorList(getContext(),mUsers);
+                userMentorList = new UserMentorList(getContext(),mUsers,false);
                 recyclerView.setAdapter(userMentorList);
             }
 

@@ -20,7 +20,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.realtimechatapp.MainActivities.fragments.MessagesFragment;
+import com.example.realtimechatapp.MainActivities.fragments.ProfileFragments;
+import com.example.realtimechatapp.MainActivities.models.UserMentee;
 import com.example.realtimechatapp.MainActivities.questions.Question1;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,15 +35,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MenteeMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    CircleImageView imageView;
+    private TextView fullname,email;
     private MenuItem logout_btn;
     FirebaseAuth auth = FirebaseAuth.getInstance();
 
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +68,15 @@ public class MenteeMainActivity extends AppCompatActivity
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserMentee userMentee = dataSnapshot.getValue(UserMentee.class);
 
-                TextView fullname = findViewById(R.id.fullname);
-                TextView email = findViewById(R.id.email);
-
+                fullname =(TextView) findViewById(R.id.fullname);
+                email =(TextView) findViewById(R.id.email);
+                imageView = (CircleImageView) findViewById(R.id.imageView);
 
                 assert userMentee != null;
                 fullname.setText(userMentee.getFullname());
                 email.setText(userMentee.getEmail());
+
+                Glide.with(getApplicationContext()).load(firebaseUser.getPhotoUrl()).into(imageView);
             }
 
             @Override
@@ -126,9 +137,9 @@ public class MenteeMainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.logout) {
             auth.signOut();
-            finish();
-            startActivity(new Intent(MenteeMainActivity.this, StartActivity.class));
-            finish();
+            startActivity(new Intent(MenteeMainActivity.this, StartActivity.class)
+            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            return true;
         }
 
         return super.onOptionsItemSelected(item1);
@@ -199,5 +210,25 @@ public class MenteeMainActivity extends AppCompatActivity
             return titles.get(position);
 
         }
+    }
+    private void status(String status){
+        databaseReference  = FirebaseDatabase.getInstance().getReference("UserMentee")
+                .child(firebaseUser.getUid());
+
+        HashMap<String,Object> hashMap= new HashMap<>();
+        hashMap.put("status",status);
+
+        databaseReference.updateChildren(hashMap);
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        status("online");
+    }
+    @Override
+    protected  void onPause(){
+        super.onPause();
+        status("offline");
     }
 }

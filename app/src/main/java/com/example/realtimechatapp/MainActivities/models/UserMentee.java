@@ -1,4 +1,4 @@
-package com.example.realtimechatapp.MainActivities.activities;
+package com.example.realtimechatapp.MainActivities.models;
 
 public class UserMentee  {
 
@@ -17,6 +17,15 @@ public class UserMentee  {
         this.image = image;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    private String status;
     private String fullname;
     private String email;
     private String password;

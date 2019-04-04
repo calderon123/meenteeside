@@ -21,10 +21,10 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 public class LoginActivityMentee extends AppCompatActivity {
 
-    MaterialEditText email, password;
-    AppCompatButton btn_login;
-    ProgressBar progressBar;
-    FirebaseAuth auth;
+    private MaterialEditText email, password;
+    private AppCompatButton btn_login;
+    private ProgressBar progressBar;
+    private FirebaseAuth auth;
 
 
 

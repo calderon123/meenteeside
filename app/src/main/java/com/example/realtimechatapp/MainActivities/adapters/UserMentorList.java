@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.realtimechatapp.MainActivities.activities.Counselors;
+import com.example.realtimechatapp.MainActivities.models.Counselors;
 import com.example.realtimechatapp.MainActivities.activities.MessageActivity;
-import com.example.realtimechatapp.MainActivities.activities.UserMentor;
+import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
 
 import java.util.List;
@@ -22,10 +22,12 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
     private UserMentor userMentor;
     private Context mContext;
     private List<Counselors> mUsers;
+    private boolean ischat;
 
-    public UserMentorList(Context mcontext, List<Counselors> userMentorList){
+    public UserMentorList(Context mcontext, List<Counselors> userMentorList,boolean ischat){
         this.mContext = mcontext;
         this.mUsers = userMentorList;
+        this.ischat = ischat;
     }
 
     @NonNull
@@ -48,6 +50,18 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
 //        }else{
 //            Glide.with(mContext).load(userMentor.getImage()).into(viewHolder.profile_image);
 //        }
+        if (ischat){
+            if (userMentor.getStatus().equals("online")){
+                viewHolder.img_on.setVisibility(View.VISIBLE);
+                viewHolder.img_off.setVisibility(View.GONE);
+            }else {
+                viewHolder.img_on.setVisibility(View.GONE);
+                viewHolder.img_off.setVisibility(View.VISIBLE);
+            }
+        }else {
+            viewHolder.img_on.setVisibility(View.GONE);
+            viewHolder.img_off.setVisibility(View.GONE);
+        }
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +83,8 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
 
         public TextView fullname,expertise,rate;
         public ImageView profile_image;
+        private ImageView img_off;
+        private ImageView img_on;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +94,8 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
             expertise = itemView.findViewById(R.id.expertise);
             rate = itemView.findViewById(R.id.rate);
             profile_image = itemView.findViewById(R.id.profile_image);
+            img_off = itemView.findViewById(R.id.img_off);
+            img_on= itemView.findViewById(R.id.img_on);
 
         }
     }

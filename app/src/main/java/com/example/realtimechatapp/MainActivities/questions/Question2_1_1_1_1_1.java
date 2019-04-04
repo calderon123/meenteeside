@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.realtimechatapp.MainActivities.activities.MenteeMainActivity;
-import com.example.realtimechatapp.MainActivities.activities.UserMentor;
+import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.MainActivities.adapters.UserMentorAdapter;
 import com.example.realtimechatapp.R;
 import com.google.firebase.database.DataSnapshot;
