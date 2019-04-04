@@ -9,6 +9,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -90,6 +91,7 @@ public class MenteeMainActivity extends AppCompatActivity
 
         viewPagerAdapter.addFragment(new MentorListFragment(),"Mentor List" );
         viewPagerAdapter.addFragment(new MessagesFragment(), "Messages");
+        viewPagerAdapter.addFragment(new ProfileFragments(), "Profile");
 
 
         viewPager.setAdapter(viewPagerAdapter);
@@ -137,18 +139,27 @@ public class MenteeMainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        Fragment fragment = null;
         if (id == R.id.find_mentor) {
             startActivity(new Intent(MenteeMainActivity.this, Question1.class));
         }else if (id == R.id.send_report) {
 
         }else if (id == R.id.view_profile) {
-
+            fragment = new ProfileFragments();
         }else if (id == R.id.logout_btn){
             auth.signOut();
             finish();
             startActivity(new Intent(MenteeMainActivity.this, StartActivity.class));
             finish();
+        }
+
+        if (fragment !=null){
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragmentManager.beginTransaction();
+
+            ft.replace(R.id.profile_fragment, fragment);
+
+            ft.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

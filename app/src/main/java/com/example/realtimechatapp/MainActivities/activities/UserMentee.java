@@ -3,6 +3,19 @@ package com.example.realtimechatapp.MainActivities.activities;
 public class UserMentee  {
 
 
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public UserMentee(String image) {
+        this.image = image;
+    }
 
     private String fullname;
     private String email;
