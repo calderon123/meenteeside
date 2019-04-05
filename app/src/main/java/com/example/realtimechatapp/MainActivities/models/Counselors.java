@@ -19,6 +19,16 @@ public class Counselors {
 
     private  String fullname;
     private  String rate;
+
+    public String getStatus_counselor() {
+        return status_counselor;
+    }
+
+    public void setStatus_counselor(String status_counselor) {
+        this.status_counselor = status_counselor;
+    }
+
+    private  String status_counselor;
     private  String expertise;
     private  String availability;
 

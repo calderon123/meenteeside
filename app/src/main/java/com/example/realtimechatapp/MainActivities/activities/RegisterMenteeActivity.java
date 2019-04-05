@@ -95,7 +95,6 @@ public class RegisterMenteeActivity extends AppCompatActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btn_register.setVisibility(View.GONE);
                 progressBar.setVisibility(View.GONE);
                 String txt_fullname = fullname.getText().toString();
                 String txt_email = email.getText().toString();

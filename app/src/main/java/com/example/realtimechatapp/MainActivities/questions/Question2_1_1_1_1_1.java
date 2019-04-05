@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.realtimechatapp.MainActivities.activities.MenteeMainActivity;
@@ -27,7 +28,7 @@ public class Question2_1_1_1_1_1 extends Activity{
 
 
     private RecyclerView recyclerView;
-    private TextView textView;
+    private ImageView textView;
     private UserMentorAdapter userMentorAdapter;
     private List<UserMentor> mUsermentor;
 
@@ -44,8 +45,9 @@ public class Question2_1_1_1_1_1 extends Activity{
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Question2_1_1_1_1_1.this, MenteeMainActivity.class));
-                finish();
+                startActivity(new Intent(Question2_1_1_1_1_1.this, MenteeMainActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+               finish();
             }
         });
 
@@ -63,11 +65,49 @@ public class Question2_1_1_1_1_1 extends Activity{
     private void readUsers() {
 
         String expertise= "Mental Health Counselor";
-
-
+        String rating ="500-1000/hour";
+        String availability ="Once a week";
        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserMentor");
 
         databaseReference.orderByChild("expertise").equalTo(expertise).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    UserMentor userMentor = snapshot.getValue(UserMentor.class);
+
+                    mUsermentor.add(userMentor);
+                }
+                userMentorAdapter = new UserMentorAdapter(getApplicationContext(),mUsermentor);
+                recyclerView.setAdapter(userMentorAdapter);
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        databaseReference.orderByChild("rating").equalTo(rating).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    UserMentor userMentor = snapshot.getValue(UserMentor.class);
+
+                    mUsermentor.add(userMentor);
+                }
+                userMentorAdapter = new UserMentorAdapter(getApplicationContext(),mUsermentor);
+                recyclerView.setAdapter(userMentorAdapter);
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        databaseReference.orderByChild("availability").equalTo(availability).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 

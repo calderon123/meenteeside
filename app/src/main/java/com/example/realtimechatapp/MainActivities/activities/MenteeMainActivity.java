@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.example.realtimechatapp.MainActivities.fragments.MessagesFragment;
 import com.example.realtimechatapp.MainActivities.fragments.ProfileFragments;
 import com.example.realtimechatapp.MainActivities.models.UserMentee;
+import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.MainActivities.questions.Question1;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -212,8 +213,9 @@ public class MenteeMainActivity extends AppCompatActivity
         }
     }
     private void status(String status){
-        databaseReference  = FirebaseDatabase.getInstance().getReference("UserMentee")
-                .child(firebaseUser.getUid());
+        UserMentor userMentor = null;
+        databaseReference  = FirebaseDatabase.getInstance().getReference("UserMentee").
+        child(firebaseUser.getUid());
 
         HashMap<String,Object> hashMap= new HashMap<>();
         hashMap.put("status",status);

@@ -109,7 +109,7 @@ public class MessagesFragment extends Fragment {
 
                     }
                 }
-                userMentorList = new UserMentorList(getContext(),mUsers,false);
+                userMentorList = new UserMentorList(getContext(),mUsers,true);
                 recyclerView.setAdapter(userMentorList);
             }
 

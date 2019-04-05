@@ -1,25 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp"
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:id="@+id/profile_image"
         android:src="@mipmap/ic_launcher"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_off"
+        android:layout_width="20dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="-59dp"
+        android:layout_marginTop="-20dp"
+        android:layout_toEndOf="@+id/profile_image"
+        android:layout_toRightOf="@+id/profile_image"
+        android:src="@mipmap/ic_launcher"
+        android:visibility="gone"
+        android:layout_below="@+id/profile_image"
+        app:civ_border_color="#bfbfbf"
+        app:civ_border_width="10dp"
+        android:layout_marginLeft="-76dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_on"
+        android:layout_width="20dp"
+        android:layout_height="24dp"
+        android:layout_below="@+id/profile_image"
+        android:layout_marginStart="-57dp"
+        android:layout_marginLeft="-57dp"
+        android:layout_marginTop="-20dp"
+        android:layout_toEndOf="@+id/profile_image"
+        android:layout_toRightOf="@+id/profile_image"
+        android:src="@mipmap/ic_launcher"
+        android:visibility="gone"
+        app:civ_border_color="#05df29"
+        app:civ_border_width="10dp" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:orientation="vertical"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/profile_image">
+        android:layout_toEndOf="@+id/profile_image"
+        android:layout_toRightOf="@+id/profile_image">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="fullname"
+            android:textSize="15dp"
             android:id="@+id/fullname"
             android:maxLines="1"
             android:textStyle="bold"/>
@@ -27,6 +59,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/expertise"
+            android:textSize="8dp"
             android:textStyle="bold"
             android:text="ex"
             />
@@ -34,9 +67,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:textSize="8dp"
             android:text="rate"
             android:id="@+id/rate"
             />
     </LinearLayout>
+    <Button
+        android:id="@+id/rate_star"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textSize="10dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/border_layout"
+        android:padding="5dp"
+        android:text="@string/rate_counselor"
+        android:textColor="#111" />
 
 </RelativeLayout>

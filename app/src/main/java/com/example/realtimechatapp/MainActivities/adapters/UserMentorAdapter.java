@@ -78,6 +78,7 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
                     hashMap.put("expertise",userMentor.getExpertise());
                     hashMap.put("availability",userMentor.getAvailability());
                     hashMap.put("rate", userMentor.getRate());
+                    hashMap.put("status","offline");
                     String userid =  userMentor.getId().toString();
                     FirebaseDatabase.getInstance().getReference().child("Add").child(firebaseUser.getUid()).child("counselor")
                             .child(userid).setValue(hashMap);
