@@ -23,7 +23,9 @@
                 android:layout_height="wrap_content" />
 
         </android.support.v7.widget.Toolbar>
+
         <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -31,18 +33,12 @@
                 android:layout_width="match_parent"
                 android:padding="8dp"
                 android:layout_height="wrap_content">
-                <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:textColor="#111"
-                    android:textAlignment="center"
-                    android:layout_height="wrap_content"
-                    android:text="COUNSELORS PROFILE"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:id="@+id/profile_image"
-                    android:layout_marginTop="50dp"
+
                     android:src="@mipmap/ic_launcher"
                     android:layout_centerHorizontal="true"/>
                 <TextView
@@ -51,11 +47,11 @@
                     android:text="FULLNAME"
                     android:id="@+id/fullname"
                     android:layout_below="@+id/profile_image"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textStyle="bold"
                     android:layout_centerHorizontal="true"
-                    android:textSize="20dp"/>
+                    android:textSize="18dp"/>
 
 
                 <TextView
@@ -70,18 +66,139 @@
                     android:layout_centerHorizontal="true"
                     android:textSize="15dp"/>
             </RelativeLayout>
+
         </android.support.v7.widget.CardView>
     </android.support.design.widget.AppBarLayout>
-    <LinearLayout
+
+
+
+    <ScrollView
         android:padding="10dp"
-        android:layout_below="@id/bar_layout"
+        android:layout_above="@+id/bottom1"
+        android:layout_below="@+id/bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <android.support.v7.widget.CardView
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.CardView>
+        </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+            android:padding="20dp"
+            android:visibility="gone"
+            android:id="@+id/card_view1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.hsalf.smilerating.SmileRating
+                android:rating="0"
+                android:id="@+id/rating_retrieve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                app:angryColor="#f29a68"
+                app:drawingColor="#353431"
+                app:normalColor="#f2dd68"
+                app:isIndicator="false"
+                app:placeHolderBackgroundColor="#e6e8ed"
+                app:placeHolderSmileColor="#ffffff"
+                app:textNonSelectionColor="#AEB3B5"
+                app:textSelectionColor="#000000" />
+            <View
+                android:layout_marginTop="80dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark"/>
+                <TextView
+                    android:padding="10dp"
+                    android:id="@+id/comments_retrieve"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginTop="80dp"
+                    android:text="Comment Feedback" />
+
+        </android.support.v7.widget.CardView>
+
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/bottom1"
+        android:layout_width="match_parent"
+        android:layout_height="103dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <com.hsalf.smilerating.SmileRating
+            android:id="@+id/ratingView"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:rating="0"
+            app:angryColor="#f29a68"
+            app:drawingColor="#353431"
+            app:isIndicator="false"
+            app:normalColor="#f2dd68"
+            app:placeHolderBackgroundColor="#e6e8ed"
+            app:placeHolderSmileColor="#ffffff"
+            app:textNonSelectionColor="#AEB3B5"
+            app:textSelectionColor="#000000" />
+
+        <RelativeLayout
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorWhite"
+
+            android:padding="5dp">
+
+            <EditText
+                android:id="@+id/comments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/btn_send"
+                android:background="@android:color/transparent"
+                android:hint="Give feedback....." />
+
+            <ImageButton
+                android:id="@+id/btn_send"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@color/colorWhite"
+                android:src="@drawable/ic_send_black_24dp" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

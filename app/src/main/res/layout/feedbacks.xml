@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+    <com.hsalf.smilerating.SmileRating
+        android:id="@+id/rating_retrieve"
+        android:layout_centerHorizontal="true"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_below="@id/rating_retrieve"
+        android:layout_width="match_parent"
+        android:background="#111"
+        android:layout_height="2dp"/>
+    <TextView
+        android:layout_below="@+id/rating_retrieve"
+        android:text="Feedbacks"
+        android:textSize="15dp"
+        android:textStyle="italic"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/comments_retrieve"
+        android:textColor="#111"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

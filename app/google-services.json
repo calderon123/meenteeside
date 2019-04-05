@@ -21,10 +21,6 @@
             "package_name": "com.example.realtimeapp",
             "certificate_hash": "ed5b1f7cdb0269ce2b8cef9ffb1491a7682829ef"
           }
-        },
-        {
-          "client_id": "228148733447-3ustqirb0ub8bdjmntbme1b57o8q41i9.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -33,20 +29,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "228148733447-3ustqirb0ub8bdjmntbme1b57o8q41i9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     },
@@ -73,10 +62,6 @@
             "package_name": "com.example.realtimechatapp",
             "certificate_hash": "6642e9f32e487c388e80325408e7a4d55adf7d22"
           }
-        },
-        {
-          "client_id": "228148733447-3ustqirb0ub8bdjmntbme1b57o8q41i9.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -85,20 +70,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "228148733447-3ustqirb0ub8bdjmntbme1b57o8q41i9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     },
@@ -109,27 +87,20 @@
           "package_name": "com.realtimeapp"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "228148733447-3ustqirb0ub8bdjmntbme1b57o8q41i9.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
           "current_key": "AIzaSyAaLsaWiJ0rwWsxOcviErWAgO8Zz0jjj5E"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
+          "other_platform_oauth_client": [
+            {
+              "client_id": "228148733447-3ustqirb0ub8bdjmntbme1b57o8q41i9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -1,17 +1,33 @@
 package com.example.realtimechatapp.MainActivities.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.realtimechatapp.MainActivities.adapters.FeedBackAdapter;
+import com.example.realtimechatapp.MainActivities.adapters.UserMentorAdapter;
 import com.example.realtimechatapp.MainActivities.models.Counselors;
+import com.example.realtimechatapp.MainActivities.models.Rate;
+import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,35 +36,96 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hsalf.smilerating.SmileRating;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MentorProfile extends AppCompatActivity {
 
+
+    public  static Context context;
     private CircleImageView profile_image;
-    private TextView fullname,expertise,emmail;
-    DatabaseReference databaseReference;
+    private TextView fullname,expertise,emmail,comments_retrieve;
     FirebaseUser firebaseUser;
     ImageView back;
+    EditText comments;
+    DatabaseReference rateDetailRef;
+    DatabaseReference userMentorInfo;
+    DatabaseReference databaseReference;
+    ImageButton btn_send;
+    RecyclerView recyclerView;
+    FeedBackAdapter feedBackAdapter;
+    List<Rate> rateList;
 
+
+    public static  final  String rate_detal_1= "RateDetails";
+    public static  Counselors counselor = null;
+    double ratingStars;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mentor_profile);
+        context = this;
+
         profile_image = (CircleImageView)findViewById(R.id.profile_image);
         fullname = findViewById(R.id.fullname);
         expertise = findViewById(R.id.expertise);
         emmail = findViewById(R.id.email);
          back = findViewById(R.id.back);
+        btn_send = findViewById(R.id.btn_send);
+        comments = findViewById(R.id.comments);
+        comments_retrieve = findViewById(R.id.comments_retrieve);
 
+
+
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        rateList = new ArrayList<>();
+
+        readUsers();
+
+    }
+
+    private void readUsers() {
         final String userid = getIntent().getStringExtra("id");
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("RateDetails")
+                .child(userid);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    Rate rate= snapshot.getValue(Rate.class);
+
+                    rateList.add(rate);
+                }
+                feedBackAdapter = new FeedBackAdapter(getApplicationContext(),rateList);
+                recyclerView.setAdapter(feedBackAdapter);
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("Add").child(firebaseUser.getUid())
+        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference("Add").child(firebaseUser.getUid())
                 .child("counselor").child(userid);
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        databaseReference1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Counselors counselors = dataSnapshot.getValue(Counselors.class);
@@ -64,6 +141,12 @@ public class MentorProfile extends AppCompatActivity {
 
             }
         });
+
+        userMentorInfo = FirebaseDatabase.getInstance().getReference("UserMentor");
+        rateDetailRef = FirebaseDatabase.getInstance().getReference(rate_detal_1);
+        SmileRating smileRating = findViewById(R.id.ratingView);
+
+
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,5 +156,115 @@ public class MentorProfile extends AppCompatActivity {
 
             }
         });
+        smileRating.setOnSmileySelectionListener(new SmileRating.OnSmileySelectionListener() {
+            @Override
+            public void onSmileySelected(int smiley, boolean reselected) {
+                switch (smiley) {
+                    case SmileRating.BAD:
+                        Toast.makeText(MentorProfile.this, "BAD", Toast.LENGTH_SHORT).show();
+                        break;
+                    case SmileRating.GOOD:
+                        Toast.makeText(MentorProfile.this, "GOOD", Toast.LENGTH_SHORT).show();
+                        break;
+                    case SmileRating.GREAT:
+                        Toast.makeText(MentorProfile.this, "GREAT", Toast.LENGTH_SHORT).show();;
+                        break;
+                    case SmileRating.OKAY:
+                        Toast.makeText(MentorProfile.this, "OKAY", Toast.LENGTH_SHORT).show();
+                        break;
+                    case SmileRating.TERRIBLE:
+                        Toast.makeText(MentorProfile.this, "TERRIBLE", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
+        smileRating.setOnRatingSelectedListener(new SmileRating.OnRatingSelectedListener() {
+            @Override
+            public void onRatingSelected(int level, boolean reselected) {
+
+                ratingStars = level;
+
+            }
+        });
+        btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submitRateDetails(userid);
+            }
+        });
     }
+
+
+    private void submitRateDetails(final String userMentorId) {
+
+        final Rate rate = new Rate(context, "");
+        rate.setRates(String.valueOf(ratingStars));
+        rate.setComments(comments.getText().toString());
+        final String userid = getIntent().getStringExtra("id");
+
+        rateDetailRef.child(userid)
+                .push()
+                .setValue(rate)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        rateDetailRef.child(userid)
+                                .addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        double averageStars = 0.0;
+                                        int count = 0;
+                                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren())
+                                        {
+                                            Rate rate = postSnapshot.getValue(Rate.class);
+                                            assert rate != null;
+                                            averageStars+=Double.parseDouble(rate.getRates().trim());
+
+                                            count++;
+                                        }
+                                        double finalAverage = averageStars/count;
+                                        DecimalFormat df = new DecimalFormat("#.#");
+                                        String valueUpdate = df.format(finalAverage);
+
+
+                                        Map<String,Object> userMentorUpdateRate = new HashMap<>();
+                                        userMentorUpdateRate.put("rates", valueUpdate);
+
+                                        databaseReference.child(userid)
+                                                .updateChildren(userMentorUpdateRate)
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        Toast.makeText(MentorProfile.this, "Thank you for submit", Toast
+                                                                .LENGTH_SHORT).show();
+                                                        comments.setText("");
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Toast.makeText(MentorProfile.this, "Rate update but cant write Counselors Information", Toast
+                                                        .LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(MentorProfile.this, "Rate failed!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+
 }
