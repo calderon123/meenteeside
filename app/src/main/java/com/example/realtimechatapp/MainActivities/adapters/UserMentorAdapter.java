@@ -60,7 +60,7 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
         viewHolder.expertise.setText(userMentor.getExpertise());
         viewHolder.rate.setText(userMentor.getRate());
         viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
-        isAdding(userMentor.getId().toString(), viewHolder.btn_add);
+        isAdding(userMentor.getId(), viewHolder.btn_add);
 
         if (userMentor.getId().equals(firebaseUser.getUid())){
             viewHolder.btn_add.setVisibility(View.GONE);
@@ -73,22 +73,26 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
                 if (viewHolder.btn_add.getText().toString().equals("add")){
 
                     HashMap<String,String> hashMap = new HashMap<>();
-                    hashMap.put("id",userMentor.getId().toString());
+                    hashMap.put("id",userMentor.getId());
                     hashMap.put("image",userMentor.getImage());
                     hashMap.put("fullname",userMentor.getFullname());
                     hashMap.put("expertise",userMentor.getExpertise());
                     hashMap.put("availability",userMentor.getAvailability());
                     hashMap.put("rate", userMentor.getRate());
                     hashMap.put("status","offline");
-                    String userid =  userMentor.getId().toString();
+                    String userid =  userMentor.getId();
                     FirebaseDatabase.getInstance().getReference().child("Add").child(firebaseUser.getUid()).child("counselor")
                             .child(userid).setValue(hashMap);
 
+
+                    HashMap<String,String> hashMap1 = new HashMap<>();
+                    hashMap1.put("id",firebaseUser.getUid());
+                    hashMap1.put("email",firebaseUser.getEmail());
                     FirebaseDatabase.getInstance().getReference().child("Add").child(userMentor.getId().toString()).child("mentees")
-                            .child(firebaseUser.getUid()).setValue(true);
+                            .child(firebaseUser.getUid()).setValue(hashMap1);
 
                 }else {
-                    String userid =  userMentor.getId().toString();
+                    String userid =  userMentor.getId();
                     FirebaseDatabase.getInstance().getReference().child("Add").child(firebaseUser.getUid()).child("counselor")
                             .child(userid).removeValue();
                     FirebaseDatabase.getInstance().getReference().child("Add").child(userMentor.getId().toString()).child("mentees")
