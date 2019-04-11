@@ -1,95 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorPrimaryDark"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
     tools:context=".MainActivities.questions.Question1">
-    <LinearLayout
-        android:padding="20dp"
-        android:orientation="vertical"
+
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:id="@+id/home"
-        android:layout_gravity="end"
-        android:src="@drawable/ic_home_black_24dp"
-        android:textColor="@color/colorWhite"
-        android:gravity="end" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Counseling Online"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-    <LinearLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Let us help you be motivated to the right Counselor."
-            android:textSize="20dp"
-            android:fontFamily="Sans-serif"
-            android:textColor="@color/colorWhite"
-            android:textStyle="bold"/>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="20dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/border_layout"
-        android:layout_width="match_parent"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content">
-        <TextView
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Counselors below can help you fix problems and motivate you to be more postive."/>
-
-
-    </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:padding="6dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    <RelativeLayout
-        android:orientation="vertical"
-        android:padding="10dp"
-
+        android:id="@+id/bar_layout"
         android:layout_marginTop="20dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        android:background="@drawable/border_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/MenuStyle">
+            <ImageButton
+                android:background="@color/colorPrimaryDark"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:layout_width="30dp"
+                android:id="@+id/back"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="250dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ImageButton
+                android:id="@+id/home"
+                android:background="@color/colorPrimaryDark"
+                android:src="@drawable/ic_home_black_24dp"
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent" />
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        </android.support.v7.widget.RecyclerView>
-    </RelativeLayout>
-    <ProgressBar
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:textColor="#111"
+                    android:textAlignment="center"
+                    android:id="@+id/textView"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Below Counselors can help you" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+         />
+        </android.support.v7.widget.CardView>
     </LinearLayout>
 </LinearLayout>

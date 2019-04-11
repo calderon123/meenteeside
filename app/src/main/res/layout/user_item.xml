@@ -1,54 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="10dp"
-    android:layout_height="wrap_content">
+    android:layout_height="250dp">
+    <ImageView
+        android:id="@+id/card_background"
+        android:background="#ececec"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@mipmap/ic_launcher"/>
+
+    <ImageView
+        android:id="@+id/imageviews"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/black_gradient"></ImageView>
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="150dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="#111"
+        android:layout_marginBottom="32dp"
+        android:layout_toEndOf="@+id/profile_image"
+        android:layout_toRightOf="@+id/profile_image"
+        android:background="@drawable/btn_add_style"
+        android:text="Add"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="90dp" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="10dp"
         android:id="@+id/profile_image"
-        android:src="@mipmap/ic_launcher"/>
-    <LinearLayout
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/fullname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:orientation="vertical"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="53dp"
         android:layout_toEndOf="@+id/profile_image"
-        android:layout_toRightOf="@+id/profile_image">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="fullname"
-            android:id="@+id/fullname"
-            android:maxLines="1"
-            android:textStyle="bold"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/expertise"
-            android:textStyle="bold"
-            android:text="ex"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="rate"
-            android:id="@+id/rate"
-            />
+        android:layout_toRightOf="@+id/profile_image"
+        android:text="Fullname"
+        android:textColor="#fff"
+        android:textSize="15dp"
+        android:textStyle="bold" />
 
-    </LinearLayout>
-    <Button
+    <TextView
+        android:id="@+id/expertise"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:id="@+id/btn_add"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="@color/colorWhite"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:visibility="gone"
-        android:layout_alignParentRight="true" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fullname"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="-50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/profile_image"
+        android:layout_toRightOf="@+id/profile_image"
+        android:text="Expertise"
+        android:textColor="#fff"
+        android:textSize="10dp"
+        android:textStyle="italic" />
+    <TextView
+        android:id="@+id/rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fullname"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="-35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/profile_image"
+        android:layout_toRightOf="@+id/profile_image"
+        android:text="Rate"
+        android:textColor="#fff"
+        android:textSize="10dp"
+        android:textStyle="italic" />
+
+
 </RelativeLayout>

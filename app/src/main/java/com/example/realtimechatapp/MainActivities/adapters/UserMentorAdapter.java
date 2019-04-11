@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.realtimechatapp.MainActivities.models.UserMentee;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
@@ -23,6 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 //import com.example.realtimechatapp.MainActivities.fragments.MentorListFragment;
 //import com.example.realtimechatapp.MainActivities.fragments.MentorListFragment;
@@ -59,7 +63,14 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
         viewHolder.fullname.setText(userMentor.getFullname());
         viewHolder.expertise.setText(userMentor.getExpertise());
         viewHolder.rate.setText(userMentor.getRate());
-        viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
+        if (userMentor.getImageUrl().equals("default")){
+            viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
+            viewHolder.card_background.setImageResource(R.mipmap.ic_launcher);
+        }else {
+            Glide.with(mContext).load(userMentor.getImageUrl()).into(viewHolder.card_background);
+            Glide.with(mContext).load(userMentor.getImageUrl()).into(viewHolder.profile_image);
+        }
+
         isAdding(userMentor.getId(), viewHolder.btn_add);
 
         if (userMentor.getId().equals(firebaseUser.getUid())){
@@ -74,7 +85,7 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
 
                     HashMap<String,String> hashMap = new HashMap<>();
                     hashMap.put("id",userMentor.getId());
-                    hashMap.put("image",userMentor.getImage());
+                    hashMap.put("image",userMentor.getImageUrl());
                     hashMap.put("fullname",userMentor.getFullname());
                     hashMap.put("expertise",userMentor.getExpertise());
                     hashMap.put("availability",userMentor.getAvailability());
@@ -112,17 +123,22 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public TextView fullname,expertise,rate;
-        public ImageView profile_image;
+        public ImageView card_background;
+        public CircleImageView profile_image;
         public Button btn_add;
+        public ImageButton home,back;
 
         public ViewHolder(View itemView){
             super(itemView);
 
+            back = itemView.findViewById(R.id.back);
+            home = itemView.findViewById(R.id.home);
             btn_add = itemView.findViewById(R.id.btn_add);
             fullname = itemView.findViewById(R.id.fullname);
             expertise = itemView.findViewById(R.id.expertise);
             profile_image = itemView.findViewById(R.id.profile_image);
             rate = itemView.findViewById(R.id.rate);
+            card_background = itemView.findViewById(R.id.card_background);
         }
     }
 

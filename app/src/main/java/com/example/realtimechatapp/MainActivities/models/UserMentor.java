@@ -1,10 +1,9 @@
 package com.example.realtimechatapp.MainActivities.models;
-
 public class UserMentor {
 
     private String id;
     private String status;
-    private String Image;
+    private String imageURL;
     private String fullname;
     private String expertise;
     private String rate;
@@ -12,19 +11,20 @@ public class UserMentor {
     private String email;
     private String date_reg;
 
-    public UserMentor(String id, String status, String image, String fullname, String expertise, String rate, String availability, String email, String date_reg) {
+    public UserMentor(){
+
+    }
+
+    public UserMentor(String id, String status, String imageURL, String fullname, String expertise, String rate, String availability, String email, String date_reg) {
         this.id = id;
         this.status = status;
-        Image = image;
+        this.imageURL = imageURL;
         this.fullname = fullname;
         this.expertise = expertise;
         this.rate = rate;
         this.availability = availability;
         this.email = email;
         this.date_reg = date_reg;
-    }
-    public UserMentor(){
-
     }
 
     public String getId() {
@@ -43,12 +43,12 @@ public class UserMentor {
         this.status = status;
     }
 
-    public String getImage() {
-        return Image;
+    public String getImageUrl() {
+        return imageURL;
     }
 
-    public void setImage(String image) {
-        Image = image;
+    public void setImageUrl(String imageUrl) {
+        this.imageURL = imageUrl;
     }
 
     public String getFullname() {

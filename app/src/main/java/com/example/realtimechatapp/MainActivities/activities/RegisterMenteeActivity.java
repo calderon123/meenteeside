@@ -161,7 +161,7 @@ public class RegisterMenteeActivity extends AppCompatActivity {
 
     private void  register (final String fullname, final String email, final String password){
 
-
+        progressBar.setVisibility(View.VISIBLE);
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -207,7 +207,7 @@ public class RegisterMenteeActivity extends AppCompatActivity {
                                             FirebaseUser firebaseUser = auth.getCurrentUser();
                                                 assert firebaseUser != null;
                                                 String userid = firebaseUser.getUid();
-
+                                            progressBar.setVisibility(View.VISIBLE);
                                                 reference = FirebaseDatabase.getInstance().getReference("UserMentee").child(userid);
                                                 FirebaseAuth auth = FirebaseAuth.getInstance();
 
@@ -217,7 +217,6 @@ public class RegisterMenteeActivity extends AppCompatActivity {
                                                 hashMap.put("email",email);
                                                 hashMap.put("status","offline");
 
-                                            progressBar.setVisibility(View.VISIBLE);
                                                 reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
