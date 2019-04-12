@@ -70,7 +70,7 @@ public class MentorListFragment extends Fragment {
                         mUsers.add(counselors);
 
                 }
-                userMentorList = new UserMentorList(getContext(), mUsers, false);
+                userMentorList = new UserMentorList(getContext(), mUsers, true);
                 recyclerView.setAdapter(userMentorList);
             }
 

@@ -119,7 +119,7 @@ public class MessageActivity extends AppCompatActivity {
                 expertise.setText(counselors.getExpertise());
                     profile_image.setImageResource(R.mipmap.ic_launcher);
 
-                readMessage(firebaseUser.getUid(),userid ,counselors.getImageurl() );
+                readMessage(firebaseUser.getUid(),userid ,counselors.getImageURL() );
             }
 
             @Override

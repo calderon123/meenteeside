@@ -3,14 +3,14 @@ package com.example.realtimechatapp.MainActivities.models;
 public class Counselors {
 
     private String id;
-    private  String imageurl;
+    private  String imageURL;
 
-    public String getImageurl() {
-        return imageurl;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setImageurl(String imageurl) {
-        this.imageurl = imageurl;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public Counselors(String id) {
@@ -20,15 +20,15 @@ public class Counselors {
     private  String fullname;
     private  String rate;
 
-    public String getStatus_counselor() {
-        return status_counselor;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStatus_counselor(String status_counselor) {
-        this.status_counselor = status_counselor;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    private  String status_counselor;
+    private  String status;
     private  String expertise;
     private  String availability;
 

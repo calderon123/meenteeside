@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.realtimechatapp.MainActivities.activities.MenteeMainActivity;
 import com.example.realtimechatapp.MainActivities.activities.MentorProfile;
 import com.example.realtimechatapp.MainActivities.activities.StartActivity;
@@ -53,23 +54,23 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
         viewHolder.rate.setText(counselors.getRate());
         viewHolder.expertise.setText(counselors.getExpertise());
 
-//        if (userMentor.getImage().equals("default")){
+        if (counselors.getImageURL().equals("default")){
             viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
-//        }else{
-//            Glide.with(mContext).load(userMentor.getImage()).into(viewHolder.profile_image);
-//        }
-//        if (ischat){
-//            if (userMentor.getStatus().equals("online")){
-//                viewHolder.img_on.setVisibility(View.VISIBLE);
-//                viewHolder.img_off.setVisibility(View.GONE);
-//            }else {
-//                viewHolder.img_on.setVisibility(View.GONE);
-//                viewHolder.img_off.setVisibility(View.VISIBLE);
-//            }
-//        }else {
-//            viewHolder.img_on.setVisibility(View.GONE);
-//            viewHolder.img_off.setVisibility(View.GONE);
-//        }
+        }else{
+            Glide.with(mContext).load(counselors.getImageURL()).into(viewHolder.profile_image);
+        }
+        if (ischat){
+            if (counselors.getStatus().equals("online")){
+                viewHolder.img_on.setVisibility(View.VISIBLE);
+                viewHolder.img_off.setVisibility(View.GONE);
+            }else {
+                viewHolder.img_on.setVisibility(View.GONE);
+                viewHolder.img_off.setVisibility(View.VISIBLE);
+            }
+        }else {
+            viewHolder.img_on.setVisibility(View.GONE);
+            viewHolder.img_off.setVisibility(View.GONE);
+        }
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

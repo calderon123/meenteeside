@@ -85,7 +85,7 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
 
                     HashMap<String,String> hashMap = new HashMap<>();
                     hashMap.put("id",userMentor.getId());
-                    hashMap.put("image",userMentor.getImageUrl());
+                    hashMap.put("imageURL",userMentor.getImageUrl());
                     hashMap.put("fullname",userMentor.getFullname());
                     hashMap.put("expertise",userMentor.getExpertise());
                     hashMap.put("availability",userMentor.getAvailability());
