@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Question2_1_1_1_1_1 extends Activity{
+public class Question2_2_2_2_2 extends Activity{
 
 
     private RecyclerView recyclerView;
@@ -52,9 +52,9 @@ public class Question2_1_1_1_1_1 extends Activity{
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Question2_1_1_1_1_1.this, MenteeMainActivity.class)
+                startActivity(new Intent(Question2_2_2_2_2.this, MenteeMainActivity.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-               finish();
+                finish();
             }
         });
 
@@ -63,8 +63,9 @@ public class Question2_1_1_1_1_1 extends Activity{
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Question2_1_1_1_1_1.this, Question2_1_1_1_1.class)
+                startActivity(new Intent(Question2_2_2_2_2.this, Question2_2_2_2.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
             }
         });
 
@@ -82,7 +83,7 @@ public class Question2_1_1_1_1_1 extends Activity{
     private void readUsers() {
 
 
-       final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserMentor");
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserMentor");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -91,8 +92,8 @@ public class Question2_1_1_1_1_1 extends Activity{
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
                     UserMentor userMentor = snapshot.getValue(UserMentor.class);
 
-                    if (userMentor.getExpertise().equals("Mental Health Counselor") && userMentor.getRate().equals("500-1000/hour")
-                    && userMentor.getAvailability().equals("Once a week")){
+                    if (userMentor.getExpertise().equals("Marriage Counselor") && userMentor.getRate().equals("500-100/hour")
+                            && userMentor.getAvailability().equals("Once a week")){
                         mUsermentor.add(userMentor);
                     }
                 }

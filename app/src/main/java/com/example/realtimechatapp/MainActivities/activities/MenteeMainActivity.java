@@ -73,9 +73,13 @@ public class MenteeMainActivity extends AppCompatActivity
                 email =(TextView) findViewById(R.id.email);
                 imageView = (CircleImageView) findViewById(R.id.imageView);
 
-                assert userMentee != null;
-                fullname.setText(userMentee.getFullname());
-                email.setText(userMentee.getEmail());
+                if (fullname != null) {
+                    fullname.setText(userMentee.getFullname());
+                    email.setText(userMentee.getEmail());
+                }else {
+                    fullname.setText(null);
+                    email.setText(null);
+                }
 
                 Glide.with(getApplicationContext()).load(firebaseUser.getPhotoUrl()).into(imageView);
             }

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
-    tools:context=".MainActivities.questions.Question2_2">
+    tools:context=".MainActivities.questions.Question1">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

@@ -66,15 +66,6 @@
             android:text="1000-1500/hour"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-        <Button
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:id="@+id/btn_ans3"
-            android:textColor="@color/colorWhite"
-            android:background="@drawable/border"
-            android:text="1500-2000/hour"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <ProgressBar
