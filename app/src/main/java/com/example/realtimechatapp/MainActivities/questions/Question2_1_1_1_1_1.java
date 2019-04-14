@@ -52,9 +52,9 @@ public class Question2_1_1_1_1_1 extends Activity{
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Question2_1_1_1_1_1.this, MenteeMainActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-               finish();
+                Intent intent = new Intent(Question2_1_1_1_1_1.this, MenteeMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 
@@ -82,7 +82,7 @@ public class Question2_1_1_1_1_1 extends Activity{
     private void readUsers() {
 
 
-       final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserMentor");
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserMentor");
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -92,7 +92,7 @@ public class Question2_1_1_1_1_1 extends Activity{
                     UserMentor userMentor = snapshot.getValue(UserMentor.class);
 
                     if (userMentor.getExpertise().equals("Mental Health Counselor") && userMentor.getRate().equals("500-1000/hour")
-                    && userMentor.getAvailability().equals("Once a week")){
+                            && userMentor.getAvailability().equals("Once a week")){
                         mUsermentor.add(userMentor);
                     }
                 }

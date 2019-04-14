@@ -3,18 +3,18 @@ package com.example.realtimechatapp.MainActivities.models;
 public class UserMentee  {
 
 
-    private String image;
+    private String imageURL;
 
-    public String getImage() {
-        return image;
+    public UserMentee(String imageURL) {
+        this.imageURL = imageURL;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public UserMentee(String image) {
-        this.image = image;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getStatus() {

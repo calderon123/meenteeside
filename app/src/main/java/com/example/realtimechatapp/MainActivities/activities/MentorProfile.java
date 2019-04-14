@@ -2,16 +2,13 @@ package com.example.realtimechatapp.MainActivities.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -19,16 +16,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.realtimechatapp.MainActivities.adapters.FeedBackAdapter;
-import com.example.realtimechatapp.MainActivities.adapters.UserMentorAdapter;
 import com.example.realtimechatapp.MainActivities.models.Counselors;
 import com.example.realtimechatapp.MainActivities.models.Rate;
-import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -54,6 +49,7 @@ public class MentorProfile extends AppCompatActivity {
     private TextView fullname,expertise,emmail,comments_retrieve;
     FirebaseUser firebaseUser;
     ImageView back;
+    private String id;
     EditText comments;
     DatabaseReference rateDetailRef;
     DatabaseReference userMentorInfo;
@@ -77,12 +73,12 @@ public class MentorProfile extends AppCompatActivity {
         fullname = findViewById(R.id.fullname);
         expertise = findViewById(R.id.expertise);
         emmail = findViewById(R.id.email);
-         back = findViewById(R.id.back);
-        btn_send = findViewById(R.id.btn_send);
-        comments = findViewById(R.id.comments);
+        back = findViewById(R.id.back);
         comments_retrieve = findViewById(R.id.comments_retrieve);
 
-
+        Intent intent = getIntent();
+        id = intent.getStringExtra("id");
+        Toast.makeText(getApplicationContext(), id, Toast.LENGTH_SHORT).show();
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -94,9 +90,8 @@ public class MentorProfile extends AppCompatActivity {
         readUsers();
 
     }
-
     private void readUsers() {
-        final String userid = getIntent().getStringExtra("id");
+         final String userid = getIntent().getStringExtra("id");
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("RateDetails")
                 .child(userid);
 
@@ -132,7 +127,13 @@ public class MentorProfile extends AppCompatActivity {
 
                 fullname.setText(counselors.getFullname());
                 expertise.setText(counselors.getExpertise());
-                profile_image.setImageResource(R.mipmap.ic_launcher);
+                if (counselors.getImageURL().equals("default")){
+                    profile_image.setImageResource(R.drawable.ic_account_circle_black_24dp);
+
+                }else {
+                    Glide.with(getApplicationContext()).load(counselors.getImageURL()).into(profile_image);
+
+                }
 
             }
 
@@ -141,10 +142,65 @@ public class MentorProfile extends AppCompatActivity {
 
             }
         });
+        Button btn_feedback = findViewById(R.id.btn_feedback);
+
+        btn_feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MentorProfile.this);
+
+                View view = getLayoutInflater().inflate(R.layout.button_feedback, null);
+                SmileRating smileRating = view.findViewById(R.id.ratingView);
+                comments = view.findViewById(R.id.comments);
+                btn_send = view.findViewById(R.id.btn_send);
+                smileRating.setOnSmileySelectionListener(new SmileRating.OnSmileySelectionListener() {
+                    @Override
+                    public void onSmileySelected(int smiley, boolean reselected) {
+                        switch (smiley) {
+                            case SmileRating.BAD:
+                                Toast.makeText(MentorProfile.this, "BAD", Toast.LENGTH_SHORT).show();
+                                break;
+                            case SmileRating.GOOD:
+                                Toast.makeText(MentorProfile.this, "GOOD", Toast.LENGTH_SHORT).show();
+                                break;
+                            case SmileRating.GREAT:
+                                Toast.makeText(MentorProfile.this, "GREAT", Toast.LENGTH_SHORT).show();;
+                                break;
+                            case SmileRating.OKAY:
+                                Toast.makeText(MentorProfile.this, "OKAY", Toast.LENGTH_SHORT).show();
+                                break;
+                            case SmileRating.TERRIBLE:
+                                Toast.makeText(MentorProfile.this, "TERRIBLE", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                    }
+                });
+                smileRating.setOnRatingSelectedListener(new SmileRating.OnRatingSelectedListener() {
+                    @Override
+                    public void onRatingSelected(int level, boolean reselected) {
+
+                        ratingStars = level;
+
+                    }
+                });
+                btn_send.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        submitRateDetails(id);
+
+                    }
+                });
+
+                builder.setView(view);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+
 
         userMentorInfo = FirebaseDatabase.getInstance().getReference("UserMentor");
         rateDetailRef = FirebaseDatabase.getInstance().getReference(rate_detal_1);
-        SmileRating smileRating = findViewById(R.id.ratingView);
+
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -156,42 +212,8 @@ public class MentorProfile extends AppCompatActivity {
 
             }
         });
-        smileRating.setOnSmileySelectionListener(new SmileRating.OnSmileySelectionListener() {
-            @Override
-            public void onSmileySelected(int smiley, boolean reselected) {
-                switch (smiley) {
-                    case SmileRating.BAD:
-                        Toast.makeText(MentorProfile.this, "BAD", Toast.LENGTH_SHORT).show();
-                        break;
-                    case SmileRating.GOOD:
-                        Toast.makeText(MentorProfile.this, "GOOD", Toast.LENGTH_SHORT).show();
-                        break;
-                    case SmileRating.GREAT:
-                        Toast.makeText(MentorProfile.this, "GREAT", Toast.LENGTH_SHORT).show();;
-                        break;
-                    case SmileRating.OKAY:
-                        Toast.makeText(MentorProfile.this, "OKAY", Toast.LENGTH_SHORT).show();
-                        break;
-                    case SmileRating.TERRIBLE:
-                        Toast.makeText(MentorProfile.this, "TERRIBLE", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        });
-        smileRating.setOnRatingSelectedListener(new SmileRating.OnRatingSelectedListener() {
-            @Override
-            public void onRatingSelected(int level, boolean reselected) {
 
-                ratingStars = level;
 
-            }
-        });
-        btn_send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                submitRateDetails(userid);
-            }
-        });
     }
 
 
@@ -200,16 +222,18 @@ public class MentorProfile extends AppCompatActivity {
         final Rate rate = new Rate(context, "");
         rate.setRates(String.valueOf(ratingStars));
         rate.setComments(comments.getText().toString());
-        final String userid = getIntent().getStringExtra("id");
+        final String push_id = FirebaseDatabase.getInstance().getReference("RateDetails").push().getKey();
 
-        rateDetailRef.child(userid)
+        rateDetailRef.child(userMentorId)
                 .push()
                 .setValue(rate)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
 
-                        rateDetailRef.child(userid)
+                        final String id = userMentorId;
+
+                        rateDetailRef.child(userMentorId)
                                 .addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -230,24 +254,10 @@ public class MentorProfile extends AppCompatActivity {
 
                                         Map<String,Object> userMentorUpdateRate = new HashMap<>();
                                         userMentorUpdateRate.put("rates", valueUpdate);
+                                        databaseReference.child(counselor.getId()).child(push_id)
+                                                .updateChildren(userMentorUpdateRate);
+                                        comments.setText("");
 
-                                        databaseReference.child(userid)
-                                                .updateChildren(userMentorUpdateRate)
-                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        Toast.makeText(MentorProfile.this, "Thank you for submit", Toast
-                                                                .LENGTH_SHORT).show();
-                                                        comments.setText("");
-                                                    }
-                                                })
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(MentorProfile.this, "Rate update but cant write Counselors Information", Toast
-                                                        .LENGTH_SHORT).show();
-                                                    }
-                                                });
                                     }
 
                                     @Override

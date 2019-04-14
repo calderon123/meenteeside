@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:id="@+id/bottom1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hi Mentee! Rate me on my capability"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:layout_marginBottom="60px"
+            android:textStyle="bold"/>
+
+
+        <com.hsalf.smilerating.SmileRating
+            android:id="@+id/ratingView"
+            android:layout_width="250dp"
+            android:layout_height="150dp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:rating="0"
+            app:angryColor="#f29a68"
+            app:drawingColor="#353431"
+            app:isIndicator="false"
+            app:normalColor="#f2dd68"
+            app:placeHolderBackgroundColor="#e6e8ed"
+            app:placeHolderSmileColor="#ffffff"
+            app:textNonSelectionColor="#AEB3B5"
+            app:textSelectionColor="#000000" />
+
+        <RelativeLayout
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorWhite"
+
+            android:padding="5dp">
+
+            <EditText
+                android:id="@+id/comments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/btn_send"
+                android:background="@android:color/transparent"
+                android:hint="Give feedback....." />
+
+            <ImageButton
+                android:id="@+id/btn_send"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@color/colorWhite"
+                android:src="@drawable/ic_send_black_24dp" />
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

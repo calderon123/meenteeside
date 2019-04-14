@@ -81,23 +81,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <android.support.v7.widget.CardView
-                android:padding="10dp"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view"
+                <android.support.v7.widget.CardView
+                    android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                </android.support.v7.widget.RecyclerView>
-            </android.support.v7.widget.CardView>
-        </RelativeLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </android.support.v7.widget.RecyclerView>
+                </android.support.v7.widget.CardView>
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 
@@ -135,70 +135,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:background="@color/colorPrimaryDark"/>
-                <TextView
-                    android:padding="10dp"
-                    android:id="@+id/comments_retrieve"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginTop="80dp"
-                    android:text="Comment Feedback" />
+            <TextView
+                android:padding="10dp"
+                android:id="@+id/comments_retrieve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="80dp"
+                android:text="Comment Feedback" />
 
         </android.support.v7.widget.CardView>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/bottom1"
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="103dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        android:padding="5dp">
-
-        <com.hsalf.smilerating.SmileRating
-            android:id="@+id/ratingView"
-            android:layout_width="250dp"
-            android:layout_height="150dp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:rating="0"
-            app:angryColor="#f29a68"
-            app:drawingColor="#353431"
-            app:isIndicator="false"
-            app:normalColor="#f2dd68"
-            app:placeHolderBackgroundColor="#e6e8ed"
-            app:placeHolderSmileColor="#ffffff"
-            app:textNonSelectionColor="#AEB3B5"
-            app:textSelectionColor="#000000" />
-
-        <RelativeLayout
-            android:id="@+id/bottom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/colorWhite"
-
-            android:padding="5dp">
-
-            <EditText
-                android:id="@+id/comments"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/btn_send"
-                android:background="@android:color/transparent"
-                android:hint="Give feedback....." />
-
-            <ImageButton
-                android:id="@+id/btn_send"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:background="@color/colorWhite"
-                android:src="@drawable/ic_send_black_24dp" />
-        </RelativeLayout>
-    </LinearLayout>
+        android:text="Rate Counselor"
+        android:id="@+id/btn_feedback"
+        android:background="@color/colorPrimary"/>
 
 </RelativeLayout>

@@ -1,23 +1,30 @@
 package com.example.realtimechatapp.MainActivities.activities;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CalendarView;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import com.bumptech.glide.Glide;
 import com.example.realtimechatapp.MainActivities.adapters.MessageAdapter;
 import com.example.realtimechatapp.MainActivities.models.Chat;
 import com.example.realtimechatapp.MainActivities.models.Counselors;
+import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -28,19 +35,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MessageActivity extends AppCompatActivity {
+public class MessageActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
     CircleImageView profile_image;
-    TextView fullname, expertise;
-    Button rate;
-
+    TextView fullname, expertise,date_schedule;
+    Button rate,btn_calendar;
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
+    private CalendarView calendarView;
+
 
     EditText text_send;
     ImageButton btn_send;
@@ -49,7 +58,7 @@ public class MessageActivity extends AppCompatActivity {
     List<Chat> mChat;
 
     RecyclerView recyclerView;
-
+    ValueEventListener seenListener;
     Intent intent;
 
     @Override
@@ -84,6 +93,33 @@ public class MessageActivity extends AppCompatActivity {
         expertise = findViewById(R.id.expertise);
         btn_send = findViewById(R.id.btn_send);
         text_send = findViewById(R.id.text_send);
+        Button schedule = findViewById(R.id.schedule);
+
+
+
+        schedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MessageActivity.this);
+
+                View view = getLayoutInflater().inflate(R.layout.schedule_btn, null);
+
+                btn_calendar = view.findViewById(R.id.btn_calendar);
+                date_schedule = view.findViewById(R.id.date_schedule);
+
+                btn_calendar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showDatePickerDialog();
+                    }
+                });
+
+                builder.setView(view);
+                AlertDialog  dialog = builder.create();
+                dialog.show();
+            }
+        });
+
         final String userid = getIntent().getStringExtra("id");
 
 
@@ -117,7 +153,7 @@ public class MessageActivity extends AppCompatActivity {
 
                 fullname.setText(counselors.getFullname());
                 expertise.setText(counselors.getExpertise());
-                    profile_image.setImageResource(R.mipmap.ic_launcher);
+                Glide.with(getApplicationContext()).load(counselors.getImageURL()).into(profile_image);
 
                 readMessage(firebaseUser.getUid(),userid ,counselors.getImageURL() );
             }
@@ -127,7 +163,41 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+            seenMessage(userid);
     }
+    private void showDatePickerDialog(){
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,this,
+
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.YEAR));
+        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        datePickerDialog.show();
+    }
+
+    private void seenMessage(final String userid){
+        databaseReference= FirebaseDatabase.getInstance().getReference("Chats");
+        seenListener= databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
+                    Chat chat = snapshot.getValue(Chat.class);
+                    if (chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userid)){
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("isseen", true);
+                        snapshot.getRef().updateChildren(hashMap);
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     private  void sendMessage(String sender,String receiver, String message){
 
@@ -137,6 +207,7 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("sender", sender);
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
+        hashMap.put("isseen", false);
 
         databaseReference.child("Chats").push().setValue(hashMap);
     }
@@ -164,5 +235,34 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void status(String status){
+        UserMentor userMentor = null;
+        databaseReference  = FirebaseDatabase.getInstance().getReference("UserMentee").
+                child(firebaseUser.getUid());
+
+        HashMap<String,Object> hashMap= new HashMap<>();
+        hashMap.put("status",status);
+
+        databaseReference.updateChildren(hashMap);
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        status("online");
+    }
+    @Override
+    protected  void onPause(){
+        super.onPause();
+        databaseReference.removeEventListener(seenListener);
+        status("offline");
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            String date  = dayOfMonth+"/"+month+"/"+year ;
+            date_schedule.setText(date);
     }
 }

@@ -8,17 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.realtimechatapp.MainActivities.activities.MenteeMainActivity;
 import com.example.realtimechatapp.MainActivities.activities.MentorProfile;
-import com.example.realtimechatapp.MainActivities.activities.StartActivity;
-import com.example.realtimechatapp.MainActivities.models.Counselors;
 import com.example.realtimechatapp.MainActivities.activities.MessageActivity;
+import com.example.realtimechatapp.MainActivities.models.Counselors;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         final Counselors counselors = mUsers.get(i);
         viewHolder.fullname.setText(counselors.getFullname());
         viewHolder.rate.setText(counselors.getRate());
@@ -59,18 +60,26 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
         }else{
             Glide.with(mContext).load(counselors.getImageURL()).into(viewHolder.profile_image);
         }
-        if (ischat){
-            if (counselors.getStatus().equals("online")){
-                viewHolder.img_on.setVisibility(View.VISIBLE);
-                viewHolder.img_off.setVisibility(View.GONE);
-            }else {
-                viewHolder.img_on.setVisibility(View.GONE);
-                viewHolder.img_off.setVisibility(View.VISIBLE);
-            }
-        }else {
-            viewHolder.img_on.setVisibility(View.GONE);
-            viewHolder.img_off.setVisibility(View.GONE);
-        }
+
+        FirebaseDatabase.getInstance().getReference("UserMentor").child(counselors.getId())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        dataSnapshot.getChildren();
+
+                        UserMentor user = dataSnapshot.getValue(UserMentor.class);
+                        if (counselors.getId().equals(user.getId())) {
+                          viewHolder.bobo(user.getStatus());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +125,25 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
             img_on= itemView.findViewById(R.id.img_on);
             rate_star = itemView.findViewById(R.id.rate_star);
         }
+        private void bobo(String id){
+
+            if (ischat){
+                if (id.equals("online")){
+                    img_on.setVisibility(View.VISIBLE);
+                    img_off.setVisibility(View.GONE);
+                }else {
+                    img_on.setVisibility(View.GONE);
+                    img_off.setVisibility(View.VISIBLE);
+                }
+            }else {
+                img_on.setVisibility(View.GONE);
+                img_off.setVisibility(View.GONE);
+
+            }
+
 
     }
 
+
+    }
 }

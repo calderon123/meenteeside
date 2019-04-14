@@ -11,12 +11,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.realtimechatapp.MainActivities.activities.MenteeMainActivity;
-import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.MainActivities.adapters.UserMentorAdapter;
+import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

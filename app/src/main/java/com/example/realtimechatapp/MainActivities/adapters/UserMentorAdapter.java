@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.realtimechatapp.MainActivities.models.UserMentee;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -90,7 +89,7 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
                     hashMap.put("expertise",userMentor.getExpertise());
                     hashMap.put("availability",userMentor.getAvailability());
                     hashMap.put("rate", userMentor.getRate());
-                    hashMap.put("status","offline");
+                    hashMap.put("search",userMentor.getFullname().toLowerCase());
                     String userid =  userMentor.getId();
                     FirebaseDatabase.getInstance().getReference().child("Add").child(firebaseUser.getUid()).child("counselor")
                             .child(userid).setValue(hashMap);

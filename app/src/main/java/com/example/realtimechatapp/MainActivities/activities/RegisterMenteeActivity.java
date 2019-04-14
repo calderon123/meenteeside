@@ -1,18 +1,16 @@
 package com.example.realtimechatapp.MainActivities.activities;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
@@ -21,9 +19,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-
 import com.example.realtimechatapp.R;
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -39,8 +35,6 @@ import com.google.firebase.storage.UploadTask;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.HashMap;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RegisterMenteeActivity extends AppCompatActivity {
 
@@ -190,7 +184,7 @@ public class RegisterMenteeActivity extends AppCompatActivity {
 
                 imageFilePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
-                    public void onSuccess(Uri uri) {
+                    public void onSuccess(final Uri uri) {
                         UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
                                 .setDisplayName(fullname)
                                 .setPhotoUri(uri)
@@ -213,6 +207,7 @@ public class RegisterMenteeActivity extends AppCompatActivity {
 
                                                 HashMap<String,String> hashMap = new HashMap<>();
                                                 hashMap.put("id",userid);
+                                                hashMap.put("imageURL", String.valueOf(uri));
                                                 hashMap.put("fullname",fullname);
                                                 hashMap.put("email",email);
                                                 hashMap.put("status","offline");

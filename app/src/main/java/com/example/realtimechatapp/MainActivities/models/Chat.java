@@ -2,15 +2,29 @@ package com.example.realtimechatapp.MainActivities.models;
 
 public class Chat {
 
+    private boolean isseen;
+
+    public boolean isIsseen() {
+        return isseen;
+    }
+
+    public void setIsseen(boolean isseen) {
+        this.isseen = isseen;
+    }
+
+    public Chat(boolean isseen) {
+        this.isseen = isseen;
+    }
 
     private String sender;
     private String receiver;
     private String message;
 
-    public Chat(String sender, String receiver, String message) {
+    public Chat(String sender, String receiver, String message,boolean isseen) {
         this.sender = sender;
         this.receiver = receiver;
         this.message = message;
+        this.isseen = isseen;
     }
     public Chat(){
 

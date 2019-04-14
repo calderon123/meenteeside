@@ -18,9 +18,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.realtimechatapp.MainActivities.fragments.MentorListFragment;
 import com.example.realtimechatapp.MainActivities.fragments.MessagesFragment;
 import com.example.realtimechatapp.MainActivities.fragments.ProfileFragments;
 import com.example.realtimechatapp.MainActivities.models.UserMentee;
@@ -43,7 +45,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MenteeMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    CircleImageView imageView;
+
+    private CircleImageView imageView,img_on,img_off;
     private TextView fullname,email;
     private MenuItem logout_btn;
     FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -69,20 +72,34 @@ public class MenteeMainActivity extends AppCompatActivity
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserMentee userMentee = dataSnapshot.getValue(UserMentee.class);
 
-                fullname =(TextView) findViewById(R.id.fullname);
-                email =(TextView) findViewById(R.id.email);
-                imageView = (CircleImageView) findViewById(R.id.imageView);
 
+                img_off = findViewById(R.id.img_of);
+                img_on = findViewById(R.id.img_o);
+                fullname = findViewById(R.id.fullnam);
+                email =findViewById(R.id.emai);
+                imageView = findViewById(R.id.imageView);
+
+                if (userMentee.getStatus().equals("online")){
+                    img_on.setVisibility(View.VISIBLE);
+                    img_off.setVisibility(View.GONE);
+                }else {
+                    img_on.setVisibility(View.GONE);
+                    img_off.setVisibility(View.GONE);
+                }
                 if (fullname != null) {
                     fullname.setText(userMentee.getFullname());
                     email.setText(userMentee.getEmail());
-                }else {
-                    fullname.setText(null);
-                    email.setText(null);
                 }
+                if (userMentee.getImageURL().equals("default")){
+               imageView.setImageResource(R.drawable.ic_account_circle_black_24dp);
 
-                Glide.with(getApplicationContext()).load(firebaseUser.getPhotoUrl()).into(imageView);
+            }else {
+            Glide.with(getApplicationContext()).load(userMentee.getImageURL()).into(imageView);
+
+        }
             }
+
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
