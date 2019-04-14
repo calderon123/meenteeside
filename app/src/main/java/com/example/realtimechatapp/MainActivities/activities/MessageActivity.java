@@ -95,7 +95,7 @@ public class MessageActivity extends AppCompatActivity {
         expertise = findViewById(R.id.expertise);
         btn_send = findViewById(R.id.btn_send);
         text_send = findViewById(R.id.text_send);
-        Button schedule = findViewById(R.id.schedule);
+        final Button schedule = findViewById(R.id.schedule);
 
 
 
@@ -113,9 +113,9 @@ public class MessageActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Calendar calendar = Calendar.getInstance();
-                        int year  = calendar.get(Calendar.YEAR);
-                        int month  = calendar.get(Calendar.MONTH);
                         int day  = calendar.get(Calendar.DAY_OF_MONTH);
+                        int month  = calendar.get(Calendar.MONTH);
+                        int year  = calendar.get(Calendar.YEAR);
 
                         DatePickerDialog dialog = new DatePickerDialog(
                                 MessageActivity.this,
@@ -128,10 +128,11 @@ public class MessageActivity extends AppCompatActivity {
                 });
                 onDateSetListener  = new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int i, int i1, int i2) {
-                        i1 = i1 +1;
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
+                        month = month +1;
+                        year = year ;
 
-                        String date = i+ "/"+i1 +"/"+i2 ;
+                        String date = dayOfMonth+ "/"+month +"/"+year ;
 
                         date_schedule.setText(date);
                     }
@@ -151,10 +152,12 @@ public class MessageActivity extends AppCompatActivity {
 
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String msg = text_send.getText().toString();
+
 
                 if (!msg.equals("")){
                     sendMessage(firebaseUser.getUid(), userid ,msg);
