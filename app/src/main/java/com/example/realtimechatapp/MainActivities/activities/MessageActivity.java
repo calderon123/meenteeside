@@ -41,7 +41,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MessageActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class MessageActivity extends AppCompatActivity {
 
     CircleImageView profile_image;
     TextView fullname, expertise,date_schedule;
@@ -60,6 +60,8 @@ public class MessageActivity extends AppCompatActivity implements DatePickerDial
     RecyclerView recyclerView;
     ValueEventListener seenListener;
     Intent intent;
+    private DatePickerDialog.OnDateSetListener onDateSetListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,15 +112,38 @@ public class MessageActivity extends AppCompatActivity implements DatePickerDial
                 btn_calendar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showDatePickerDialog();
+                        Calendar calendar = Calendar.getInstance();
+                        int year  = calendar.get(Calendar.YEAR);
+                        int month  = calendar.get(Calendar.MONTH);
+                        int day  = calendar.get(Calendar.DAY_OF_MONTH);
+
+                        DatePickerDialog dialog = new DatePickerDialog(
+                                MessageActivity.this,
+                                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                                onDateSetListener,
+                                year,month,day);
+                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            dialog.show();
                     }
                 });
+                onDateSetListener  = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int i, int i1, int i2) {
+                        i1 = i1 +1;
+
+                        String date = i+ "/"+i1 +"/"+i2 ;
+
+                        date_schedule.setText(date);
+                    }
+                };
+
 
                 builder.setView(view);
                 AlertDialog  dialog = builder.create();
                 dialog.show();
             }
         });
+
 
         final String userid = getIntent().getStringExtra("id");
 
@@ -164,15 +189,6 @@ public class MessageActivity extends AppCompatActivity implements DatePickerDial
             }
         });
             seenMessage(userid);
-    }
-    private void showDatePickerDialog(){
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this,this,
-
-                Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
-                Calendar.getInstance().get(Calendar.MONTH),
-                Calendar.getInstance().get(Calendar.YEAR));
-        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        datePickerDialog.show();
     }
 
     private void seenMessage(final String userid){
@@ -260,9 +276,5 @@ public class MessageActivity extends AppCompatActivity implements DatePickerDial
         status("offline");
     }
 
-    @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-            String date  = dayOfMonth+"/"+month+"/"+year ;
-            date_schedule.setText(date);
-    }
+
 }
