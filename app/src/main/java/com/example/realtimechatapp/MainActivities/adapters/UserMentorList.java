@@ -13,11 +13,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.realtimechatapp.MainActivities.activities.MentorProfile;
 import com.example.realtimechatapp.MainActivities.activities.MessageActivity;
+import com.example.realtimechatapp.MainActivities.models.Chat;
 import com.example.realtimechatapp.MainActivities.models.Counselors;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -31,7 +35,7 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
     private Context mContext;
     private List<Counselors> mUsers;
     private boolean ischat;
-
+     String theLastMessage;
 
 
     public UserMentorList(Context mcontext, List<Counselors> userMentorList,boolean ischat){
@@ -52,7 +56,7 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         final Counselors counselors = mUsers.get(i);
         viewHolder.fullname.setText(counselors.getFullname());
-        viewHolder.rate.setText(counselors.getRate());
+
         viewHolder.expertise.setText(counselors.getExpertise());
 
         if (counselors.getImageURL().equals("default")){
@@ -61,6 +65,11 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
             Glide.with(mContext).load(counselors.getImageURL()).into(viewHolder.profile_image);
         }
 
+        if (ischat){
+            lastMessage(counselors.getId() ,viewHolder.last_msg);
+        }else {
+            viewHolder.last_msg.setVisibility(View.GONE);
+        }
         FirebaseDatabase.getInstance().getReference("UserMentor").child(counselors.getId())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -107,7 +116,7 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView fullname,expertise,rate;
+        public TextView fullname,expertise,rate,last_msg;
         public CircleImageView profile_image;
         private CircleImageView img_off;
         private CircleImageView img_on;
@@ -116,7 +125,7 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-
+            last_msg = itemView.findViewById(R.id.last_message);
             fullname = itemView.findViewById(R.id.fullname);
             expertise = itemView.findViewById(R.id.expertise);
             rate = itemView.findViewById(R.id.rate);
@@ -144,6 +153,43 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
 
     }
 
+
+    }
+    private void lastMessage(final String userid, final TextView last_message){
+         theLastMessage = "default";
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Chats");
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    Chat chat = snapshot.getValue(Chat.class);
+                    if (chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userid) ||
+                            chat.getReceiver().equals(userid) && chat.getSender().equals(firebaseUser.getUid())){
+                            theLastMessage = chat.getMessage();
+                    }
+
+                }
+                switch (theLastMessage){
+                    case "default":
+                    last_message.setText("NoMessage");
+                    break;
+
+
+                    default:
+                        last_message.setText(theLastMessage);
+                        break;
+                }
+                theLastMessage= "default";
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 }

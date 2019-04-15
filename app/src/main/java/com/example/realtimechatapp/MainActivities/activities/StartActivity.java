@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.realtimechatapp.R;
@@ -32,7 +33,7 @@ public class StartActivity extends AppCompatActivity {
     private MaterialEditText fullname,email,password,confirmpassword;
     private Button btn_register;
     private ImageView profile_image;
-
+    private TextView forgot_password;
     private FirebaseAuth auth;
     private DatabaseReference reference;
     private Uri image_uri;
@@ -60,7 +61,6 @@ public class StartActivity extends AppCompatActivity {
 
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +72,17 @@ public class StartActivity extends AppCompatActivity {
                 Button btn_login = view.findViewById(R.id.btn_login);
                 final ProgressBar progressBar = view.findViewById(R.id.progressBar);
                 final FirebaseAuth auth = FirebaseAuth.getInstance();
+
+                forgot_password = view.findViewById(R.id.forgot_password);
+
+
+                forgot_password.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(StartActivity.this, ResetPassword.class));
+                    }
+                });
+
                 btn_login.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(final View view) {

@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivities.activities.ResetPassword"></activity>
+        <activity
+            android:parentActivityName=".MainActivities.activities.StartActivity"
+            android:name=".MainActivities.activities.ResetPassword"></activity>
         <activity android:name=".MainActivities.questions.Question2_2_2_2_2" />
         <activity android:name=".MainActivities.questions.Question2_2_2_2" />
         <activity android:name=".MainActivities.questions.Question2_2_2" />
@@ -35,6 +37,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".MainActivities.Notification.MyFirebaseIdService"
+            android:enabled="true"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:name=".MainActivities.Notification.MyFirebaseMessagin"
+            android:enabled="true"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
