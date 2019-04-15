@@ -51,6 +51,16 @@
             android:layout_marginTop="10dp"
             />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot your Password"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:layout_gravity="end"
+            android:id="@+id/forgot_password"
+            android:textColor="@color/colorPrimaryDark"
+            />
 
     </LinearLayout>
     <ProgressBar

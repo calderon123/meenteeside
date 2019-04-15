@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#63C5BC"
+    android:background="#ececec"
+    android:padding="2dp"
     tools:context=".MainActivities.fragments.MentorListFragment">
 
     <android.support.v7.widget.RecyclerView

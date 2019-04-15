@@ -37,7 +37,7 @@ public class FeedBackAdapter extends RecyclerView.Adapter <FeedBackAdapter.FeedB
     public void onBindViewHolder(@NonNull FeedBackViewHolder feedBackViewHolder, int i) {
         Rate rate = rateList.get(i);
 
-        feedBackViewHolder.comments_retrieve.setText(rate.getComments());
+        feedBackViewHolder.comments_retrieve.setText("'"+rate.getComments()+"'");
     }
 
     @Override
@@ -53,7 +53,6 @@ public class FeedBackAdapter extends RecyclerView.Adapter <FeedBackAdapter.FeedB
         public FeedBackViewHolder(View itemView){
             super(itemView);
 
-            rating_retrieve =itemView.findViewById(R.id.rating_retrieve);
             comments_retrieve = itemView.findViewById(R.id.comments_retrieve);
         }
     }

@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.realtimechatapp.MainActivities.adapters.FeedBackAdapter;
@@ -58,7 +59,7 @@ public class MentorProfile extends AppCompatActivity {
     RecyclerView recyclerView;
     FeedBackAdapter feedBackAdapter;
     List<Rate> rateList;
-
+    Toolbar toolbar;
 
     public static  final  String rate_detal_1= "RateDetails";
     public static  Counselors counselor = null;
@@ -70,6 +71,7 @@ public class MentorProfile extends AppCompatActivity {
         context = this;
 
         profile_image = (CircleImageView)findViewById(R.id.profile_image);
+
         fullname = findViewById(R.id.fullname);
         expertise = findViewById(R.id.expertise);
         emmail = findViewById(R.id.email);

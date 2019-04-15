@@ -5,18 +5,13 @@
     android:padding="10dp"
     android:layout_height="wrap_content">
 
-    <com.hsalf.smilerating.SmileRating
-        android:id="@+id/rating_retrieve"
-        android:layout_centerHorizontal="true"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content" />
+
     <View
-        android:layout_below="@id/rating_retrieve"
+       android:layout_below="@+id/comments_retrieve"
         android:layout_width="match_parent"
         android:background="#111"
         android:layout_height="2dp"/>
     <TextView
-        android:layout_below="@+id/rating_retrieve"
         android:text="Feedbacks"
         android:textSize="15dp"
         android:textStyle="italic"

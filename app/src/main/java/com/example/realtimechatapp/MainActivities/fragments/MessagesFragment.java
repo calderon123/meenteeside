@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.realtimechatapp.MainActivities.models.Chat;
 import com.example.realtimechatapp.MainActivities.models.Counselors;
@@ -28,7 +29,7 @@ public class MessagesFragment extends Fragment {
 
 
     private RecyclerView recyclerView;
-
+    private Button rate_star;
     private UserMentorList userMentorList;
     private List<String> mUserslist;
 
@@ -93,7 +94,6 @@ public class MessagesFragment extends Fragment {
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Counselors counselors = snapshot.getValue(Counselors.class);
-
                     for (String id: mUserslist ){
                         if (counselors.getId().equals(id)){
                             if (mUsers.size() != 0){
