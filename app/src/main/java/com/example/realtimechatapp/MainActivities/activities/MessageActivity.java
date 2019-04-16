@@ -31,6 +31,7 @@ import com.example.realtimechatapp.MainActivities.adapters.MessageAdapter;
 import com.example.realtimechatapp.MainActivities.fragments.APIService;
 import com.example.realtimechatapp.MainActivities.models.Chat;
 import com.example.realtimechatapp.MainActivities.models.Counselors;
+import com.example.realtimechatapp.MainActivities.models.Mentees;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -267,14 +268,14 @@ public class MessageActivity extends AppCompatActivity {
 
         final String msg = message;
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("UserMentor")
-        .child(firebaseUser.getUid());
+        databaseReference = FirebaseDatabase.getInstance().getReference("Add").child(userid)
+                .child("mentees").child(firebaseUser.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserMentor userMentor  = dataSnapshot.getValue(UserMentor.class);
+                UserMentor userMentor= dataSnapshot.getValue(UserMentor.class);
                 if (notify) {
-                    sendNotification(receiver, userMentor.getFullname(), msg);
+                    sendNotification(receiver, userMentor.getEmail(), msg);
                 }
                 notify = false;
             }
@@ -286,7 +287,7 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
-    private void sendNotification(String receiver, final String fullname, final String message) {
+    private void sendNotification(String receiver, final String email, final String message) {
         DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
         final String userid = getIntent().getStringExtra("id");
         Query query = tokens.orderByKey().equalTo(receiver);
@@ -296,7 +297,7 @@ public class MessageActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot:dataSnapshot.getChildren()){
                     Token token = snapshot.getValue(Token.class);
 
-                    Data data = new Data(firebaseUser.getUid(), R.mipmap.ic_launcher, fullname+": "+message,
+                    Data data = new Data(firebaseUser.getUid(), R.mipmap.ic_launcher, email+": "+message,
                             "New Message",userid);
 
                  Sender sender = new Sender(data ,token.getToken());

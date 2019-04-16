@@ -1,46 +1,55 @@
 package com.example.realtimechatapp.MainActivities.models;
 
-public class Counselors {
+public class Mentees {
+
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     private String id;
-    private  String imageURL;
+    private  String imageurl;
 
-
-    public String getImageURL() {
-        return imageURL;
+    public String getImageurl() {
+        return imageurl;
     }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
     }
 
-    public Counselors(String id) {
+    public Mentees(String id) {
         this.id = id;
     }
 
     private  String fullname;
     private  String rate;
 
-    public String getStatus() {
-        return status;
+    public String getStatus_counselor() {
+        return status_counselor;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus_counselor(String status_counselor) {
+        this.status_counselor = status_counselor;
     }
 
-    private  String status;
+    private  String status_counselor;
     private  String expertise;
     private  String availability;
 
-    public Counselors(String id, String fullname, String rate, String expertise, String availability, String email) {
+    public Mentees(String id, String fullname, String rate, String expertise, String availability) {
         this.id = id;
         this.fullname = fullname;
         this.rate = rate;
         this.expertise = expertise;
         this.availability = availability;
     }
-    public  Counselors(){
+    public Mentees(){
 
     }
     public String getId() {
