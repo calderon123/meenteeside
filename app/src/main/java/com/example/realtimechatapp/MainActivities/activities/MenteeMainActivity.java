@@ -42,7 +42,6 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-@SuppressWarnings("ALL")
 public class MenteeMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

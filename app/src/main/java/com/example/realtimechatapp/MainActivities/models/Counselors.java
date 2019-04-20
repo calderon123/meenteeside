@@ -4,7 +4,7 @@ public class Counselors {
 
     private String id;
     private  String imageURL;
-
+    private String email;
 
     public String getImageURL() {
         return imageURL;
@@ -81,5 +81,13 @@ public class Counselors {
 
     public void setAvailability(String availability) {
         this.availability = availability;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

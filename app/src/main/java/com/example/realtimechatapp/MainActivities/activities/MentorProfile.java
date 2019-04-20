@@ -97,7 +97,7 @@ public class MentorProfile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Counselors counselors = dataSnapshot.getValue(Counselors.class);
-
+                emmail.setText(counselors.getEmail());
                 fullname.setText(counselors.getFullname());
                 expertise.setText(counselors.getExpertise());
                 if (counselors.getImageURL().equals("default")){

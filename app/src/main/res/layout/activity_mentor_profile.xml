@@ -21,17 +21,18 @@
                android:layout_width="match_parent"
                android:layout_height="wrap_content">
                <Button
-                   android:background="@drawable/profile_background"
+                   android:background="#00BCD4"
                    android:id="@+id/back"
+                   android:textAlignment="center"
                    android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
+                   android:layout_height="35dp"
                    android:text="BACK" />
            </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="30dp"
                 android:layout_centerHorizontal="true"
                 android:id="@+id/bottom1"
-                android:padding="2dp"
+                android:padding="5dp"
                 android:background="@drawable/image_back_bacl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -179,11 +180,12 @@
                 <TextView
                     android:fontFamily="sans-serif-light"
                     android:textSize="18sp"
+                    android:text="111"
                     android:id="@+id/email"
-                    android:textColor="#000000"
+                    android:textColor="#111"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Email"/>
+                   />
                 <View
                     android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
