@@ -53,7 +53,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
                 android:layout_alignParentBottom="true"
                 android:id="@+id/last_message"
                 android:textColor="@color/colorPrimary"
@@ -86,9 +85,12 @@
 
 
             <Button
+                android:background="@drawable/profile_background"
                 android:id="@+id/rate_star"
+                android:fontFamily="sans-serif-light"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:text="Rate Counselor"

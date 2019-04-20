@@ -42,6 +42,7 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+@SuppressWarnings("ALL")
 public class MenteeMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -177,8 +178,6 @@ public class MenteeMainActivity extends AppCompatActivity
             startActivity(new Intent(MenteeMainActivity.this, Question1.class));
         }else if (id == R.id.send_report) {
 
-        }else if (id == R.id.view_profile) {
-            fragment = new ProfileFragments();
         }else if (id == R.id.logout_btn){
             auth.signOut();
             finish();

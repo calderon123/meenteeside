@@ -12,10 +12,9 @@ import com.example.realtimechatapp.MainActivities.models.Rate;
 import com.example.realtimechatapp.R;
 import com.hsalf.smilerating.SmileRating;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
+@SuppressWarnings("ALL")
 public class FeedBackAdapter extends RecyclerView.Adapter <FeedBackAdapter.FeedBackViewHolder> {
 
 

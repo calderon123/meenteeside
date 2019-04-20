@@ -7,23 +7,19 @@
         <item
             android:id="@+id/find_mentor"
             android:icon="@drawable/ic_search_black_24dp"
-            android:title="Find mentor" />
+            android:title="@string/find_mentor" />
         <item
             android:id="@+id/send_report"
             android:icon="@drawable/ic_report_problem_black_24dp"
-            android:title="Send Report" />
+            android:title="@string/send_report" />
     </group>
 
-    <item android:title="Account">
+    <item android:title="@string/account">
         <menu>
-            <item
-                android:id="@+id/view_profile"
-                android:icon="@drawable/ic_account_circle_black_24dp"
-                android:title="View Profile" />
             <item
                 android:id="@+id/logout_btn"
                 android:icon="@drawable/ic_exit_to_app_black_24dp"
-                android:title="Sign Out" />
+                android:title="@string/sign_out" />
         </menu>
 
     </item>

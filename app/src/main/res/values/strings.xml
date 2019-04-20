@@ -11,4 +11,13 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="rate_counselor">Rate Counselor</string>
+    <string name="find_mentor">Find mentor</string>
+    <string name="send_report">Send Report</string>
+    <string name="account">Account</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="_0">0</string>
+    <string name="expertise">Expertise</string>
+    <string name="mentees">Mentees</string>
+    <string name="fb_com_cynthia_cynthia">fb.com/cynthia_cynthia</string>
+    <string name="fb_account">Fb Account</string>
 </resources>
