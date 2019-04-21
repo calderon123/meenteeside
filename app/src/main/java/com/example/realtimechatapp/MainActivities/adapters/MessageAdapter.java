@@ -22,7 +22,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     public  static final int MSG_TYPE_LEFT = 0;
     public  static final int MSG_TYPE_RIGHT= 1;
-    private UserMentor userMentor;
     private Context mContext;
     private List<Chat> mChat;
     public String imageurl;
@@ -53,13 +52,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
 
         viewHolder.show_message.setText(chat.getMessage());
-        viewHolder.time_sent.setText(chat.getTime_sent());
 
-        if(imageurl.equals("default")) {
+
+
             viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
-        }else{
-            Glide.with(mContext).load(imageurl).into(viewHolder.profile_image);
-        }
+
             if (i == mChat.size()-1){
                 if (chat.isIsseen()){
                     viewHolder.txt_seen.setText("Seen");
@@ -94,12 +91,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         public TextView show_message;
         public ImageView profile_image;
-        public TextView txt_seen,time_sent;
+        public TextView txt_seen;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            time_sent = itemView.findViewById(R.id.time_sent);
+
             txt_seen = itemView.findViewById(R.id.text_seen);
             show_message = itemView.findViewById(R.id.show_message);
             profile_image = itemView.findViewById(R.id.profile_image);
