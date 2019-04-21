@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.realtimechatapp.MainActivities.models.Chat;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
@@ -47,15 +48,18 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         }
     }
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         final Chat chat= mChat.get(i);
 
 
         viewHolder.show_message.setText(chat.getMessage());
+        viewHolder.time_sent.setText(chat.getTime_sent());
 
-
+        if(imageurl.equals("default")) {
             viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
-
+        }else{
+            Glide.with(mContext).load(imageurl).into(viewHolder.profile_image);
+        }
             if (i == mChat.size()-1){
                 if (chat.isIsseen()){
                     viewHolder.txt_seen.setText("Seen");
@@ -65,6 +69,19 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             }else {
                 viewHolder.txt_seen.setVisibility(View.GONE);
             }
+
+           viewHolder.show_message.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View v) {
+                   if (viewHolder.txt_seen.getVisibility() == View.GONE) {
+                       viewHolder.txt_seen.setVisibility(View.VISIBLE);
+                   } else {
+                       viewHolder.txt_seen.setVisibility(View.GONE);
+
+                   }
+               }
+
+           });
 
     }
 
@@ -77,11 +94,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         public TextView show_message;
         public ImageView profile_image;
-        public TextView txt_seen;
+        public TextView txt_seen,time_sent;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            time_sent = itemView.findViewById(R.id.time_sent);
             txt_seen = itemView.findViewById(R.id.text_seen);
             show_message = itemView.findViewById(R.id.show_message);
             profile_image = itemView.findViewById(R.id.profile_image);

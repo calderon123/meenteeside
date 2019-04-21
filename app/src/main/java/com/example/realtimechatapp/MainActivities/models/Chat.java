@@ -19,8 +19,21 @@ public class Chat {
     private String sender;
     private String receiver;
     private String message;
+    private String time_sent;
 
-    public Chat(String sender, String receiver, String message,boolean isseen) {
+    public Chat(String time_sent) {
+        this.time_sent = time_sent;
+    }
+
+    public String getTime_sent() {
+        return time_sent;
+    }
+
+    public void setTime_sent(String time_sent) {
+        this.time_sent = time_sent;
+    }
+
+    public Chat(String sender, String receiver, String message, boolean isseen) {
         this.sender = sender;
         this.receiver = receiver;
         this.message = message;

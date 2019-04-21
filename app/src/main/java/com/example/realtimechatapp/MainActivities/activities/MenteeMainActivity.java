@@ -176,7 +176,7 @@ public class MenteeMainActivity extends AppCompatActivity
         if (id == R.id.find_mentor) {
             startActivity(new Intent(MenteeMainActivity.this, Question1.class));
         }else if (id == R.id.send_report) {
-
+            startActivity(new Intent(MenteeMainActivity.this, ReportActivity.class));
         }else if (id == R.id.logout_btn){
             auth.signOut();
             finish();

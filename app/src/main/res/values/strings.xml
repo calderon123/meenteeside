@@ -20,4 +20,10 @@
     <string name="mentees">Mentees</string>
     <string name="fb_com_cynthia_cynthia">fb.com/cynthia_cynthia</string>
     <string name="fb_account">Fb Account</string>
+    <string name="report_prompt">Choose report type</string>
+    <string-array name="report_list">
+        <item>System Bug</item>
+        <item>User</item>
+        <item>Others</item>
+    </string-array>
 </resources>

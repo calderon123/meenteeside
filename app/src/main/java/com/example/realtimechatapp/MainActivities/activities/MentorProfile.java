@@ -102,14 +102,10 @@ public class MentorProfile extends AppCompatActivity {
                 expertise.setText(counselors.getExpertise());
                 if (counselors.getImageURL().equals("default")){
                     profile_image.setImageResource(R.drawable.ic_account_circle_black_24dp);
-
                 }else {
                     Glide.with(getApplicationContext()).load(counselors.getImageURL()).into(profile_image);
-
                 }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 

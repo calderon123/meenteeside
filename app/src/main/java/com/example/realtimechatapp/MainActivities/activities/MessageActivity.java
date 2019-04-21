@@ -1,6 +1,7 @@
 package com.example.realtimechatapp.MainActivities.activities;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -43,6 +45,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -62,7 +65,7 @@ public class MessageActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     private CalendarView calendarView;
 
-
+    Button btn_set_sched;
     EditText text_send;
     ImageButton btn_send;
 
@@ -71,7 +74,7 @@ public class MessageActivity extends AppCompatActivity {
 
     APIService apiService;
     boolean notify = false;
-
+    EditText set_dscrpt;
     RecyclerView recyclerView;
     ValueEventListener seenListener;
     Intent intent;
@@ -121,12 +124,15 @@ public class MessageActivity extends AppCompatActivity {
         schedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(MessageActivity.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MessageActivity.this);
 
                 View view = getLayoutInflater().inflate(R.layout.schedule_btn, null);
-
+                final String userid = getIntent().getStringExtra("id");
                 btn_calendar = view.findViewById(R.id.btn_calendar);
                 date_schedule = view.findViewById(R.id.date_schedule);
+                 set_dscrpt = view.findViewById(R.id.set_dscrpt);
+                btn_set_sched = view.findViewById(R.id.btn_set_sched);
+
 
                 btn_calendar.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -157,6 +163,28 @@ public class MessageActivity extends AppCompatActivity {
                     }
                 };
 
+                btn_set_sched.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String date_schedule_ = date_schedule.getText().toString();
+                        String set_dscrpt_ = set_dscrpt.getText().toString();
+
+                        String msg = date_schedule_ + set_dscrpt_;
+
+                        if (!msg.equals("")) {
+                            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                @Override
+                                public void onDismiss(DialogInterface dialog) {
+                                    dialog.dismiss();
+                                }
+                            });
+                            sendMessage(firebaseUser.getUid(), userid, msg);
+                        } else {
+                            Toast.makeText(MessageActivity.this, "Can't set empty fields", Toast.LENGTH_SHORT).show();
+                        }
+                        text_send.setText("");
+                    }
+                });
 
                 builder.setView(view);
                 AlertDialog  dialog = builder.create();
@@ -242,8 +270,10 @@ public class MessageActivity extends AppCompatActivity {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
+
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("sender", sender);
+        hashMap.put("time_sent",time_sent());
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
         hashMap.put("isseen", false);
@@ -285,6 +315,11 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private String time_sent() {
+            String delegate = "hh:mm aaa";
+            return (String) DateFormat.format(delegate,Calendar.getInstance().getTime());
     }
 
     private void sendNotification(String receiver, final String email, final String message) {

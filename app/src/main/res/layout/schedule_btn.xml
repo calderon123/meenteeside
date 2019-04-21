@@ -74,7 +74,7 @@
 
     </RelativeLayout>
         <Button
-            android:id="@+id/set_sched"
+            android:id="@+id/btn_set_sched"
             android:layout_marginTop="10dp"
            android:background="@drawable/border_schedule"
             android:textStyle="bold"
