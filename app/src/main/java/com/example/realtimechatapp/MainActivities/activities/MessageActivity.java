@@ -169,7 +169,7 @@ public class MessageActivity extends AppCompatActivity {
                         String date_schedule_ = date_schedule.getText().toString();
                         String set_dscrpt_ = set_dscrpt.getText().toString();
 
-                        String msg = date_schedule_ + set_dscrpt_;
+                        String msg = date_schedule_ +"\n"+ set_dscrpt_;
 
                         if (!msg.equals("")) {
                             builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
