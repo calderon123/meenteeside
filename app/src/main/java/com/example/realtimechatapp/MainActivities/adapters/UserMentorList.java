@@ -55,16 +55,29 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         final Counselors counselors = mUsers.get(i);
-        viewHolder.fullname.setText(counselors.getFullname());
 
-        viewHolder.expertise.setText(counselors.getExpertise());
+        FirebaseDatabase.getInstance().getReference("UserMentor")
+                .child(counselors.getId()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserMentor userMentor = dataSnapshot.getValue(UserMentor.class);
+                viewHolder.fullname.setText(userMentor.getFullname());
 
-        if (counselors.getImageURL().equals("default")){
-            viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
-        }else{
-            Glide.with(mContext).load(counselors.getImageURL()).into(viewHolder.profile_image);
-        }
+                viewHolder.expertise.setText(userMentor.getExpertise());
 
+                if (userMentor.getImageUrl().equals("default")){
+                    viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
+                }else{
+                    Glide.with(mContext).load(userMentor.getImageUrl()).into(viewHolder.profile_image);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         if (ischat){
             lastMessage(counselors.getId() ,viewHolder.last_msg);
         }else {

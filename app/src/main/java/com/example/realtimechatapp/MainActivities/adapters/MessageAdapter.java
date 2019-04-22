@@ -3,6 +3,7 @@ package com.example.realtimechatapp.MainActivities.adapters;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
@@ -59,8 +61,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
             if (i == mChat.size()-1){
                 if (chat.isIsseen()){
+
                     viewHolder.txt_seen.setText("Seen");
                 }else {
+
                     viewHolder.txt_seen.setText("Delivered");
                 }
             }else {
@@ -81,6 +85,9 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
            });
 
     }
+
+
+
 
     @Override
     public int getItemCount() {

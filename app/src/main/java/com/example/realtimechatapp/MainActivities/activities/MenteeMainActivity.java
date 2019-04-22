@@ -25,6 +25,7 @@ import com.bumptech.glide.Glide;
 import com.example.realtimechatapp.MainActivities.fragments.MentorListFragment;
 import com.example.realtimechatapp.MainActivities.fragments.MessagesFragment;
 import com.example.realtimechatapp.MainActivities.fragments.ProfileFragments;
+import com.example.realtimechatapp.MainActivities.models.Chat;
 import com.example.realtimechatapp.MainActivities.models.UserMentee;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.MainActivities.questions.Question1;
@@ -117,19 +118,44 @@ public class MenteeMainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        TabLayout tableLayout = findViewById(R.id.tab_layout);
-        ViewPager viewPager = findViewById(R.id.view_pager);
-
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-
-        viewPagerAdapter.addFragment(new MentorListFragment(),"Mentor List" );
-        viewPagerAdapter.addFragment(new MessagesFragment(), "Messages");
-        viewPagerAdapter.addFragment(new ProfileFragments(), "Profile");
+        final TabLayout tableLayout = findViewById(R.id.tab_layout);
+        final ViewPager viewPager = findViewById(R.id.view_pager);
 
 
-        viewPager.setAdapter(viewPagerAdapter);
 
-        tableLayout.setupWithViewPager(viewPager);
+        databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+                int unread = 0;
+                for (DataSnapshot snapshot:dataSnapshot.getChildren()){
+                    Chat chat = snapshot.getValue(Chat.class);
+                    if (chat.getReceiver().equals(firebaseUser.getUid()) && !chat.isIsseen()){
+                        unread++;
+                    }
+                }
+                if (unread == 0){
+                    viewPagerAdapter.addFragment(new MessagesFragment(), "Messages");
+                }else {
+                    viewPagerAdapter.addFragment(new MessagesFragment(), "("+unread+")Messages");
+                }
+                viewPagerAdapter.addFragment(new MentorListFragment(),"Counselor List" );
+                viewPagerAdapter.addFragment(new ProfileFragments(), "Profile");
+
+
+                viewPager.setAdapter(viewPagerAdapter);
+
+                tableLayout.setupWithViewPager(viewPager);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 
     @Override

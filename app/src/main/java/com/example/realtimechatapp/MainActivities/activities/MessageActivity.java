@@ -34,6 +34,7 @@ import com.example.realtimechatapp.MainActivities.fragments.APIService;
 import com.example.realtimechatapp.MainActivities.models.Chat;
 import com.example.realtimechatapp.MainActivities.models.Counselors;
 import com.example.realtimechatapp.MainActivities.models.Mentees;
+import com.example.realtimechatapp.MainActivities.models.UserMentee;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -65,7 +66,7 @@ public class MessageActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     private CalendarView calendarView;
 
-    Button btn_set_sched;
+
     EditText text_send;
     ImageButton btn_send;
 
@@ -117,80 +118,6 @@ public class MessageActivity extends AppCompatActivity {
         expertise = findViewById(R.id.expertise);
         btn_send = findViewById(R.id.btn_send);
         text_send = findViewById(R.id.text_send);
-        final Button schedule = findViewById(R.id.schedule);
-
-
-
-        schedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(MessageActivity.this);
-
-                View view = getLayoutInflater().inflate(R.layout.schedule_btn, null);
-                final String userid = getIntent().getStringExtra("id");
-                btn_calendar = view.findViewById(R.id.btn_calendar);
-                date_schedule = view.findViewById(R.id.date_schedule);
-                 set_dscrpt = view.findViewById(R.id.set_dscrpt);
-                btn_set_sched = view.findViewById(R.id.btn_set_sched);
-
-
-                btn_calendar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Calendar calendar = Calendar.getInstance();
-                        int day  = calendar.get(Calendar.DAY_OF_MONTH);
-                        int month  = calendar.get(Calendar.MONTH);
-                        int year  = calendar.get(Calendar.YEAR);
-
-                        DatePickerDialog dialog = new DatePickerDialog(
-                                MessageActivity.this,
-                                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                                onDateSetListener,
-                                year,month,day);
-                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                            dialog.show();
-                    }
-                });
-                onDateSetListener  = new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth){
-                        month = month +1;
-                        year = year ;
-
-                        String date = dayOfMonth+ "/"+month +"/"+year ;
-
-                        date_schedule.setText(date);
-                    }
-                };
-
-                btn_set_sched.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String date_schedule_ = date_schedule.getText().toString();
-                        String set_dscrpt_ = set_dscrpt.getText().toString();
-
-                        String msg = date_schedule_ +"\n"+ set_dscrpt_;
-
-                        if (!msg.equals("")) {
-                            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                                @Override
-                                public void onDismiss(DialogInterface dialog) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            sendMessage(firebaseUser.getUid(), userid, msg);
-                        } else {
-                            Toast.makeText(MessageActivity.this, "Can't set empty fields", Toast.LENGTH_SHORT).show();
-                        }
-                        text_send.setText("");
-                    }
-                });
-
-                builder.setView(view);
-                AlertDialog  dialog = builder.create();
-                dialog.show();
-            }
-        });
 
 
         final String userid = getIntent().getStringExtra("id");
@@ -227,9 +154,22 @@ public class MessageActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Counselors counselors = dataSnapshot.getValue(Counselors.class);
 
-                fullname.setText(counselors.getFullname());
-                expertise.setText(counselors.getExpertise());
-                Glide.with(getApplicationContext()).load(counselors.getImageURL()).into(profile_image);
+
+                FirebaseDatabase.getInstance().getReference("UserMentor").child(counselors.getId())
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                UserMentor userMentor = dataSnapshot.getValue(UserMentor.class);
+                                fullname.setText(userMentor.getFullname());
+                                expertise.setText(userMentor.getExpertise());
+                                Glide.with(getApplicationContext()).load(userMentor.getImageUrl()).into(profile_image);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
 
                 readMessage(firebaseUser.getUid(),userid ,counselors.getImageURL() );
             }
@@ -251,7 +191,8 @@ public class MessageActivity extends AppCompatActivity {
                     Chat chat = snapshot.getValue(Chat.class);
                     if (chat.getReceiver().equals(firebaseUser.getUid()) && chat.getSender().equals(userid)){
                         HashMap<String, Object> hashMap = new HashMap<>();
-                        hashMap.put("isseen", true);
+
+                        hashMap.put("isseen", true );
                         snapshot.getRef().updateChildren(hashMap);
 
                     }
@@ -264,7 +205,10 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
     }
-
+    private String delegate() {
+        String delegate = "hh:mm aaa";
+        return (String) DateFormat.format(delegate,Calendar.getInstance().getTime());
+    }
 
     private  void sendMessage(String sender, final String receiver, String message){
 
@@ -273,7 +217,6 @@ public class MessageActivity extends AppCompatActivity {
 
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("sender", sender);
-        hashMap.put("time_sent",time_sent());
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
         hashMap.put("isseen", false);
@@ -303,11 +246,25 @@ public class MessageActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserMentor userMentor= dataSnapshot.getValue(UserMentor.class);
-                if (notify) {
-                    sendNotification(receiver, userMentor.getEmail(), msg);
-                }
-                notify = false;
+                Mentees mentees= dataSnapshot.getValue(Mentees.class);
+
+                FirebaseDatabase.getInstance().getReference("UserMentee").child(mentees.getId())
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                UserMentee userMentee = dataSnapshot.getValue(UserMentee.class);
+                                       if (notify) {
+                                            sendNotification(receiver, userMentee.getFullname(), msg);
+                                        }
+                                notify = false;
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
             }
 
             @Override
@@ -317,12 +274,7 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
-    private String time_sent() {
-            String delegate = "hh:mm aaa";
-            return (String) DateFormat.format(delegate,Calendar.getInstance().getTime());
-    }
-
-    private void sendNotification(String receiver, final String email, final String message) {
+    private void sendNotification(String receiver, final String fullname, final String message) {
         DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
         final String userid = getIntent().getStringExtra("id");
         Query query = tokens.orderByKey().equalTo(receiver);
@@ -332,10 +284,11 @@ public class MessageActivity extends AppCompatActivity {
                 for (DataSnapshot snapshot:dataSnapshot.getChildren()){
                     Token token = snapshot.getValue(Token.class);
 
-                    Data data = new Data(firebaseUser.getUid(), R.mipmap.ic_launcher, email+": "+message,
+                    Data data = new Data(firebaseUser.getUid(), R.mipmap.ic_launcher, fullname+": "+message,
                             "New Message",userid);
 
-                 Sender sender = new Sender(data ,token.getToken());
+                    Sender sender = new Sender(data ,token.getToken());
+
                         apiService.sendNotification(sender)
                                 .enqueue(new Callback<MyResponse>() {
                                     @Override

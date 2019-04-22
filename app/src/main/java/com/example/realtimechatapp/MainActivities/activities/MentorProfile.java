@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 
 import com.example.realtimechatapp.MainActivities.models.Counselors;
 
+import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -97,14 +98,29 @@ public class MentorProfile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Counselors counselors = dataSnapshot.getValue(Counselors.class);
-                emmail.setText(counselors.getEmail());
-                fullname.setText(counselors.getFullname());
-                expertise.setText(counselors.getExpertise());
-                if (counselors.getImageURL().equals("default")){
-                    profile_image.setImageResource(R.drawable.ic_account_circle_black_24dp);
-                }else {
-                    Glide.with(getApplicationContext()).load(counselors.getImageURL()).into(profile_image);
-                }
+
+                FirebaseDatabase.getInstance().getReference("UserMentor").
+                        child(counselors.getId())
+                        .addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                UserMentor userMentor = dataSnapshot.getValue(UserMentor.class);
+
+                                emmail.setText(userMentor.getEmail());
+                                fullname.setText(userMentor.getFullname());
+                                expertise.setText(userMentor.getExpertise());
+                                if (userMentor.getImageUrl().equals("default")){
+                                    profile_image.setImageResource(R.drawable.ic_account_circle_black_24dp);
+                                }else {
+                                    Glide.with(getApplicationContext()).load(userMentor.getImageUrl()).into(profile_image);
+                                }
+                                 }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

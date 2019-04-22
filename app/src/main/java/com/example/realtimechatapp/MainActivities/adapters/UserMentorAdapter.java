@@ -84,13 +84,6 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
 
                     HashMap<String,String> hashMap = new HashMap<>();
                     hashMap.put("id",userMentor.getId());
-                    hashMap.put("imageURL",userMentor.getImageUrl());
-                    hashMap.put("email",userMentor.getEmail());
-                    hashMap.put("fullname",userMentor.getFullname());
-                    hashMap.put("expertise",userMentor.getExpertise());
-                    hashMap.put("availability",userMentor.getAvailability());
-                    hashMap.put("rate", userMentor.getRate());
-                    hashMap.put("search",userMentor.getFullname().toLowerCase());
                     String userid =  userMentor.getId();
                     FirebaseDatabase.getInstance().getReference().child("Add").child(firebaseUser.getUid()).child("counselor")
                             .child(userid).setValue(hashMap);
@@ -98,7 +91,6 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
 
                     HashMap<String,String> hashMap1 = new HashMap<>();
                     hashMap1.put("id",firebaseUser.getUid());
-                    hashMap1.put("email",firebaseUser.getEmail());
                     FirebaseDatabase.getInstance().getReference().child("Add").child(userMentor.getId().toString()).child("mentees")
                             .child(firebaseUser.getUid()).setValue(hashMap1);
 
@@ -151,7 +143,7 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(userid).exists()){
-                    button.setText("added");
+                    button.setText("unfriend");
                 } else {
                     button.setText("add");
                 }
