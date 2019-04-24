@@ -2,12 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:elevation="6dp"
+    android:background="#4000"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivities.activities.RegisterMenteeActivity">
 
 
     <LinearLayout
+        android:background="#4000"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
@@ -20,46 +23,62 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:fontFamily="casual"
+            android:text="SIGN IN" />
 
-            android:textSize="20sp"
-            android:text="Log in" />
 
-
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <EditText
+            android:layout_marginTop="30dp"
             android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@drawable/input_back"
+            android:ems="10"
+            android:textColorHint="#fff"
+            android:textColor="#ffff"
             android:hint="Email"
-            android:layout_marginTop="10dp"
-            app:met_floatingLabel="normal"/>
+            android:inputType="textEmailAddress"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
+            android:textColorHint="#fff"
             android:id="@+id/password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/input_back"
+            android:ems="10"
+            android:textColor="#ffff"
             android:hint="Password"
             android:inputType="textPassword"
-            app:met_floatingLabel="normal" />
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp" />
         <android.support.v7.widget.AppCompatButton
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_login"
-            android:text="Login"
-            android:background="@color/colorPrimaryDark"
+            android:text="SIGN IN"
+            android:paddingLeft="20dp"
+            android:drawableRight="@drawable/ic_navigate_next_black_24dp"
+            android:background="@drawable/btn_login"
             android:textColor="#fff"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Forgot your Password"
+            android:text="Forgot your Password?"
             android:layout_marginTop="10dp"
             android:textStyle="bold"
+            android:fontFamily="casual"
             android:layout_gravity="end"
             android:id="@+id/forgot_password"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="#ffff"
             />
 
     </LinearLayout>

@@ -214,10 +214,13 @@ public class ViewFeedbacks extends AppCompatActivity {
                                         DecimalFormat df = new DecimalFormat("#.#");
                                         String valueUpdate = df.format(finalAverage);
 
-
+                                        FirebaseUser firebaseUser =
+                                                FirebaseAuth.getInstance().getCurrentUser();
                                         Map<String,Object> userMentorUpdateRate = new HashMap<>();
                                         userMentorUpdateRate.put("rates", valueUpdate);
-                                        databaseReference.child(counselor.getId()).child(push_id)
+                                        userMentorUpdateRate.put("id", firebaseUser.getUid());
+                                        rateDetailRef.child(counselor.getId())
+                                                .child(push_id)
                                                 .updateChildren(userMentorUpdateRate);
                                         comments.setText("");
 

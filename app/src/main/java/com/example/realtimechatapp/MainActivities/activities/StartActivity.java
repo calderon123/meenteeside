@@ -1,6 +1,7 @@
 package com.example.realtimechatapp.MainActivities.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,8 +9,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +34,9 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 public class StartActivity extends AppCompatActivity {
 
     private Button login, register;
+    LinearLayout bgapp;
+    Animation bganim;
+
 
     private FirebaseUser firebaseUser;
     private MaterialEditText fullname,email,password,confirmpassword;
@@ -61,15 +70,18 @@ public class StartActivity extends AppCompatActivity {
 
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);
+
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder  =new AlertDialog.Builder(StartActivity.this);
                 View view = getLayoutInflater().inflate(R.layout.activity_login_mentee,null);
-
-                final MaterialEditText email = view.findViewById(R.id.email);
-                final MaterialEditText password =view.findViewById(R.id.password);
-                Button btn_login = view.findViewById(R.id.btn_login);
+                final Animation animRotate = AnimationUtils.loadAnimation(StartActivity.this, R.anim.bganim);
+                login.startAnimation(animRotate);
+                final EditText email = view.findViewById(R.id.email);
+                final EditText password =view.findViewById(R.id.password);
+                final Button btn_login = view.findViewById(R.id.btn_login);
                 final ProgressBar progressBar = view.findViewById(R.id.progressBar);
                 final FirebaseAuth auth = FirebaseAuth.getInstance();
 
@@ -91,11 +103,11 @@ public class StartActivity extends AppCompatActivity {
                         String txt_password = password.getText().toString();
 
 
-
                         if (TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)){
                             Toast.makeText(StartActivity.this,"All fields required!", Toast.LENGTH_SHORT).show();
                         }else {
-
+                            btn_login.setVisibility(View.GONE);
+                            progressBar.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                             progressBar.setVisibility(View.VISIBLE);
                             auth.signInWithEmailAndPassword(txt_email, txt_password)
                                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -110,6 +122,7 @@ public class StartActivity extends AppCompatActivity {
                                                 finish();
 
                                             }else{
+                                                btn_login.setVisibility(View.VISIBLE);
                                                 Toast.makeText(StartActivity.this, "Authentication failed!" , Toast.LENGTH_SHORT).show();
                                             }
                                         }
@@ -118,7 +131,8 @@ public class StartActivity extends AppCompatActivity {
                     }
                 });
                 builder.setView(view);
-                AlertDialog  dialog = builder.create();
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 dialog.show();
             }
         });
@@ -126,7 +140,9 @@ public class StartActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-             startActivity(new Intent(StartActivity.this, RegisterMenteeActivity.class));
+                final Animation animRotate = AnimationUtils.loadAnimation(StartActivity.this, R.anim.bganim);
+                register.startAnimation(animRotate);
+                startActivity(new Intent(StartActivity.this, RegisterMenteeActivity.class));
             }
         });
 

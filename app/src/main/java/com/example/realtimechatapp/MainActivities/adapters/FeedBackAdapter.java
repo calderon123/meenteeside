@@ -37,6 +37,7 @@ public class FeedBackAdapter extends RecyclerView.Adapter <FeedBackAdapter.FeedB
         Rate rate = rateList.get(i);
 
         feedBackViewHolder.comments_retrieve.setText("'"+rate.getComments()+"'");
+
     }
 
     @Override

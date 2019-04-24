@@ -57,32 +57,32 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
 
 
-            viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
+        viewHolder.profile_image.setImageResource(R.drawable.ic_account_circle_black_24dp);
 
-            if (i == mChat.size()-1){
-                if (chat.isIsseen()){
+        if (i == mChat.size()-1){
+            if (chat.isIsseen()){
 
-                    viewHolder.txt_seen.setText("Seen");
-                }else {
-
-                    viewHolder.txt_seen.setText("Delivered");
-                }
+                viewHolder.txt_seen.setText("Seen");
             }else {
-                viewHolder.txt_seen.setVisibility(View.GONE);
+
+                viewHolder.txt_seen.setText("Delivered");
+            }
+        }else {
+            viewHolder.txt_seen.setVisibility(View.GONE);
+        }
+
+        viewHolder.show_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewHolder.txt_seen.getVisibility() == View.GONE) {
+                    viewHolder.txt_seen.setVisibility(View.VISIBLE);
+                } else {
+                    viewHolder.txt_seen.setVisibility(View.GONE);
+
+                }
             }
 
-           viewHolder.show_message.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                   if (viewHolder.txt_seen.getVisibility() == View.GONE) {
-                       viewHolder.txt_seen.setVisibility(View.VISIBLE);
-                   } else {
-                       viewHolder.txt_seen.setVisibility(View.GONE);
-
-                   }
-               }
-
-           });
+        });
 
     }
 
