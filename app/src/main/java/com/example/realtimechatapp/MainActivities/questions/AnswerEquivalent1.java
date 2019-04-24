@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Question2_1_1_1_1_1 extends Activity{
+public class AnswerEquivalent1 extends Activity{
 
 
     private RecyclerView recyclerView;
@@ -52,7 +52,7 @@ public class Question2_1_1_1_1_1 extends Activity{
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Question2_1_1_1_1_1.this, MenteeMainActivity.class);
+                Intent intent = new Intent(AnswerEquivalent1.this, MenteeMainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
@@ -63,7 +63,7 @@ public class Question2_1_1_1_1_1 extends Activity{
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Question2_1_1_1_1_1.this, Question2_1_1_1_1.class)
+                startActivity(new Intent(AnswerEquivalent1.this, Question2_1_1_1_1.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
@@ -91,11 +91,17 @@ public class Question2_1_1_1_1_1 extends Activity{
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
                     UserMentor userMentor = snapshot.getValue(UserMentor.class);
 
-                    if (userMentor.getExpertise().equals("Mental Health Counselor")
-                            && userMentor.getRate().equals("500-1000/hour")
-                            && userMentor.getAvailability().equals("Once a week")){
-                        mUsermentor.add(userMentor);
-                    }
+                        if (userMentor.getExpertise().equals("Mental Health Counselor")
+                                && userMentor.getRate().equals("500-1500/hour")
+                                && userMentor.getAvailability().equals("Once a week")) {
+                            mUsermentor.add(userMentor);
+                        } else if (userMentor.getExpertise().equals("Mental Health Counselor")
+                                && userMentor.getRate().equals("500-1000/hour")
+                                && userMentor.getAvailability().equals("Once a week")) {
+                            mUsermentor.add(userMentor);
+                        }
+
+
                 }
                 userMentorAdapter = new UserMentorAdapter(getApplicationContext(),mUsermentor);
                 recyclerView.setAdapter(userMentorAdapter);

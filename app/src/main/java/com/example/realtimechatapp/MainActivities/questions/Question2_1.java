@@ -19,6 +19,7 @@ public class Question2_1 extends AppCompatActivity {
 
 
         btn_ans1 = findViewById(R.id.btn_ans1);
+        btn_ans2 = findViewById(R.id.btn_ans2);
 
 
         btn_ans1.setOnClickListener(new View.OnClickListener() {
@@ -27,9 +28,18 @@ public class Question2_1 extends AppCompatActivity {
                 btn_ans1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Question2_1.this, Question2_1_1.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+                        startActivity(new Intent(Question2_1.this, Question2_1_1.class));
+                    }
+                });
+            }
+        });
+        btn_ans2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_ans1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(Question2_1.this, Question2_1_1.class));
                     }
                 });
             }

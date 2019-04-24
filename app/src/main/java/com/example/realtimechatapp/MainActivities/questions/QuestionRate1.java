@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.example.realtimechatapp.R;
 
-public class Question2_1_1_1_1 extends AppCompatActivity {
+public class QuestionRate1 extends AppCompatActivity {
 
     private Button btn_ans1,btn_ans2,btn_ans3;
 
@@ -23,14 +23,14 @@ public class Question2_1_1_1_1 extends AppCompatActivity {
         btn_ans1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Question2_1_1_1_1.this, Question2_1_1_1_1_1.class));
+                startActivity(new Intent(QuestionRate1.this, AnswerEquivalent2.class));
 
             }
         });
         btn_ans2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Question2_1_1_1_1.this, AnswerEquivalent1.class));
+                startActivity(new Intent(QuestionRate1.this, AnswerEquivalent3.class));
 
             }
         });

@@ -46,15 +46,16 @@
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="What problem do you encounter that you want your counselor will tackle all about?"/>
+            android:text="Availability of counselor you want?"/>
+
         <Button
-            android:textStyle="bold"
             android:layout_marginTop="20dp"
-            android:id="@+id/btn_ans1"
             android:textColor="@color/colorWhite"
             android:background="@drawable/border"
-            android:text="About Mental problems"
+            android:text="Once 1 week"
             android:layout_width="match_parent"
+            android:textStyle="bold"
+            android:id="@+id/btn_ans1"
             android:layout_height="wrap_content" />
         <Button
             android:textStyle="bold"
@@ -62,7 +63,7 @@
             android:id="@+id/btn_ans2"
             android:textColor="@color/colorWhite"
             android:background="@drawable/border"
-            android:text="About your studies"
+            android:text="Twice a week"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

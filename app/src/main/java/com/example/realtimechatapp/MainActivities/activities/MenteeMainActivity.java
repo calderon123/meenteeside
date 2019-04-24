@@ -140,7 +140,7 @@ public class MenteeMainActivity extends AppCompatActivity
                 }else {
                     viewPagerAdapter.addFragment(new MessagesFragment(), "("+unread+")Messages");
                 }
-                viewPagerAdapter.addFragment(new MentorListFragment(),"Counselor List" );
+                viewPagerAdapter.addFragment(new MentorListFragment(),"Counselors" );
                 viewPagerAdapter.addFragment(new ProfileFragments(), "Profile");
 
 

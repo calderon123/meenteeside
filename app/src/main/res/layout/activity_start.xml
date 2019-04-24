@@ -92,6 +92,7 @@
                     android:layout_height="wrap_content"
                     android:text="to be "/>
                 <TextView
+
                     android:layout_below="@+id/ready"
                     android:layout_marginRight="30dp"
                     android:id="@+id/textView2"
@@ -100,10 +101,11 @@
                     android:textAlignment="textEnd"
                     android:layout_marginLeft="20dp"
                     android:text="Motivated! "
-                    android:textColor="#fff"
+                    android:textColor="#FF9800"
                     android:textSize="40sp"
                     android:gravity="end" />
                 <LinearLayout
+                    android:padding="30dp"
                     android:layout_below="@+id/textView2"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -116,7 +118,8 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="20dp"
                         android:layout_marginLeft="20dp"
-                        android:layout_marginTop="150dp"
+                        android:layout_marginTop="130dp"
+                        android:paddingLeft="20dp"
                         android:layout_marginEnd="20dp"
                         android:background="@drawable/start_backgrounds"
                         android:drawableEnd="@drawable/ic_navigate_next_black_24dp"
@@ -130,6 +133,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/login"
+                        android:paddingLeft="20dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="20dp"
