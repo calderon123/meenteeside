@@ -18,6 +18,8 @@ import com.example.realtimechatapp.MainActivities.activities.MenteeMainActivity;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.MainActivities.adapters.UserMentorAdapter;
 import com.example.realtimechatapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Question2_1_1_1_1_1 extends Activity{
@@ -108,6 +111,28 @@ public class Question2_1_1_1_1_1 extends Activity{
             }
         });
     }
+    private void status(String status){
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference databaseReference  = FirebaseDatabase.getInstance().getReference("UserMentee").
+                child(firebaseUser.getUid());
+
+        HashMap<String,Object> hashMap= new HashMap<>();
+        hashMap.put("status",status);
+
+        databaseReference.updateChildren(hashMap);
+
+    }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        status("online");
+    }
+    @Override
+    protected  void onPause(){
+        super.onPause();
+        status("offline");
+    }
+
 
 
 

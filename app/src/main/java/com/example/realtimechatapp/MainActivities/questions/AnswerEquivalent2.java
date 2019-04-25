@@ -96,6 +96,7 @@ public class AnswerEquivalent2 extends Activity{
                             && userMentor.getAvailability().equals("Twice a week")){
                         mUsermentor.add(userMentor);
                     }
+
                 }
                 userMentorAdapter = new UserMentorAdapter(getApplicationContext(),mUsermentor);
                 recyclerView.setAdapter(userMentorAdapter);

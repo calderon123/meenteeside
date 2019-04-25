@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.realtimechatapp.MainActivities.activities.MentorProfile;
 import com.example.realtimechatapp.MainActivities.activities.MessageActivity;
+import com.example.realtimechatapp.MainActivities.fragments.MentorListFragment;
+import com.example.realtimechatapp.MainActivities.fragments.MessagesFragment;
+import com.example.realtimechatapp.MainActivities.fragments.ProfileFragments;
 import com.example.realtimechatapp.MainActivities.models.Chat;
 import com.example.realtimechatapp.MainActivities.models.Counselors;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
@@ -55,6 +58,36 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder viewHolder, int i) {
         final Counselors counselors = mUsers.get(i);
+
+
+        FirebaseDatabase.getInstance().getReference("Chats")
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        int unread = 0;
+                        for (DataSnapshot snapshot:dataSnapshot.getChildren()){
+                            Chat chat = snapshot.getValue(Chat.class);
+                            FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            if (chat.getSender().equals(counselors.getId())&& chat.getReceiver().equals(firebaseUser.getUid()) && !chat.isIsseen()){
+                                unread++;
+                            }
+                        }
+                        if (unread == 0){
+
+                           viewHolder.unread.setVisibility(View.GONE);
+                        }else {
+                            viewHolder.unread.setText(Integer.toString(unread));
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+
 
         FirebaseDatabase.getInstance().getReference("UserMentor")
                 .child(counselors.getId()).addValueEventListener(new ValueEventListener() {
@@ -129,15 +162,17 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView fullname,expertise,rate,last_msg;
+        public TextView fullname,expertise,rate,last_msg,unread;
         public CircleImageView profile_image;
         private CircleImageView img_off;
         private CircleImageView img_on;
         private Button rate_star;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            unread = itemView.findViewById(R.id.unread);
             last_msg = itemView.findViewById(R.id.last_message);
             fullname = itemView.findViewById(R.id.fullname);
             expertise = itemView.findViewById(R.id.expertise);

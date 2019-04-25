@@ -94,15 +94,15 @@ public class AnswerEquivalent3 extends Activity{
                     if (userMentor.getExpertise().equals("Mental Health Counselor")
                             && userMentor.getRate().equals("500-1500/hour")
                             && userMentor.getAvailability().equals("Twice a Week")){
+                        mUsermentor.add(userMentor);
 
                     }else if (userMentor.getExpertise().equals("Mental Health Counselor")
                             && userMentor.getRate().equals("500-1000/hour")
-                            && userMentor.getAvailability().equals("Twice a Week"))
-                    {
-
+                            && userMentor.getAvailability().equals("Twice a Week")){
+                        mUsermentor.add(userMentor);
                     }
 
-                        mUsermentor.add(userMentor);
+
                 }
                 userMentorAdapter = new UserMentorAdapter(getApplicationContext(),mUsermentor);
                 recyclerView.setAdapter(userMentorAdapter);

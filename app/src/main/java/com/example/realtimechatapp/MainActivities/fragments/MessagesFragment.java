@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.realtimechatapp.MainActivities.Notification.Token;
+import com.example.realtimechatapp.MainActivities.activities.MenteeMainActivity;
 import com.example.realtimechatapp.MainActivities.models.Chat;
 import com.example.realtimechatapp.MainActivities.models.ChatList;
 import com.example.realtimechatapp.MainActivities.models.Counselors;
@@ -56,7 +58,6 @@ public class MessagesFragment extends Fragment {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Chats");
-
 
         reference  = FirebaseDatabase.getInstance().getReference("Chatlist")
                 .child(firebaseUser.getUid());

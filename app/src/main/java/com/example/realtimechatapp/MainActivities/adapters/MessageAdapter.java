@@ -84,6 +84,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         });
 
+
     }
 
 
@@ -98,7 +99,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         public TextView show_message;
         public ImageView profile_image;
-        public TextView txt_seen;
+        public TextView txt_seen,unread;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -107,6 +108,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             txt_seen = itemView.findViewById(R.id.text_seen);
             show_message = itemView.findViewById(R.id.show_message);
             profile_image = itemView.findViewById(R.id.profile_image);
+            unread = itemView.findViewById(R.id.unread);
 
         }
     }

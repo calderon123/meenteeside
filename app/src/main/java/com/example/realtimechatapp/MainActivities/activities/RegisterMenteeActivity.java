@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -38,7 +39,7 @@ import java.util.HashMap;
 
 public class RegisterMenteeActivity extends AppCompatActivity {
 
-    private MaterialEditText fullname,email,password,confirmpassword;
+    private EditText fullname,email,password,confirmpassword;
     private Button btn_register;
     private ImageView profile_image;
 
