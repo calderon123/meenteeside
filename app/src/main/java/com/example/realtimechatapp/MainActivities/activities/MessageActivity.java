@@ -106,8 +106,6 @@ public class MessageActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
 
-
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -162,8 +160,14 @@ public class MessageActivity extends AppCompatActivity {
                                 UserMentor userMentor = dataSnapshot.getValue(UserMentor.class);
                                 fullname.setText(userMentor.getFullname());
                                 expertise.setText(userMentor.getExpertise());
+                                if (userMentor.getImageUrl().equals("default")){
+                                    profile_image.setImageResource(R.drawable.ic_account_circle_black_24dp);
+                                }else {
                                 Glide.with(getApplicationContext()).load(userMentor.getImageUrl()).into(profile_image);
+
+                                }
                             }
+
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -275,7 +279,7 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     private void sendNotification(String receiver, final String fullname, final String message) {
-        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
+        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Notification");
         final String userid = getIntent().getStringExtra("id");
         Query query = tokens.orderByKey().equalTo(receiver);
         query.addValueEventListener(new ValueEventListener() {

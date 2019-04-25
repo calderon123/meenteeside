@@ -46,7 +46,7 @@
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lastly, the rate of mentor you want? or payment?"/>
+            android:text="Lastly, the rateDetails of mentor you want? or payment?"/>
 
         <Button
             android:layout_marginTop="20dp"

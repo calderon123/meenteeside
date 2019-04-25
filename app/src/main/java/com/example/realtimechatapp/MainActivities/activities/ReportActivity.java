@@ -170,8 +170,9 @@ public class ReportActivity extends AppCompatActivity {
                         SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
                         String stringdate = dt.format(newDate);
 
-                        reference = FirebaseDatabase.getInstance().getReference("Reports").child(userid);
-
+                        reference = FirebaseDatabase.getInstance().getReference("Reports");
+                        String pushid = FirebaseDatabase.getInstance().getReference("Reports")
+                                .push().getKey();
                         HashMap<String,String> hashMap = new HashMap<>();
                         hashMap.put("id",userid);
                         hashMap.put("date_reported",stringdate);
@@ -179,7 +180,7 @@ public class ReportActivity extends AppCompatActivity {
                         hashMap.put("report_type",report_type);
                         hashMap.put("report_dscrpt",report_dscrpt);
 
-                        reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        reference.child(pushid).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()){

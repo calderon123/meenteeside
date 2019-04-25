@@ -3,6 +3,7 @@ package com.example.realtimechatapp.MainActivities.activities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Telephony;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,10 +20,11 @@ import android.widget.Toast;
 
 import com.example.realtimechatapp.MainActivities.adapters.FeedBackAdapter;
 import com.example.realtimechatapp.MainActivities.models.Counselors;
-import com.example.realtimechatapp.MainActivities.models.Rate;
+import com.example.realtimechatapp.MainActivities.models.RateDetails;
 import com.example.realtimechatapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,12 +36,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.hsalf.smilerating.SmileRating;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 @SuppressWarnings("ALL")
 public class ViewFeedbacks extends AppCompatActivity {
@@ -55,10 +59,9 @@ public class ViewFeedbacks extends AppCompatActivity {
     ImageButton btn_send,back;
     RecyclerView recyclerView;
     FeedBackAdapter feedBackAdapter;
-    List<Rate> rateList;
+    List<RateDetails> rateDetailsList;
     Toolbar toolbar;
 
-    public static  final  String rate_detal_1= "RateDetails";
     public static  Counselors counselor = null;
     double ratingStars;
 
@@ -90,12 +93,13 @@ public class ViewFeedbacks extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        rateList = new ArrayList<>();
+        rateDetailsList = new ArrayList<>();
 
         readUsers();
     }
     private void readUsers() {
         final String userid = getIntent().getStringExtra("id");
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("RateDetails")
                 .child(userid);
 
@@ -103,16 +107,13 @@ public class ViewFeedbacks extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot snapshot: dataSnapshot.getChildren()){
-                    Rate rate= snapshot.getValue(Rate.class);
-
-                    rateList.add(rate);
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    RateDetails rateDetails = snapshot.getValue(RateDetails.class);
+                    rateDetailsList.add(rateDetails);
                 }
-                feedBackAdapter = new FeedBackAdapter(getApplicationContext(),rateList);
+                feedBackAdapter = new FeedBackAdapter(getApplicationContext(), rateDetailsList);
                 recyclerView.setAdapter(feedBackAdapter);
             }
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -126,7 +127,7 @@ public class ViewFeedbacks extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ViewFeedbacks.this);
 
                 View view = getLayoutInflater().inflate(R.layout.button_feedback, null);
-                SmileRating smileRating = view.findViewById(R.id.ratingView);
+                final SmileRating smileRating = view.findViewById(R.id.ratingView);
                 comments = view.findViewById(R.id.comments);
                 btn_send = view.findViewById(R.id.btn_send);
                 smileRating.setOnSmileySelectionListener(new SmileRating.OnSmileySelectionListener() {
@@ -140,7 +141,8 @@ public class ViewFeedbacks extends AppCompatActivity {
                                 Toast.makeText(ViewFeedbacks.this, "GOOD", Toast.LENGTH_SHORT).show();
                                 break;
                             case SmileRating.GREAT:
-                                Toast.makeText(ViewFeedbacks.this, "GREAT", Toast.LENGTH_SHORT).show();;
+                                Toast.makeText(ViewFeedbacks.this, "GREAT", Toast.LENGTH_SHORT).show();
+                                ;
                                 break;
                             case SmileRating.OKAY:
                                 Toast.makeText(ViewFeedbacks.this, "OKAY", Toast.LENGTH_SHORT).show();
@@ -162,8 +164,14 @@ public class ViewFeedbacks extends AppCompatActivity {
                 btn_send.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        submitRateDetails(id);
 
+                        String comments_ = comments.getText().toString();
+                        if (!comments_.equals("")) {
+                            submitRateDetails(firebaseUser.getUid(),comments_);
+                        } else {
+                            Toast.makeText(ViewFeedbacks.this, "Please give some feedback", Toast.LENGTH_SHORT).show();
+                        }
+                        comments.setText("");
                     }
                 });
 
@@ -175,62 +183,27 @@ public class ViewFeedbacks extends AppCompatActivity {
 
 
         userMentorInfo = FirebaseDatabase.getInstance().getReference("UserMentor");
-        rateDetailRef = FirebaseDatabase.getInstance().getReference(rate_detal_1);
+        FirebaseUser firebaseUser1 = FirebaseAuth.getInstance().getCurrentUser();
+        String pushid = FirebaseDatabase.getInstance().getReference("UserMentor").push().getKey();
+        rateDetailRef = FirebaseDatabase.getInstance().getReference("RateDetails")
+                .child(userid).child(pushid);
 
 
     }
+    private void submitRateDetails(final String userMentorId,final String comments) {
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Map<String,Object> hashMap = new HashMap<>();
 
-    private void submitRateDetails(final String userMentorId) {
-
-        final Rate rate = new Rate(context, "");
-        rate.setRates(String.valueOf(ratingStars));
-        rate.setComments(comments.getText().toString());
-        final String push_id = FirebaseDatabase.getInstance().getReference("RateDetails").push().getKey();
-
-        rateDetailRef.child(userMentorId)
-                .push()
-                .setValue(rate)
+        String date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.ENGLISH).format(new Date());
+        hashMap.put("comments", comments);
+        hashMap.put("date", date);
+        hashMap.put("rate",String.valueOf(ratingStars));
+        hashMap.put("id", userMentorId);
+        rateDetailRef.setValue(hashMap)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-
-                        final String id = userMentorId;
-
-                        rateDetailRef.child(userMentorId)
-                                .addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        double averageStars = 0.0;
-                                        int count = 0;
-                                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren())
-                                        {
-                                            Rate rate = postSnapshot.getValue(Rate.class);
-                                            assert rate != null;
-                                            averageStars+=Double.parseDouble(rate.getRates().trim());
-
-                                            count++;
-                                        }
-                                        double finalAverage = averageStars/count;
-                                        DecimalFormat df = new DecimalFormat("#.#");
-                                        String valueUpdate = df.format(finalAverage);
-
-                                        FirebaseUser firebaseUser =
-                                                FirebaseAuth.getInstance().getCurrentUser();
-                                        Map<String,Object> userMentorUpdateRate = new HashMap<>();
-                                        userMentorUpdateRate.put("rates", valueUpdate);
-                                        userMentorUpdateRate.put("id", firebaseUser.getUid());
-                                        rateDetailRef.child(counselor.getId())
-                                                .child(push_id)
-                                                .updateChildren(userMentorUpdateRate);
-                                        comments.setText("");
-
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                    }
-                                });
+                        Toast.makeText(ViewFeedbacks.this , "Thanks for rating",Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -241,5 +214,6 @@ public class ViewFeedbacks extends AppCompatActivity {
                 });
 
     }
+
 
 }

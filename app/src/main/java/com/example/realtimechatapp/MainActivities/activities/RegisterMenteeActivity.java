@@ -96,8 +96,10 @@ public class RegisterMenteeActivity extends AppCompatActivity {
                 String txt_confirmpass = confirmpassword.getText().toString();
 
 
+
                 if(TextUtils.isEmpty(txt_fullname) || TextUtils.isEmpty(txt_email) ||
-                        TextUtils.isEmpty(txt_password) || TextUtils.isEmpty(txt_confirmpass)){
+                        TextUtils.isEmpty(txt_password) || TextUtils.isEmpty(txt_confirmpass) ||
+                TextUtils.isEmpty(profile_image.getDrawable().toString())){
                     Toast.makeText(RegisterMenteeActivity.this, "All fields required!", Toast.LENGTH_SHORT).show();
                         btn_register.setVisibility(View.VISIBLE);
                         progressBar.setVisibility(View.INVISIBLE);

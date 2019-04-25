@@ -10,14 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 import com.example.realtimechatapp.MainActivities.models.Counselors;
 
+import com.example.realtimechatapp.MainActivities.models.RateDetails;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
 
@@ -28,7 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import com.hsalf.smilerating.SmileRating;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -39,11 +38,12 @@ public class MentorProfile extends AppCompatActivity {
 
     public  static Context context;
     private CircleImageView profile_image;
-    private TextView fullname,expertise,emmail,feedback_count,feedbacks,mentees_count;
+    private TextView fullname,expertise,emmail,feedback_count,feedbacks,mentees_count,ratingAve;
     FirebaseUser firebaseUser;
     Button back;
     Toolbar toolbar;
     private String id;
+    SmileRating rating_bar;
 
 
 
@@ -61,6 +61,7 @@ public class MentorProfile extends AppCompatActivity {
         emmail = findViewById(R.id.email);
         mentees_count = findViewById(R.id.mentees_count);
         back = findViewById(R.id.back);
+        rating_bar = findViewById(R.id.rating_bar);
 
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +82,36 @@ public class MentorProfile extends AppCompatActivity {
 
         final String userid = getIntent().getStringExtra("id");
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        final String push_id = FirebaseDatabase.getInstance().getReference("RateDetails").push().getKey();
+        DatabaseReference reference =FirebaseDatabase.getInstance().getReference("RateDetails")
+                .child(userid).child(push_id);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                int sum =0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    RateDetails rateDetails = snapshot.getValue(RateDetails.class);
+
+
+                    ratingAve = findViewById(R.id.rating);
+
+                    int ratings = Integer.parseInt(String.valueOf(rateDetails.getRates()));
+
+                    sum += ratings;
+
+                    ratingAve.setText(String.valueOf(sum));
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         view_feedbacks.setOnClickListener(new View.OnClickListener() {
             @Override

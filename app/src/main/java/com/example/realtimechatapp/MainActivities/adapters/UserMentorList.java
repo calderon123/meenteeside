@@ -141,7 +141,6 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
             last_msg = itemView.findViewById(R.id.last_message);
             fullname = itemView.findViewById(R.id.fullname);
             expertise = itemView.findViewById(R.id.expertise);
-            rate = itemView.findViewById(R.id.rate);
             profile_image = itemView.findViewById(R.id.profile_image);
             img_off = itemView.findViewById(R.id.img_off);
             img_on= itemView.findViewById(R.id.img_on);

@@ -126,10 +126,10 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
             back = itemView.findViewById(R.id.back);
             home = itemView.findViewById(R.id.home);
             btn_add = itemView.findViewById(R.id.btn_add);
+            rate = itemView.findViewById(R.id.rate);
             fullname = itemView.findViewById(R.id.fullname);
             expertise = itemView.findViewById(R.id.expertise);
             profile_image = itemView.findViewById(R.id.profile_image);
-            rate = itemView.findViewById(R.id.rate);
             card_background = itemView.findViewById(R.id.card_background);
         }
     }

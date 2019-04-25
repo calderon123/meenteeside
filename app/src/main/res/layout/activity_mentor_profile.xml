@@ -16,18 +16,24 @@
             android:padding="4dp"
             android:layout_height="wrap_content">
 
-           <LinearLayout
-               android:orientation="vertical"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
-               <Button
-                   android:background="#00BCD4"
-                   android:id="@+id/back"
-                   android:textAlignment="center"
-                   android:layout_width="wrap_content"
-                   android:layout_height="35dp"
-                   android:text="BACK" />
-           </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <Button
+                    android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:background="#40000000"
+                    android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
+                    android:text="BACK"
+                    android:textAlignment="center" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="30dp"
                 android:layout_centerHorizontal="true"
@@ -164,6 +170,44 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/text"
+                    android:textSize="13sp"
+                    android:textColor="#00BCD4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Rating Percentage"/>
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_below="@id/text"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="18sp"
+                    android:id="@+id/rating"
+                    android:textColor="#111"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+                <com.hsalf.smilerating.SmileRating
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/rating_bar"
+                    android:layout_below="@id/rating"
+                    android:layout_width="200dp"
+                    android:layout_height="100dp" />
+                <View
+                    android:layout_below="@id/rating_bar"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:background="#ADA0A0"
+                    android:layout_height="1dp"/>
+            </RelativeLayout>
             <LinearLayout
                 android:layout_marginTop="20dp"
                 android:orientation="vertical"

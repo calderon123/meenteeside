@@ -17,8 +17,8 @@
             android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentStart="true"
                 android:id="@+id/profile_image"
@@ -62,6 +62,8 @@
                 android:layout_marginLeft="50dp" />
 
             <TextView
+                android:fontFamily="sans-serif"
+                android:layout_marginTop="10dp"
                 android:id="@+id/fullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,6 +74,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:fontFamily="sans-serif-condensed"
                 android:id="@+id/expertise"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

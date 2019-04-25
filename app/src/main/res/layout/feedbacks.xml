@@ -12,7 +12,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
                 android:layout_width="70dp"
                 android:layout_height="60dp"
@@ -34,8 +34,18 @@
                     android:layout_centerVertical="true"
                     android:textColor="#111"
                     android:textSize="18sp" />
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@id/comments_retrieve"
+                    android:text="awdawdawd"
+                android:textColor="#706B6B"
+                    android:id="@+id/date"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
+                    android:textSize="10sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
                 <View
-
                     android:layout_below="@+id/comments_retrieve"
                     android:id="@+id/view"
                     android:layout_marginTop="30dp"

@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ececec"
-    android:padding="2dp"
+    android:background="@drawable/blur"
     tools:context=".MainActivities.fragments.MessagesFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#4000"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-
-</FrameLayout>
+        android:layout_height="match_parent">
+    <!-- TODO: Update blank fragment layout -->
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <EditText
+            android:background="@drawable/input_back"
+            android:hint="Search"
+            android:textColor="#F5F2F2"
+            android:paddingBottom="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+           />
+        </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:padding="5dp"
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</RelativeLayout>

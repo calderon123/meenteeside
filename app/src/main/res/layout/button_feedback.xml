@@ -41,7 +41,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@color/colorWhite"
-
             android:padding="5dp">
 
             <EditText

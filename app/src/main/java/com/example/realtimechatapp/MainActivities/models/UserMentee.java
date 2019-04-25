@@ -4,9 +4,21 @@ public class UserMentee  {
 
 
     private String imageURL;
+    private String status;
+    private String fullname;
+    private String email;
+    private String id;
 
-    public UserMentee(String imageURL) {
+    public UserMentee(){
+
+    }
+
+    public UserMentee(String imageURL, String status, String fullname, String email, String id) {
         this.imageURL = imageURL;
+        this.status = status;
+        this.fullname = fullname;
+        this.email = email;
+        this.id = id;
     }
 
     public String getImageURL() {
@@ -25,22 +37,6 @@ public class UserMentee  {
         this.status = status;
     }
 
-    private String status;
-    private String fullname;
-    private String email;
-    private String password;
-
-
-
-    public UserMentee(String fullname, String email,String password) {
-        this.fullname = fullname;
-        this.email = email;
-
-    }
-    public UserMentee(){
-
-    }
-
     public String getFullname() {
         return fullname;
     }
@@ -57,12 +53,11 @@ public class UserMentee  {
         this.email = email;
     }
 
-
-    public String getPassword() {
-        return password;
+    public String getId() {
+        return id;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setId(String id) {
+        this.id = id;
     }
 }
