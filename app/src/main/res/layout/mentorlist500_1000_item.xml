@@ -27,7 +27,6 @@
                 android:layout_alignParentLeft="true" />
             <TextView
                 android:background="@drawable/unread_background"
-                android:text="1"
                 android:paddingStart="6dp"
                 android:paddingRight="6dp"
                 android:layout_marginStart="-10dp"

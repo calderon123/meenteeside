@@ -1,7 +1,9 @@
-package com.example.realtimechatapp;
+package com.example.realtimechatapp.MainActivities.questions;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.realtimechatapp.R;
 
 public class QuestionRate extends AppCompatActivity {
 

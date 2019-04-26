@@ -279,7 +279,7 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     private void sendNotification(String receiver, final String fullname, final String message) {
-        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Notification");
+        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Notifications");
         final String userid = getIntent().getStringExtra("id");
         Query query = tokens.orderByKey().equalTo(receiver);
         query.addValueEventListener(new ValueEventListener() {
@@ -298,9 +298,8 @@ public class MessageActivity extends AppCompatActivity {
                                     @Override
                                     public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
                                         if (response.code() == 200 ){
-                                            if (response.body().success == 1){
+                                            if (response.body().success != 1){
                                                 Toast.makeText(MessageActivity.this, "Failed", Toast.LENGTH_SHORT).show();
-
                                             }
                                         }
                                     }

@@ -12,10 +12,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.realtimechatapp.MainActivities.models.Chat;
+import com.example.realtimechatapp.MainActivities.models.UserMentee;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 import java.util.List;
@@ -55,9 +60,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         viewHolder.show_message.setText(chat.getMessage());
 
-
-
-        viewHolder.profile_image.setImageResource(R.drawable.ic_account_circle_black_24dp);
+        Glide.with(mContext).load(imageurl).into(viewHolder.profile_image);
 
         if (i == mChat.size()-1){
             if (chat.isIsseen()){

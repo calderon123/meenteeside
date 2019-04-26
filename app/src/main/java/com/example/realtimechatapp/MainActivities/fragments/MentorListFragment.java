@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.realtimechatapp.MainActivities.models.Counselors;
 import com.example.realtimechatapp.MainActivities.adapters.UserMentorList;
+import com.example.realtimechatapp.MainActivities.adapters.MentorlistAdapter;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,7 +31,7 @@ public class MentorListFragment extends Fragment {
     private FirebaseAuth mAuth;
 
     private RecyclerView add;
-    private UserMentorList userMentorList;
+    private  MentorlistAdapter mentorlistAdapter;
     private List<Counselors> mUsers;
 
 
@@ -70,8 +71,8 @@ public class MentorListFragment extends Fragment {
                         mUsers.add(counselors);
 
                 }
-                userMentorList = new UserMentorList(getContext(), mUsers, true);
-                recyclerView.setAdapter(userMentorList);
+                mentorlistAdapter = new MentorlistAdapter(getContext(), mUsers, true);
+                recyclerView.setAdapter(mentorlistAdapter);
             }
 
             @Override
