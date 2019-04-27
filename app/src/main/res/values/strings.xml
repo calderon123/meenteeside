@@ -21,6 +21,7 @@
     <string name="fb_com_cynthia_cynthia">fb.com/cynthia_cynthia</string>
     <string name="fb_account">Fb Account</string>
     <string name="report_prompt">Choose report type</string>
+    <string name="dscrpt">Sorry for the inconvenience you must be verified before you go to main activities, this is provided to prove that you are really the owner of this email. Thank you!!</string>
     <string-array name="report_list">
         <item>System Bug</item>
         <item>User</item>

@@ -19,6 +19,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -50,7 +52,10 @@ public class MenteeMainActivity extends AppCompatActivity
     private CircleImageView imageView,img_on,img_off;
     private TextView fullname,email;
     private MenuItem logout_btn;
+    Button send_verification;
     FirebaseAuth auth = FirebaseAuth.getInstance();
+    NavigationView nav_view;
+    RelativeLayout unverified;
 
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
@@ -63,7 +68,6 @@ public class MenteeMainActivity extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("UserMentee").child(firebaseUser.getUid());
@@ -79,6 +83,7 @@ public class MenteeMainActivity extends AppCompatActivity
                 fullname = findViewById(R.id.fullnam);
                 email =findViewById(R.id.emai);
                 imageView = findViewById(R.id.imageView);
+
 
                 if (userMentee.getStatus().equals("online")){
                     img_on.setVisibility(View.VISIBLE);
@@ -114,6 +119,7 @@ public class MenteeMainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
