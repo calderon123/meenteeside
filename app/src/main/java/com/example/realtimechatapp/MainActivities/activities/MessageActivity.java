@@ -257,8 +257,7 @@ public class MessageActivity extends AppCompatActivity {
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("sender", sender);
         hashMap.put("receiver", receiver);
-        hashMap.put("message", message);
-        hashMap.put("message_sent", delegate());
+        hashMap.put("message", message + "| time sent:"+delegate());
         hashMap.put("isseen", false);
 
         databaseReference.child("Chats").push().setValue(hashMap);

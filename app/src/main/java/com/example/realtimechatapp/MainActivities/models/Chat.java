@@ -3,6 +3,22 @@ package com.example.realtimechatapp.MainActivities.models;
 public class Chat {
 
     private boolean isseen;
+    private String sender;
+    private String receiver;
+    private String message;
+    private String message_sent;
+
+    public Chat(){
+
+    }
+
+    public Chat(boolean isseen, String sender, String receiver, String message, String message_sent) {
+        this.isseen = isseen;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.message = message;
+        this.message_sent = message_sent;
+    }
 
     public boolean isIsseen() {
         return isseen;
@@ -10,37 +26,6 @@ public class Chat {
 
     public void setIsseen(boolean isseen) {
         this.isseen = isseen;
-    }
-
-    public Chat(boolean isseen) {
-        this.isseen = isseen;
-    }
-
-    private String sender;
-    private String receiver;
-    private String message;
-    private String time_sent;
-
-    public Chat(String time_sent) {
-        this.time_sent = time_sent;
-    }
-
-    public String getTime_sent() {
-        return time_sent;
-    }
-
-    public void setTime_sent(String time_sent) {
-        this.time_sent = time_sent;
-    }
-
-    public Chat(String sender, String receiver, String message, boolean isseen) {
-        this.sender = sender;
-        this.receiver = receiver;
-        this.message = message;
-        this.isseen = isseen;
-    }
-    public Chat(){
-
     }
 
     public String getSender() {
@@ -65,6 +50,14 @@ public class Chat {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getMessage_sent() {
+        return message_sent;
+    }
+
+    public void setMessage_sent(String message_sent) {
+        this.message_sent = message_sent;
     }
 }
 

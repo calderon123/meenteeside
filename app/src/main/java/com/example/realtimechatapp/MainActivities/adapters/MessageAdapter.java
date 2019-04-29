@@ -32,6 +32,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     private Context mContext;
     private List<Chat> mChat;
     public String imageurl;
+    private TextView time_messge_sent ;
 
 
     FirebaseUser firebaseUser;
@@ -59,6 +60,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
 
         viewHolder.show_message.setText(chat.getMessage());
+
 
         viewHolder.profile_image.setImageResource(R.drawable.ic_account_circle_black_24dp);
 
@@ -100,13 +102,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView show_message;
+        public TextView show_message,time_messge_sent;
         public ImageView profile_image;
         public TextView txt_seen,unread;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
 
             txt_seen = itemView.findViewById(R.id.text_seen);
             show_message = itemView.findViewById(R.id.show_message);
