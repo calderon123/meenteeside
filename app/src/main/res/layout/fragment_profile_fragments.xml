@@ -71,7 +71,7 @@
                 android:layout_toEndOf="@+id/profile_image"
                 android:layout_toRightOf="@+id/profile_image"
                 android:text="Fullname"
-                android:textColor="#fff"
+                android:textColor="#ffff"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 

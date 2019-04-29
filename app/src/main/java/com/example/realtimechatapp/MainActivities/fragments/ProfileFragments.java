@@ -105,7 +105,7 @@ public class ProfileFragments extends Fragment {
 
 
                 assert userMentee != null;
-                fullname.setText(firebaseUser.getDisplayName());
+                fullname.setText(userMentee.getFullname());
                 email.setText(userMentee.getEmail());
                 Glide.with(getContext()).load(userMentee.getImageURL()).into(card_background);
                 Glide.with(getContext()).load(userMentee.getImageURL()).into(profile_image);

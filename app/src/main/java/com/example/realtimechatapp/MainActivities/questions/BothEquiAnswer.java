@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnswerEquivalent1 extends Activity{
+public class BothEquiAnswer extends Activity{
 
 
     private RecyclerView recyclerView;
@@ -52,18 +52,17 @@ public class AnswerEquivalent1 extends Activity{
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AnswerEquivalent1.this, MenteeMainActivity.class);
+                Intent intent = new Intent(BothEquiAnswer.this, MenteeMainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
 
-        home = findViewById(R.id.home);
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AnswerEquivalent1.this, Question2_1_1_1_1.class)
+                startActivity(new Intent(BothEquiAnswer.this, Question2_1_1_1_1.class)
                         .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
@@ -91,11 +90,15 @@ public class AnswerEquivalent1 extends Activity{
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
                     UserMentor userMentor = snapshot.getValue(UserMentor.class);
 
-                        if (userMentor.getExpertise().equals("Mental Health Counselor")
-                                && userMentor.getRate().equals("500-1500/hour")
-                                && userMentor.getAvailability().equals("Once a week")) {
-                            mUsermentor.add(userMentor);
-                        }
+                    if (userMentor.getExpertise().equals("Mental Health Counselor")
+                            && userMentor.getRate().equals("500-1500/hour")
+                            && userMentor.getAvailability().equals("Once a week")) {
+                        mUsermentor.add(userMentor);
+                    } else if (userMentor.getExpertise().equals("Mental Health Counselor")
+                            && userMentor.getRate().equals("500-1000/hour")
+                            && userMentor.getAvailability().equals("Once a week")) {
+                        mUsermentor.add(userMentor);
+                    }
 
 
                 }

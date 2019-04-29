@@ -111,30 +111,6 @@ public class Question2_1_1_1_1_1 extends Activity{
             }
         });
     }
-    private void status(String status){
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference databaseReference  = FirebaseDatabase.getInstance().getReference("UserMentee").
-                child(firebaseUser.getUid());
-
-        HashMap<String,Object> hashMap= new HashMap<>();
-        hashMap.put("status",status);
-
-        databaseReference.updateChildren(hashMap);
-
-    }
-    @Override
-    protected void onResume(){
-        super.onResume();
-        status("online");
-    }
-    @Override
-    protected  void onPause(){
-        super.onPause();
-        status("offline");
-    }
-
-
-
 
 
 

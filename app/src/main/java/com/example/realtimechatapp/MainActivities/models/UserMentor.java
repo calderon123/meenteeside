@@ -10,6 +10,19 @@ public class UserMentor {
     private String availability;
     private String email;
     private String date_reg;
+    private String handles;
+
+    public UserMentor(String handles) {
+        this.handles = handles;
+    }
+
+    public String getHandles() {
+        return handles;
+    }
+
+    public void setHandles(String handles) {
+        this.handles = handles;
+    }
 
     public UserMentor(){
 

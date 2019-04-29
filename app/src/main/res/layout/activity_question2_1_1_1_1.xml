@@ -46,7 +46,7 @@
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lastly, the rateDetails of mentor you want? or payment?"/>
+            android:text="Lastly, the rate of counselor you want? or payment?"/>
 
         <Button
             android:layout_marginTop="20dp"
@@ -64,6 +64,15 @@
             android:textColor="@color/colorWhite"
             android:background="@drawable/border"
             android:text="500-1500/hour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:id="@+id/btn_ans3"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/border"
+            android:text="Both"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

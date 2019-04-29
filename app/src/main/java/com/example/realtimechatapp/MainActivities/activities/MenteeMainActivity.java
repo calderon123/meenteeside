@@ -1,6 +1,7 @@
 package com.example.realtimechatapp.MainActivities.activities;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +21,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -69,50 +72,7 @@ public class MenteeMainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference("UserMentee").child(firebaseUser.getUid());
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserMentee userMentee = dataSnapshot.getValue(UserMentee.class);
-
-
-                img_off = findViewById(R.id.img_of);
-                img_on = findViewById(R.id.img_o);
-                fullname = findViewById(R.id.fullnam);
-                email =findViewById(R.id.emai);
-                imageView = findViewById(R.id.imageView);
-
-
-                if (userMentee.getStatus().equals("online")){
-                    img_on.setVisibility(View.VISIBLE);
-                    img_off.setVisibility(View.GONE);
-                }else {
-                    img_on.setVisibility(View.GONE);
-                    img_off.setVisibility(View.GONE);
-                }
-                if (fullname != null) {
-                    fullname.setText(userMentee.getFullname());
-                    email.setText(userMentee.getEmail());
-                }
-                if (userMentee.getImageURL().equals("default")){
-               imageView.setImageResource(R.drawable.ic_account_circle_black_24dp);
-
-            }else {
-            Glide.with(getApplicationContext()).load(userMentee.getImageURL()).into(imageView);
-
-        }
-            }
-
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
+        changeText();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -161,6 +121,60 @@ public class MenteeMainActivity extends AppCompatActivity
             }
         });
 
+
+    }
+
+    private void changeText() {
+        changeText2();
+    }
+
+    private void changeText2() {
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference("UserMentee").child(firebaseUser.getUid());
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserMentee userMentee = dataSnapshot.getValue(UserMentee.class);
+
+
+                img_off = (CircleImageView) findViewById(R.id.img_of);
+                img_on =(CircleImageView) findViewById(R.id.img_o);
+                fullname = findViewById(R.id.fullnam);
+                email = findViewById(R.id.emai);
+                imageView = findViewById(R.id.imageView);
+
+                try {
+
+                    if (userMentee.getStatus().equals("online")) {
+                        img_on.setVisibility(View.VISIBLE);
+                        img_off.setVisibility(View.GONE);
+                    } else {
+                        img_on.setVisibility(View.GONE);
+                        img_off.setVisibility(View.GONE);
+                    }
+                    if (fullname != null) {
+                        fullname.setText(userMentee.getFullname());
+                        email.setText(userMentee.getEmail());
+                    }
+                    if (userMentee.getImageURL().equals("default")) {
+                        imageView.setImageResource(R.drawable.ic_account_circle_black_24dp);
+
+                    } else {
+                        Glide.with(getApplicationContext()).load(userMentee.getImageURL()).into(imageView);
+
+                    }
+                }catch (NullPointerException e){
+                    throw  new IllegalStateException("This is not possible",e);
+                }
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
 

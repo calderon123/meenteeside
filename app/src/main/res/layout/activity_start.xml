@@ -5,9 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivities.activities.StartActivity">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -53,7 +51,7 @@
                         android:layout_marginTop="50dp"
                         android:layout_toRightOf="@+id/logo"
                         android:fontFamily="sans-serif-condensed-light"
-                        android:text="Tambagi"
+                        android:text="Counseling"
                         android:textColor="#F59404"
                         android:textSize="25sp"
                         android:textStyle="bold" />
@@ -65,7 +63,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_toRightOf="@+id/logo"
                         android:fontFamily="sans-serif-condensed-light"
-                        android:text="Ko"
+                        android:text="Online"
                         android:textColor="#fff"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -159,5 +157,5 @@
         </RelativeLayout>
     </RelativeLayout>
         </RelativeLayout>
-    </ScrollView>
+
 </RelativeLayout>
