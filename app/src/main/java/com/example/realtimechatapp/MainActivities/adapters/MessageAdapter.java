@@ -60,7 +60,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         viewHolder.show_message.setText(chat.getMessage());
 
-        Glide.with(mContext).load(imageurl).into(viewHolder.profile_image);
+        viewHolder.profile_image.setImageResource(R.drawable.ic_account_circle_black_24dp);
 
         if (i == mChat.size()-1){
             if (chat.isIsseen()){

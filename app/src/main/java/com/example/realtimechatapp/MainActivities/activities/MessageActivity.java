@@ -30,10 +30,12 @@ import com.example.realtimechatapp.MainActivities.Notification.MyResponse;
 import com.example.realtimechatapp.MainActivities.Notification.Sender;
 import com.example.realtimechatapp.MainActivities.Notification.Token;
 import com.example.realtimechatapp.MainActivities.adapters.MessageAdapter;
+import com.example.realtimechatapp.MainActivities.adapters.ScheduleAdapter;
 import com.example.realtimechatapp.MainActivities.fragments.APIService;
 import com.example.realtimechatapp.MainActivities.models.Chat;
 import com.example.realtimechatapp.MainActivities.models.Counselors;
 import com.example.realtimechatapp.MainActivities.models.Mentees;
+import com.example.realtimechatapp.MainActivities.models.Schedules;
 import com.example.realtimechatapp.MainActivities.models.UserMentee;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
@@ -66,6 +68,8 @@ public class MessageActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     private CalendarView calendarView;
 
+    ScheduleAdapter scheduleAdapter;
+    List<Schedules> mSchedules;
 
     EditText text_send;
     ImageButton btn_send;
@@ -73,6 +77,7 @@ public class MessageActivity extends AppCompatActivity {
     MessageAdapter messageAdapter;
     List<Chat> mChat;
 
+    RecyclerView recyclerView1;
     APIService apiService;
     boolean notify = false;
     EditText set_dscrpt;
@@ -104,11 +109,17 @@ public class MessageActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
+        recyclerView1 = findViewById(R.id.recycler_view1);
+        recyclerView.setHasFixedSize(true);
 
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView1.setLayoutManager(linearLayoutManager1);
 
 
         profile_image = findViewById(R.id.profile_image);
@@ -124,7 +135,31 @@ public class MessageActivity extends AppCompatActivity {
 
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        mSchedules = new ArrayList<>();
+        DatabaseReference adding_schedules =   FirebaseDatabase.getInstance().getReference("Schedules")
+                .child(userid).child(firebaseUser.getUid());
+        adding_schedules.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                mSchedules.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Schedules schedules = snapshot.getValue(Schedules.class);
+                    if (!(mSchedules ==null) && schedules.getMentee_sched_id().equals(firebaseUser.getUid())
+                            && schedules.getCounselor_sched_id().equals(userid)) {
 
+                        mSchedules.add(schedules);
+                    }else {
+
+                    }
+                }
+                scheduleAdapter = new ScheduleAdapter(MessageActivity.this,mSchedules);
+                recyclerView1.setAdapter(scheduleAdapter);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -223,6 +258,7 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("sender", sender);
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
+        hashMap.put("message_sent", delegate());
         hashMap.put("isseen", false);
 
         databaseReference.child("Chats").push().setValue(hashMap);

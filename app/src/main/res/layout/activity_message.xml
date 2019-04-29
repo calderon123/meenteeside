@@ -102,4 +102,9 @@
                 android:src="@drawable/ic_send_black_24dp" />
         </RelativeLayout>
     </RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/bar_layout"
+        android:id="@+id/recycler_view1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </RelativeLayout>
