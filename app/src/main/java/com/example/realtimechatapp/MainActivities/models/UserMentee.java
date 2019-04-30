@@ -8,9 +8,21 @@ public class UserMentee  {
     private String fullname;
     private String email;
     private String id;
-
+    private String address;
     public UserMentee(){
 
+    }
+
+    public UserMentee(String address) {
+        this.address = address;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public UserMentee(String imageURL, String status, String fullname, String email, String id) {

@@ -287,7 +287,7 @@ public class MessageActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Mentees mentees= dataSnapshot.getValue(Mentees.class);
 
-                FirebaseDatabase.getInstance().getReference("UserMentee").child(mentees.getId())
+                FirebaseDatabase.getInstance().getReference("UserMentee").child(mentees.getId()).child(mentees.getId())
                         .addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -386,7 +386,7 @@ public class MessageActivity extends AppCompatActivity {
     private void status(String status){
         UserMentor userMentor = null;
         databaseReference  = FirebaseDatabase.getInstance().getReference("UserMentee").
-                child(firebaseUser.getUid());
+                child(firebaseUser.getUid()).child(firebaseUser.getUid());
 
         HashMap<String,Object> hashMap= new HashMap<>();
         hashMap.put("status",status);

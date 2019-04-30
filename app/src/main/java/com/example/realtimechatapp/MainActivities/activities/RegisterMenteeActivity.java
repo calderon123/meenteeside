@@ -124,12 +124,13 @@ public class RegisterMenteeActivity extends AppCompatActivity {
 
                             HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("id", userid);
+                            hashMap.put("address", "default");
                             hashMap.put("imageURL", "default");
                             hashMap.put("fullname", fullname);
                             hashMap.put("email", email);
                             hashMap.put("status", "offline");
 
-                            reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            reference.child(userid).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {

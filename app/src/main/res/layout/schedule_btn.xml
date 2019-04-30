@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@mipmap/background_schedule"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#ffff"
+    app:cardCornerRadius="10dp"
     android:layout_height="350dp">
     <LinearLayout
         android:padding="10dp"
-        android:background="#b999"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -85,4 +85,4 @@
             android:layout_height="40dp"
             android:text="Set Schedule"/>
     </LinearLayout>
-</RelativeLayout>
+</android.support.v7.widget.CardView>

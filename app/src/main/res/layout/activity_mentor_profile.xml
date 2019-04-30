@@ -236,33 +236,7 @@
                     android:background="#ADA0A0"
                     android:layout_height="1dp"/>
             </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textSize="13sp"
-                    android:textColor="#00BCD4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Phone Number"/>
-                <TextView
-                    android:fontFamily="sans-serif-light"
-                    android:textSize="18sp"
-                    android:id="@+id/phone_number"
-                    android:textColor="#000000"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="09223625055"/>
-                <View
-                    android:layout_marginTop="15dp"
-                    android:layout_width="match_parent"
-                    android:background="#ADA0A0"
-                    android:layout_height="1dp"/>
-            </LinearLayout>
+
             <LinearLayout
                 android:layout_marginTop="20dp"
                 android:orientation="vertical"
@@ -290,33 +264,7 @@
                     android:background="#ADA0A0"
                     android:layout_height="1dp"/>
             </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textSize="13sp"
-                    android:textColor="#00BCD4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fb_account"/>
-                <TextView
-                    android:fontFamily="sans-serif-light"
-                    android:textSize="18sp"
-                    android:id="@+id/fb_mail"
-                    android:textColor="#000000"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fb_com_cynthia_cynthia"/>
-                <View
-                    android:layout_marginTop="15dp"
-                    android:layout_width="match_parent"
-                    android:background="#ADA0A0"
-                    android:layout_height="1dp"/>
-            </LinearLayout>
+
         </LinearLayout>
     </RelativeLayout>
 

@@ -61,6 +61,7 @@ public class ViewFeedbacks extends AppCompatActivity {
     FeedBackAdapter feedBackAdapter;
     List<RateDetails> rateDetailsList;
     Toolbar toolbar;
+    AlertDialog dialog;
 
     public static  Counselors counselor = null;
     double ratingStars;
@@ -176,7 +177,7 @@ public class ViewFeedbacks extends AppCompatActivity {
                 });
 
                 builder.setView(view);
-                AlertDialog dialog = builder.create();
+                dialog = builder.create();
                 dialog.show();
             }
         });
@@ -204,11 +205,13 @@ public class ViewFeedbacks extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         Toast.makeText(ViewFeedbacks.this , "Thanks for rating",Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        dialog.dismiss();
                         Toast.makeText(ViewFeedbacks.this, "Rate failed!", Toast.LENGTH_SHORT).show();
                     }
                 });
