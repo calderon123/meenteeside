@@ -98,10 +98,10 @@ public class UserMentorList extends RecyclerView.Adapter<UserMentorList.ViewHold
 
                 viewHolder.expertise.setText(userMentor.getExpertise());
 
-                if (userMentor.getImageUrl().equals("default")){
+                if (userMentor.getImageURL().equals("default")){
                     viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
                 }else{
-                    Glide.with(mContext).load(userMentor.getImageUrl()).into(viewHolder.profile_image);
+                    Glide.with(mContext).load(userMentor.getImageURL()).into(viewHolder.profile_image);
                 }
 
             }

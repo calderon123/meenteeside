@@ -62,12 +62,12 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
         viewHolder.fullname.setText(userMentor.getFullname());
         viewHolder.expertise.setText(userMentor.getExpertise());
         viewHolder.rate.setText(userMentor.getRate());
-        if (userMentor.getImageUrl().equals("default")){
+        if (userMentor.getImageURL().equals("default")){
             viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
             viewHolder.card_background.setImageResource(R.mipmap.ic_launcher);
         }else {
-            Glide.with(mContext).load(userMentor.getImageUrl()).into(viewHolder.card_background);
-            Glide.with(mContext).load(userMentor.getImageUrl()).into(viewHolder.profile_image);
+            Glide.with(mContext).load(userMentor.getImageURL()).into(viewHolder.card_background);
+            Glide.with(mContext).load(userMentor.getImageURL()).into(viewHolder.profile_image);
         }
 
         isAdding(userMentor.getId(), viewHolder.btn_add);
@@ -85,6 +85,8 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
                     HashMap<String,String> hashMap = new HashMap<>();
                     hashMap.put("id",userMentor.getId());
                     String userid =  userMentor.getId();
+                    hashMap.put("expertise",userMentor.getExpertise().toLowerCase());
+                    hashMap.put("search",userMentor.getFullname().toLowerCase());
                     FirebaseDatabase.getInstance().getReference().child("Add").child(firebaseUser.getUid()).child("counselor")
                             .child(userid).setValue(hashMap);
 

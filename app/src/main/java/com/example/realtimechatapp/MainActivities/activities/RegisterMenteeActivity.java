@@ -128,6 +128,7 @@ public class RegisterMenteeActivity extends AppCompatActivity {
                             hashMap.put("imageURL", "default");
                             hashMap.put("fullname", fullname);
                             hashMap.put("email", email);
+                            hashMap.put("search", fullname.toLowerCase());
                             hashMap.put("status", "offline");
 
                             reference.child(userid).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {

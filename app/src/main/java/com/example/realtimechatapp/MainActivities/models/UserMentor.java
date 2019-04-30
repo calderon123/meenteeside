@@ -11,24 +11,14 @@ public class UserMentor {
     private String email;
     private String date_reg;
     private String handles;
+    private String search;
 
-    public UserMentor(String handles) {
-        this.handles = handles;
-    }
 
-    public String getHandles() {
-        return handles;
-    }
-
-    public void setHandles(String handles) {
-        this.handles = handles;
-    }
-
-    public UserMentor(){
+    public  UserMentor(){
 
     }
 
-    public UserMentor(String id, String status, String imageURL, String fullname, String expertise, String rate, String availability, String email, String date_reg) {
+    public UserMentor(String id, String status, String imageURL, String fullname, String expertise, String rate, String availability, String email, String date_reg, String handles, String search) {
         this.id = id;
         this.status = status;
         this.imageURL = imageURL;
@@ -38,6 +28,8 @@ public class UserMentor {
         this.availability = availability;
         this.email = email;
         this.date_reg = date_reg;
+        this.handles = handles;
+        this.search = search;
     }
 
     public String getId() {
@@ -56,12 +48,12 @@ public class UserMentor {
         this.status = status;
     }
 
-    public String getImageUrl() {
+    public String getImageURL() {
         return imageURL;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageURL = imageUrl;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public String getFullname() {
@@ -110,5 +102,21 @@ public class UserMentor {
 
     public void setDate_reg(String date_reg) {
         this.date_reg = date_reg;
+    }
+
+    public String getHandles() {
+        return handles;
+    }
+
+    public void setHandles(String handles) {
+        this.handles = handles;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 }

@@ -20,6 +20,7 @@
             <EditText
                 android:background="@drawable/input_register"
                 android:hint="Search"
+                android:id="@+id/search"
                 android:textColor="#F5F2F2"
                 android:paddingBottom="10dp"
                 android:paddingStart="10dp"

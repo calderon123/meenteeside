@@ -195,10 +195,10 @@ public class MessageActivity extends AppCompatActivity {
                                 UserMentor userMentor = dataSnapshot.getValue(UserMentor.class);
                                 fullname.setText(userMentor.getFullname());
                                 expertise.setText(userMentor.getExpertise());
-                                if (userMentor.getImageUrl().equals("default")){
+                                if (userMentor.getImageURL().equals("default")){
                                     profile_image.setImageResource(R.drawable.ic_account_circle_black_24dp);
                                 }else {
-                                Glide.with(getApplicationContext()).load(userMentor.getImageUrl()).into(profile_image);
+                                Glide.with(getApplicationContext()).load(userMentor.getImageURL()).into(profile_image);
 
                                 }
                             }
