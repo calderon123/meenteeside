@@ -93,6 +93,7 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
 
                     HashMap<String,String> hashMap1 = new HashMap<>();
                     hashMap1.put("id",firebaseUser.getUid());
+                    hashMap1.put("search" ,firebaseUser.getEmail().toLowerCase());
                     FirebaseDatabase.getInstance().getReference().child("Add").child(userMentor.getId().toString()).child("mentees")
                             .child(firebaseUser.getUid()).setValue(hashMap1);
 
