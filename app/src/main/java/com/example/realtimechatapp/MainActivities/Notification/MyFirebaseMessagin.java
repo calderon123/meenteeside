@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -27,16 +28,23 @@ public class MyFirebaseMessagin extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
 
         String sented = remoteMessage.getData().get("sented");
+        String user = remoteMessage.getData().get("user");
+
+        SharedPreferences preferences = getSharedPreferences("PREFS",MODE_PRIVATE);
+
+        String currentUser = preferences.getString("currentuser", "none");
+
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         assert sented != null;
         if (firebaseUser != null && sented.equals(firebaseUser.getUid())){
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                sendOreoNotification (remoteMessage);
-            }else {
-                sendNotification(remoteMessage);
+            if (!currentUser.equals(user)) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    sendOreoNotification(remoteMessage);
+                } else {
+                    sendNotification(remoteMessage);
+                }
             }
         }
     }
