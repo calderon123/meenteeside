@@ -107,19 +107,20 @@ public class MentorlistAdapter extends RecyclerView.Adapter<MentorlistAdapter.Vi
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         double total = 0.0;
                         double count = 0.0;
-                        double average = 0.0;
+                        int average = 0;
                         for(DataSnapshot ds: dataSnapshot.getChildren()) {
                             RateDetails rateDetails = ds.getValue(RateDetails.class);
 
                             double rating = Double.parseDouble(rateDetails.getRate());
                             total = total + rating;
                             count = count + 1;
-                            average = total / count;
+                            average = (int) (total / count);
 
 
-                            String ave = Double.toString(average);
+                            final String ave = Integer.toString(average);
 
-                            viewHolder.rate_ave.setText(ave);
+                            String ave_ave = Double.toString(Double.parseDouble(ave));
+                            viewHolder.rate_ave.setText(ave_ave);
                         }
                     }
 

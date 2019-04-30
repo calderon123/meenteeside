@@ -114,7 +114,9 @@
                         android:textAllCaps="true"
                         android:textColor="#ffff"
                         android:textSize="23sp" />
+
                     <TextView
+                        android:id="@+id/mentees"
                         android:textSize="13sp"
                         android:layout_width="wrap_content"
                         android:textAllCaps="true"
@@ -148,7 +150,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
+                        android:id="@+id/feedbacks"
                         android:textAllCaps="true"
                         android:textColor="#ffff"
                         android:textSize="13sp" />

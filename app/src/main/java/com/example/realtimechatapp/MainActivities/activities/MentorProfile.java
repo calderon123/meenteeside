@@ -39,7 +39,7 @@ public class MentorProfile extends AppCompatActivity {
 
     public  static Context context;
     private CircleImageView profile_image;
-    private TextView fullname,expertise,emmail,feedback_count,feedbacks,mentees_count,ratingAve,rate_ave;
+    private TextView fullname,expertise,emmail,feedback_count,feedbacks,mentees,mentees_count,ratingAve,rate_ave;
     FirebaseUser firebaseUser;
     Button back;
     Toolbar toolbar;
@@ -56,7 +56,8 @@ public class MentorProfile extends AppCompatActivity {
         context = this;
 
         profile_image = (CircleImageView)findViewById(R.id.profile_image);
-
+        mentees = findViewById(R.id.mentees);
+        feedbacks = findViewById(R.id.feedbacks);
         rate_ave = findViewById(R.id.rate_ave);
         fullname = findViewById(R.id.fullname);
         expertise = findViewById(R.id.expertise);
@@ -119,19 +120,21 @@ public class MentorProfile extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         double total = 0.0;
                         double count = 0.0;
-                        double average = 0.0;
+                        int average = 0;
                         for(DataSnapshot ds: dataSnapshot.getChildren()) {
                             RateDetails rateDetails = ds.getValue(RateDetails.class);
 
                             double rating = Double.parseDouble(rateDetails.getRate());
                             total = total + rating;
                             count = count + 1;
-                            average = total / count;
+                            average = (int) (total / count);
 
 
-                            final String ave = Double.toString(average);
-                            rate_ave.setText(ave);
-                            rating_bar.setRating(new Float(ave));
+                            final String ave = Integer.toString(average);
+
+                            String ave_ave = Double.toString(Double.parseDouble(ave));
+                            rate_ave.setText(ave_ave);
+                            rating_bar.setRating(new Float(ave_ave));
                         }
                     }
 
@@ -194,16 +197,16 @@ public class MentorProfile extends AppCompatActivity {
                 if (dataSnapshot.exists()){
                    int countFeedbacks = (int) dataSnapshot.getChildrenCount();
                     if (countFeedbacks >= 1){
-                        feedback_count.setText(Integer.toString(countFeedbacks)+"FEEDBACKS");
-
+                        feedback_count.setText(Integer.toString(countFeedbacks));
+                        feedbacks.setText("Feedbacks");
 
                     }else if(countFeedbacks < 1) {
-                        feedback_count.setText(Integer.toString(countFeedbacks)+"FEEDBACK");
-
+                        feedback_count.setText(Integer.toString(countFeedbacks));
+                        feedbacks.setText("Feedback");
                     }
 
                 }else {
-                    feedback_count.setText("0");
+                    feedback_count.setText("No Feedbacks");
                 }
             }
 
@@ -220,11 +223,11 @@ public class MentorProfile extends AppCompatActivity {
                 if (dataSnapshot.exists()){
                     int countMentees = (int) dataSnapshot.getChildrenCount();
                     if (countMentees >= 1){
-                        mentees_count.setText(Integer.toString(countMentees)+"MENTEE");
-
+                        mentees_count.setText(Integer.toString(countMentees));
+                        mentees.setText("Mentees");
                     }else if(countMentees < 1) {
-                        mentees_count.setText(Integer.toString(countMentees)+"MENTEES");
-
+                        mentees_count.setText(Integer.toString(countMentees));
+                        mentees.setText("Mentee");
                     }
 
                 }else {
