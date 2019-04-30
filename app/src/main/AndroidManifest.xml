@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivities.questions.BothEquiAnswer"></activity>
+        <activity android:name=".MainActivities.questions.EquiQuestion1"></activity>
+        <activity android:name=".MainActivities.questions.BothEquiAnswer" />
         <activity android:name=".MainActivities.questions.AnswerEquivalent3" />
         <activity android:name=".MainActivities.questions.AnswerEquivalent2" />
         <activity android:name=".MainActivities.questions.QuestionRate1" />

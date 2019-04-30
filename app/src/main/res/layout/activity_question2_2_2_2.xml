@@ -7,7 +7,7 @@
     android:padding="20dp"
     android:background="@color/colorPrimaryDark"
     android:layout_height="match_parent"
-    tools:context=".MainActivities.questions.Question2_2_2_2">
+    tools:context=".MainActivities.questions.Question1">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -46,7 +46,7 @@
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lastly, the rateDetails of mentor you want? or payment?"/>
+            android:text="Lastly, the rate of counselor you want? or payment?"/>
 
         <Button
             android:layout_marginTop="20dp"
@@ -55,7 +55,7 @@
             android:text="500-1000/hour"
             android:layout_width="match_parent"
             android:textStyle="bold"
-            android:id="@+id/btn_answer1"
+            android:id="@+id/btn_ans1"
             android:layout_height="wrap_content" />
         <Button
             android:textStyle="bold"
@@ -63,7 +63,16 @@
             android:id="@+id/btn_ans2"
             android:textColor="@color/colorWhite"
             android:background="@drawable/border"
-            android:text="1000-1500/hour"
+            android:text="500-1500/hour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:id="@+id/btn_ans3"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/border"
+            android:text="Both"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

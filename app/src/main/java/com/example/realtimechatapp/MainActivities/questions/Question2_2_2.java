@@ -25,9 +25,7 @@ public class Question2_2_2 extends AppCompatActivity {
         btn_ans1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Question2_2_2.this, Question2_2_2_2.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                startActivity(new Intent(Question2_2_2.this,  Question2_2_2_2.class));
             }
         });
 //        btn_answer2.setOnClickListener(new View.OnClickListener() {

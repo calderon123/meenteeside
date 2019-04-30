@@ -4,7 +4,7 @@ import android.content.Context;
 
 public class RateDetails {
 
-    private String rates;
+    private String rate;
     private String comments;
     private String id;
     private  String date;
@@ -25,18 +25,18 @@ public class RateDetails {
 
     }
 
-    public RateDetails(String rates, String comments, String id) {
-        this.rates = rates;
+    public RateDetails(String rate, String comments, String id) {
+        this.rate = rate;
         this.comments = comments;
         this.id = id;
     }
 
-    public String getRates() {
-        return rates;
+    public String getRate() {
+        return rate;
     }
 
-    public void setRates(String rates) {
-        this.rates = rates;
+    public void getRate(String rate) {
+        this.rate = rate;
     }
 
     public String getComments() {

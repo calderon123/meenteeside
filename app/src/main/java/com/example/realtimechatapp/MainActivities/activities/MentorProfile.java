@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -38,12 +39,12 @@ public class MentorProfile extends AppCompatActivity {
 
     public  static Context context;
     private CircleImageView profile_image;
-    private TextView fullname,expertise,emmail,feedback_count,feedbacks,mentees_count,ratingAve;
+    private TextView fullname,expertise,emmail,feedback_count,feedbacks,mentees_count,ratingAve,rate_ave;
     FirebaseUser firebaseUser;
     Button back;
     Toolbar toolbar;
     private String id;
-    SmileRating rating_bar;
+    RatingBar rating_bar;
 
 
 
@@ -56,6 +57,7 @@ public class MentorProfile extends AppCompatActivity {
 
         profile_image = (CircleImageView)findViewById(R.id.profile_image);
 
+        rate_ave = findViewById(R.id.rate_ave);
         fullname = findViewById(R.id.fullname);
         expertise = findViewById(R.id.expertise);
         emmail = findViewById(R.id.email);
@@ -73,7 +75,6 @@ public class MentorProfile extends AppCompatActivity {
             }
         });
         feedback_count = findViewById(R.id.feedback_count);
-        feedbacks =findViewById(R.id.feedbacks);
         RelativeLayout view_feedbacks =findViewById(R.id.view_feedbacks);
 
 
@@ -97,7 +98,7 @@ public class MentorProfile extends AppCompatActivity {
 
                     ratingAve = findViewById(R.id.rating);
 
-                    int ratings = Integer.parseInt(String.valueOf(rateDetails.getRates()));
+                    int ratings = Integer.parseInt(String.valueOf(rateDetails.getRate()));
 
                     sum += ratings;
 
@@ -112,6 +113,33 @@ public class MentorProfile extends AppCompatActivity {
 
             }
         });
+        FirebaseDatabase.getInstance().getReference("RateDetails").child(userid)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        double total = 0.0;
+                        double count = 0.0;
+                        double average = 0.0;
+                        for(DataSnapshot ds: dataSnapshot.getChildren()) {
+                            RateDetails rateDetails = ds.getValue(RateDetails.class);
+
+                            double rating = Double.parseDouble(rateDetails.getRate());
+                            total = total + rating;
+                            count = count + 1;
+                            average = total / count;
+
+
+                            final String ave = Double.toString(average);
+                            rate_ave.setText(ave);
+                            rating_bar.setRating(new Float(ave));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
         view_feedbacks.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,11 +194,11 @@ public class MentorProfile extends AppCompatActivity {
                 if (dataSnapshot.exists()){
                    int countFeedbacks = (int) dataSnapshot.getChildrenCount();
                     if (countFeedbacks >= 1){
-                        feedback_count.setText(Integer.toString(countFeedbacks));
-                        feedbacks.setText("FEEDBACKS");
+                        feedback_count.setText(Integer.toString(countFeedbacks)+"FEEDBACKS");
+
 
                     }else if(countFeedbacks < 1) {
-                        feedback_count.setText(Integer.toString(countFeedbacks));
+                        feedback_count.setText(Integer.toString(countFeedbacks)+"FEEDBACK");
 
                     }
 
@@ -192,10 +220,10 @@ public class MentorProfile extends AppCompatActivity {
                 if (dataSnapshot.exists()){
                     int countMentees = (int) dataSnapshot.getChildrenCount();
                     if (countMentees >= 1){
-                        mentees_count.setText(Integer.toString(countMentees));
+                        mentees_count.setText(Integer.toString(countMentees)+"MENTEE");
 
                     }else if(countMentees < 1) {
-                        mentees_count.setText(Integer.toString(countMentees));
+                        mentees_count.setText(Integer.toString(countMentees)+"MENTEES");
 
                     }
 

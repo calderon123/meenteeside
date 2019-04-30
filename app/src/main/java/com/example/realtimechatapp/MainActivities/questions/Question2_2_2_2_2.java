@@ -92,7 +92,7 @@ public class Question2_2_2_2_2 extends Activity{
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
                     UserMentor userMentor = snapshot.getValue(UserMentor.class);
 
-                    if (userMentor.getExpertise().equals("Marriage Counselor") && userMentor.getRate().equals("500-100/hour")
+                    if (userMentor.getExpertise().equals("Marriage Counselor") && userMentor.getRate().equals("500-1000/hour")
                             && userMentor.getAvailability().equals("Once a week")){
                         mUsermentor.add(userMentor);
                     }

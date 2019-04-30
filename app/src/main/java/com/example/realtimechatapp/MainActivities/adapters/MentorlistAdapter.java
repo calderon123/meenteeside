@@ -18,6 +18,7 @@ import com.example.realtimechatapp.MainActivities.fragments.MessagesFragment;
 import com.example.realtimechatapp.MainActivities.fragments.ProfileFragments;
 import com.example.realtimechatapp.MainActivities.models.Chat;
 import com.example.realtimechatapp.MainActivities.models.Counselors;
+import com.example.realtimechatapp.MainActivities.models.RateDetails;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -100,6 +101,34 @@ public class MentorlistAdapter extends RecyclerView.Adapter<MentorlistAdapter.Vi
                     }
                 });
 
+        FirebaseDatabase.getInstance().getReference("RateDetails").child(counselors.getId())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        double total = 0.0;
+                        double count = 0.0;
+                        double average = 0.0;
+                        for(DataSnapshot ds: dataSnapshot.getChildren()) {
+                            RateDetails rateDetails = ds.getValue(RateDetails.class);
+
+                            double rating = Double.parseDouble(rateDetails.getRate());
+                            total = total + rating;
+                            count = count + 1;
+                            average = total / count;
+
+
+                            String ave = Double.toString(average);
+
+                            viewHolder.rate_ave.setText(ave);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
 
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +150,7 @@ public class MentorlistAdapter extends RecyclerView.Adapter<MentorlistAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView fullname,expertise,rate;
+        public TextView fullname,expertise,rate,rate_ave;
         public CircleImageView profile_image;
         private CircleImageView img_off;
         private CircleImageView img_on;
@@ -131,6 +160,7 @@ public class MentorlistAdapter extends RecyclerView.Adapter<MentorlistAdapter.Vi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            rate_ave = itemView.findViewById(R.id.rate_ave);
             fullname = itemView.findViewById(R.id.fullname);
             expertise = itemView.findViewById(R.id.expertise);
             profile_image = itemView.findViewById(R.id.profile_image);
