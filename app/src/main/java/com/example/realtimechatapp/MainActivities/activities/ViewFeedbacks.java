@@ -107,7 +107,7 @@ public class ViewFeedbacks extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                rateDetailsList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     RateDetails rateDetails = snapshot.getValue(RateDetails.class);
                     rateDetailsList.add(rateDetails);
