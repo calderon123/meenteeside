@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.example.realtimechatapp.R;
 
-public class Question2_2_2_2 extends AppCompatActivity {
+public class TwiceAWeek extends AppCompatActivity {
 
     private Button btn_ans1,btn_ans2,btn_ans3;
 
@@ -25,19 +25,19 @@ public class Question2_2_2_2 extends AppCompatActivity {
         btn_ans1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Question2_2_2_2.this,  EquiQuestion1.class));
+                startActivity(new Intent(TwiceAWeek.this,  TwiceAWeek1.class));
             }
         });
         btn_ans2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Question2_2_2_2.this,  EquiAnswer2.class));
+                startActivity(new Intent(TwiceAWeek.this,  TwiceAWeek2.class));
             }
         });
         btn_ans3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Question2_2_2_2.this,  EquiAnswer3.class));
+                startActivity(new Intent(TwiceAWeek.this,  TwiceAWeek3.class));
             }
         });
     }

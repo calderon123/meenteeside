@@ -12,6 +12,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_marginTop="2dp"
             android:layout_marginStart="2dp"
             android:layout_marginEnd="2dp"
@@ -30,6 +31,13 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
                 />
+            <Button
+                android:visibility="gone"
+                android:id="@+id/find_counselor"
+                android:layout_gravity="right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Find Counselor"/>
         </LinearLayout>
         <android.support.v7.widget.RecyclerView
             android:padding="2dp"

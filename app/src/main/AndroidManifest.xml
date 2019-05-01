@@ -12,7 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivities.questions.EquiQuestion1"></activity>
+        <activity android:name=".MainActivities.questions.TwiceAWeek3"></activity>
+        <activity android:name=".MainActivities.questions.TwiceAWeek2" />
+        <activity android:name=".MainActivities.questions.TwiceAWeek1" />
+        <activity android:name=".MainActivities.questions.TwiceAWeek" />
+        <activity android:name=".MainActivities.questions.EquiAnswer3" />
+        <activity android:name=".MainActivities.questions.EquiAnswer2" />
+        <activity android:name=".MainActivities.questions.EquiQuestion1" />
         <activity android:name=".MainActivities.questions.BothEquiAnswer" />
         <activity android:name=".MainActivities.questions.AnswerEquivalent3" />
         <activity android:name=".MainActivities.questions.AnswerEquivalent2" />

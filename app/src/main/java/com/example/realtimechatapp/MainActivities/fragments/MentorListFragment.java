@@ -1,5 +1,6 @@
 package com.example.realtimechatapp.MainActivities.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -10,12 +11,15 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.realtimechatapp.MainActivities.models.Counselors;
 import com.example.realtimechatapp.MainActivities.adapters.UserMentorList;
 import com.example.realtimechatapp.MainActivities.adapters.MentorlistAdapter;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
+import com.example.realtimechatapp.MainActivities.questions.Question1;
+import com.example.realtimechatapp.MainActivities.questions.Question2;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,19 +43,29 @@ public class MentorListFragment extends Fragment {
     private RecyclerView add;
     private  MentorlistAdapter mentorlistAdapter;
     private List<Counselors> mUsers;
-
+    private Button find_counselor;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_mentor_list, container, false);
+        final View view = inflater.inflate(R.layout.fragment_mentor_list, container, false);
 
         search = view.findViewById(R.id.search);
         recyclerView = view.findViewById(R.id.fragment_cont);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        find_counselor = view.findViewById(R.id.find_counselor);
+
+        find_counselor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Question1.class);
+                startActivity(intent);
+            }
+        });
+
 
         mUsers = new ArrayList<>();
 
@@ -92,8 +106,11 @@ public class MentorListFragment extends Fragment {
                     mUsers.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Counselors counselors= snapshot.getValue(Counselors.class);
-                        if (!counselors.getId().equals(firebaseUser.getUid())) {
+                        if (!counselors.getId().equals(firebaseUser.getUid()) && mUsers != null) {
+                            find_counselor.setVisibility(View.GONE);
                             mUsers.add(counselors);
+                        }else {
+                            find_counselor.setVisibility(View.VISIBLE);
                         }
                     }
                     mentorlistAdapter = new MentorlistAdapter(getContext(), mUsers, false);

@@ -20,8 +20,6 @@ import com.example.realtimechatapp.MainActivities.activities.MenteeMainActivity;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.MainActivities.adapters.UserMentorAdapter;
 import com.example.realtimechatapp.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,10 +27,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class Question2_1_1_1_1_1 extends AppCompatActivity {
+public class TwiceAWeek1 extends AppCompatActivity {
 
 
     private RecyclerView recyclerView;
@@ -52,10 +49,13 @@ public class Question2_1_1_1_1_1 extends AppCompatActivity {
 
 
 
+        home = findViewById(R.id.home);
+        back = findViewById(R.id.back);
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         Toolbar toolbar;
         toolbar = findViewById(R.id.toolbar);
         if (getSupportActionBar() != null){
@@ -87,11 +87,12 @@ public class Question2_1_1_1_1_1 extends AppCompatActivity {
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
                     UserMentor userMentor = snapshot.getValue(UserMentor.class);
 
-                    if (userMentor.getExpertise().equals("Mental Health Counselor")
+                    if (userMentor.getExpertise().equals("Marriage Counselor")
                             && userMentor.getRate().equals("500-1000/hour")
-                            && userMentor.getAvailability().equals("Once a week")){
+                            && userMentor.getAvailability().equals("Twice a week")) {
                         mUsermentor.add(userMentor);
                     }
+
                 }
                 userMentorAdapter = new UserMentorAdapter(getApplicationContext(),mUsermentor);
                 recyclerView.setAdapter(userMentorAdapter);
@@ -104,6 +105,8 @@ public class Question2_1_1_1_1_1 extends AppCompatActivity {
             }
         });
     }
+
+
 
 
 
