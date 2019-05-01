@@ -11,22 +11,14 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:id="@+id/bar_layout"
+        android:background="@drawable/background_messaging"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
+
         <android.support.v7.widget.Toolbar
-            android:textAlignment="center"
-            app:titleTextColor="#FF5722"
-            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/bar_layout"
-            android:layout_alignLeft="@+id/bar_layout"
-            android:layout_alignTop="@+id/bar_layout"
-            android:background="@drawable/background_messaging"
-            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/MenuStyle">
-
-        </android.support.v7.widget.Toolbar>
+            android:id="@+id/toolbar" />
 
     </android.support.design.widget.AppBarLayout>
 

@@ -68,7 +68,7 @@ public class MessageActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     DatabaseReference databaseReference;
     private CalendarView calendarView;
-
+    private Toolbar toolbar;
     ScheduleAdapter scheduleAdapter;
     List<Schedules> mSchedules;
 
@@ -94,17 +94,6 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message);
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MessageActivity.this, MenteeMainActivity.class)
-                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-            }
-        });
 
         apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
 
@@ -128,12 +117,23 @@ public class MessageActivity extends AppCompatActivity {
         expertise = findViewById(R.id.expertise);
         btn_send = findViewById(R.id.btn_send);
         text_send = findViewById(R.id.text_send);
-
+        toolbar = findViewById(R.id.toolbar);
 
         final String userid = getIntent().getStringExtra("id");
 
 
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mSchedules = new ArrayList<>();

@@ -36,13 +36,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 @SuppressWarnings("ALL")
 public class MentorProfile extends AppCompatActivity {
 
-
+    private Toolbar toolbar;
     public  static Context context;
     private CircleImageView profile_image;
     private TextView fullname,expertise,emmail,feedback_count,feedbacks,mentees,mentees_count,ratingAve,rate_ave;
     FirebaseUser firebaseUser;
     Button back;
-    Toolbar toolbar;
     private String id;
     RatingBar rating_bar;
 
@@ -63,18 +62,23 @@ public class MentorProfile extends AppCompatActivity {
         expertise = findViewById(R.id.expertise);
         emmail = findViewById(R.id.email);
         mentees_count = findViewById(R.id.mentees_count);
-        back = findViewById(R.id.back);
+
         rating_bar = findViewById(R.id.rating_bar);
+        toolbar = findViewById(R.id.toolbar);
 
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
-        back.setOnClickListener(new View.OnClickListener() {
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                        startActivity(new Intent(MentorProfile.this, MenteeMainActivity.class)
-                                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-
+                onBackPressed();
             }
         });
+
         feedback_count = findViewById(R.id.feedback_count);
         RelativeLayout view_feedbacks =findViewById(R.id.view_feedbacks);
 
@@ -84,36 +88,6 @@ public class MentorProfile extends AppCompatActivity {
 
         final String userid = getIntent().getStringExtra("id");
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        final String push_id = FirebaseDatabase.getInstance().getReference("RateDetails").push().getKey();
-        DatabaseReference reference =FirebaseDatabase.getInstance().getReference("RateDetails")
-                .child(userid).child(push_id);
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                int sum =0;
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    RateDetails rateDetails = snapshot.getValue(RateDetails.class);
-
-
-                    ratingAve = findViewById(R.id.rating);
-
-                    int ratings = Integer.parseInt(String.valueOf(rateDetails.getRate()));
-
-                    sum += ratings;
-
-                    ratingAve.setText(String.valueOf(sum));
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
         FirebaseDatabase.getInstance().getReference("RateDetails").child(userid)
                 .addValueEventListener(new ValueEventListener() {
                     @Override

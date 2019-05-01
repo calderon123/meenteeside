@@ -69,7 +69,6 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
             Glide.with(mContext).load(userMentor.getImageURL()).into(viewHolder.card_background);
             Glide.with(mContext).load(userMentor.getImageURL()).into(viewHolder.profile_image);
         }
-
         isAdding(userMentor.getId(), viewHolder.btn_add);
 
         if (userMentor.getId().equals(firebaseUser.getUid())){
@@ -120,11 +119,12 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
         public TextView fullname,expertise,rate;
         public ImageView card_background;
         public CircleImageView profile_image;
-        public Button btn_add;
+        public Button btn_add,btn_message;
         public ImageButton home,back;
 
         public ViewHolder(View itemView){
             super(itemView);
+
 
             back = itemView.findViewById(R.id.back);
             home = itemView.findViewById(R.id.home);
