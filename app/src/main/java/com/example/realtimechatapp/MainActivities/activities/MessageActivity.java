@@ -39,6 +39,7 @@ import com.example.realtimechatapp.MainActivities.models.Mentees;
 import com.example.realtimechatapp.MainActivities.models.Schedules;
 import com.example.realtimechatapp.MainActivities.models.UserMentee;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
+import com.example.realtimechatapp.MainActivities.questions.Question2_1_1_1_1_1;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -131,7 +132,9 @@ public class MessageActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent intent = new Intent(MessageActivity.this, MenteeMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
 
@@ -288,7 +291,7 @@ public class MessageActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Mentees mentees= dataSnapshot.getValue(Mentees.class);
 
-                FirebaseDatabase.getInstance().getReference("UserMentee").child(mentees.getId()).child(mentees.getId())
+                FirebaseDatabase.getInstance().getReference("UserMentee").child(mentees.getId())
                         .addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -394,7 +397,7 @@ public class MessageActivity extends AppCompatActivity {
     private void status(String status){
         UserMentor userMentor = null;
         databaseReference  = FirebaseDatabase.getInstance().getReference("UserMentee").
-                child(firebaseUser.getUid()).child(firebaseUser.getUid());
+                child(firebaseUser.getUid());
 
         HashMap<String,Object> hashMap= new HashMap<>();
         hashMap.put("status",status);

@@ -131,7 +131,7 @@ public class RegisterMenteeActivity extends AppCompatActivity {
                             hashMap.put("search", fullname.toLowerCase());
                             hashMap.put("status", "offline");
 
-                            reference.child(userid).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {

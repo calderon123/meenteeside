@@ -50,18 +50,9 @@ public class Question2_1_1_1_1_1 extends Activity{
 
 
 
-        home = findViewById(R.id.home);
-        back = findViewById(R.id.back);
-        home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Question2_1_1_1_1_1.this, MenteeMainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-            }
-        });
 
-        home = findViewById(R.id.home);
+        back = findViewById(R.id.back);
+
 
         back.setOnClickListener(new View.OnClickListener() {
             @Override

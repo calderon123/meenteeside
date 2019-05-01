@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,60 +11,41 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:id="@+id/bar_layout"
-        android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/toolbar"
             android:background="@color/colorPrimaryDark"
             android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/MenuStyle">
-            <ImageButton
-                android:background="@color/colorPrimaryDark"
-                android:src="@drawable/ic_arrow_back_black_24dp"
-                android:layout_width="30dp"
-                android:id="@+id/back"
-                android:layout_height="wrap_content" />
-            <LinearLayout
-                android:layout_marginRight="10dp"
-                android:layout_marginLeft="250dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            <ImageButton
-                android:id="@+id/home"
-                android:background="@color/colorPrimaryDark"
-                android:src="@drawable/ic_home_black_24dp"
-                android:layout_width="match_parent"
+            app:popupTheme="@style/MenuStyle" />
 
-                android:layout_height="match_parent" />
-            </LinearLayout>
-        </android.support.v7.widget.Toolbar>
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/card_view"
+    </android.support.design.widget.AppBarLayout>
+    <android.support.v7.widget.CardView
+        android:layout_below="@+id/bar_layout"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_marginTop="20dp"
+            <TextView
+                android:textColor="#111"
+                android:textAlignment="center"
+                android:id="@+id/textView"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:textColor="#111"
-                    android:textAlignment="center"
-                    android:id="@+id/textView"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="20dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Below Counselors can help you" />
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-    </android.support.design.widget.AppBarLayout>
-
+                android:layout_height="wrap_content"
+                android:text="Below Counselors can help you" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
     <LinearLayout
+        android:layout_below="@id/card_view"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -78,4 +59,4 @@
          />
         </android.support.v7.widget.CardView>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

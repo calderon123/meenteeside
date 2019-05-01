@@ -1,6 +1,7 @@
 package com.example.realtimechatapp.MainActivities.activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.realtimechatapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -52,16 +54,18 @@ public class ReportActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private DatabaseReference reference;
     private Uri image_uri;
+    private Toolbar toolbar;
     static int PreqCode =1;
     private  static int REQUESCODE = 1;
     private ProgressBar progressBar;
     private StorageTask uploadTask;
     ProgressDialog pd;
+    @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
 
-
+        toolbar = findViewById(R.id.toolbar);
         image = findViewById(R.id.image_uploaded);
         upload_photo = findViewById(R.id.btn_upload);
         btn_send_report = findViewById(R.id.btn_send_report);
@@ -89,7 +93,18 @@ public class ReportActivity extends AppCompatActivity {
                 }
             }
         });
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
+        if (getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         StorageReference storageReference = FirebaseStorage.getInstance().getReference("users_photo");
         upload_photo.setOnClickListener(new View.OnClickListener() {
             @Override

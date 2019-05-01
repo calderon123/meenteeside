@@ -126,8 +126,7 @@ public class ProfileFragments extends Fragment {
         });
 
 
-        databaseReference = FirebaseDatabase.getInstance().getReference("UserMentee").child(firebaseUser.getUid())
-        .child(firebaseUser.getUid());
+        databaseReference = FirebaseDatabase.getInstance().getReference("UserMentee").child(firebaseUser.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -173,7 +172,7 @@ public class ProfileFragments extends Fragment {
                     @Override
                     public void onClick(View v) {
                         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("UserMentee")
-                                .child(firebaseUser.getUid()).child(firebaseUser.getUid());
+                               .child(firebaseUser.getUid());
                         HashMap<String, Object> hashMap = new HashMap<>();
 
                         hashMap.put("address", address_edit.getText().toString());
@@ -245,7 +244,7 @@ public class ProfileFragments extends Fragment {
                         String mUri = downloadUri.toString();
 
                         databaseReference = FirebaseDatabase.getInstance().getReference("UserMentee").child(firebaseUser.getUid())
-                                .child(firebaseUser.getUid());
+                                ;
 
                         HashMap<String,Object> map = new HashMap<>();
 

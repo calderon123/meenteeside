@@ -129,8 +129,7 @@ public class MenteeMainActivity extends AppCompatActivity
 
     private void changeText2() {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference("UserMentee").child(firebaseUser.getUid())
-        .child(firebaseUser.getUid());
+        databaseReference = FirebaseDatabase.getInstance().getReference("UserMentee").child(firebaseUser.getUid());
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -280,7 +279,7 @@ public class MenteeMainActivity extends AppCompatActivity
     private void status(String status){
         UserMentor userMentor = null;
         databaseReference  = FirebaseDatabase.getInstance().getReference("UserMentee").
-        child(firebaseUser.getUid()).child(firebaseUser.getUid());
+        child(firebaseUser.getUid());
 
         HashMap<String,Object> hashMap= new HashMap<>();
         hashMap.put("status",status);

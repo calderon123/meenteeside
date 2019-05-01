@@ -1,6 +1,7 @@
 package com.example.realtimechatapp.MainActivities.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.realtimechatapp.MainActivities.activities.MessageActivity;
 import com.example.realtimechatapp.MainActivities.models.UserMentor;
 import com.example.realtimechatapp.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +38,7 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
     private List<UserMentor> mUsermentor;
     private View view;
     FirebaseUser firebaseUser;
-
+    private Button btn_message;
     public UserMentorAdapter(Context mContext, List<UserMentor> mUsermentor){
         this.mUsermentor = mUsermentor;
         this.mContext = mContext;
@@ -48,6 +50,9 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
 
 
          view = LayoutInflater.from(mContext).inflate(R.layout.user_item, parent, false);
+
+
+         btn_message = view.findViewById(R.id.btn_message);
         return new UserMentorAdapter.ViewHolder(view);
     }
 
@@ -69,6 +74,15 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
             Glide.with(mContext).load(userMentor.getImageURL()).into(viewHolder.card_background);
             Glide.with(mContext).load(userMentor.getImageURL()).into(viewHolder.profile_image);
         }
+        viewHolder.btn_message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, MessageActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("id", userMentor.getId());
+                v.getContext().startActivity(intent);
+            }
+        });
         isAdding(userMentor.getId(), viewHolder.btn_add);
 
         if (userMentor.getId().equals(firebaseUser.getUid())){
@@ -80,7 +94,7 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
             @Override
             public void onClick(View v) {
                 if (viewHolder.btn_add.getText().toString().equals("add")){
-
+                    viewHolder.btn_message.setVisibility(View.VISIBLE);
                     HashMap<String,String> hashMap = new HashMap<>();
                     hashMap.put("id",userMentor.getId());
                     String userid =  userMentor.getId();
@@ -97,6 +111,8 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
                             .child(firebaseUser.getUid()).setValue(hashMap1);
 
                 }else {
+                    viewHolder.btn_message.setVisibility(View.GONE);
+
                     String userid =  userMentor.getId();
                     FirebaseDatabase.getInstance().getReference().child("Add").child(firebaseUser.getUid()).child("counselor")
                             .child(userid).removeValue();
@@ -125,7 +141,7 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
         public ViewHolder(View itemView){
             super(itemView);
 
-
+            btn_message = itemView.findViewById(R.id.btn_message);
             back = itemView.findViewById(R.id.back);
             home = itemView.findViewById(R.id.home);
             btn_add = itemView.findViewById(R.id.btn_add);
@@ -147,8 +163,10 @@ public class UserMentorAdapter extends RecyclerView.Adapter<UserMentorAdapter.Vi
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child(userid).exists()){
                     button.setText("unfriend");
+                    btn_message.setVisibility(View.VISIBLE);
                 } else {
                     button.setText("add");
+                    btn_message.setVisibility(View.GONE);
                 }
             }
 

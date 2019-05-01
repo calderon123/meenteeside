@@ -49,7 +49,6 @@ public class FeedBackAdapter extends RecyclerView.Adapter <FeedBackAdapter.FeedB
         feedBackViewHolder.comments_retrieve.setText("'"+ rateDetails.getComments()+"'");
         feedBackViewHolder.date.setText(rateDetails.getDate());
         FirebaseDatabase.getInstance().getReference("UserMentee").child(rateDetails.getId())
-                .child(rateDetails.getId())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
