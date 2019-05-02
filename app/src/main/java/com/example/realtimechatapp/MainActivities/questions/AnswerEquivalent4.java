@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnswerEquivalent3 extends AppCompatActivity {
+public class AnswerEquivalent4 extends AppCompatActivity {
 
 
     private RecyclerView recyclerView;
@@ -48,12 +48,6 @@ public class AnswerEquivalent3 extends AppCompatActivity {
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
 
-
-        home = findViewById(R.id.home);
-        back = findViewById(R.id.back);
-
-
-        home = findViewById(R.id.home);
         Toolbar toolbar;
         toolbar = findViewById(R.id.toolbar);
         if (getSupportActionBar() != null){
@@ -95,6 +89,10 @@ public class AnswerEquivalent3 extends AppCompatActivity {
                             && userMentor.getAvailability().equals("Twice a week")){
                         mUsermentor.add(userMentor);
 
+                    }else if (userMentor.getExpertise().equals("Mental Health Counselor")
+                            && userMentor.getRate().equals("500-1000/hour")
+                            && userMentor.getAvailability().equals("Twice a week")){
+                        mUsermentor.add(userMentor);
                     }
 
 

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.realtimechatapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -11,8 +13,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivities.questions.TwiceAWeek3"></activity>
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".MainActivities.activities.Access"></activity>
+        <activity android:name=".MainActivities.questions.AnswerEquivalent4" />
+        <activity android:name=".MainActivities.questions.Equi3" />
+        <activity android:name=".MainActivities.questions.Equi2" />
+        <activity android:name=".MainActivities.questions.Equi1" />
+        <activity android:name=".MainActivities.questions.RateCounselor1" />
+        <activity android:name=".MainActivities.questions.AvailabilityOnceAWeek" />
+        <activity android:name=".MainActivities.questions.TwiceAWeek3" />
         <activity android:name=".MainActivities.questions.TwiceAWeek2" />
         <activity android:name=".MainActivities.questions.TwiceAWeek1" />
         <activity android:name=".MainActivities.questions.TwiceAWeek" />
@@ -46,14 +56,15 @@
         <activity android:name=".MainActivities.questions.Question1" />
         <activity android:name=".MainActivities.activities.MenteeMainActivity" />
         <activity android:name=".MainActivities.activities.RegisterMenteeActivity" />
-        <activity android:name=".MainActivities.activities.StartActivity">
+        <activity android:name=".MainActivities.activities.StartActivity"></activity>
+        <activity android:name=".MainActivities.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".MainActivities.activities.Access" />
         <service
             android:name=".MainActivities.Notification.MyFirebaseIdService"
             android:enabled="true"

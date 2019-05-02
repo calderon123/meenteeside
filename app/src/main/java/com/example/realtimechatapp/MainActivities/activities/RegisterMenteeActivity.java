@@ -137,7 +137,7 @@ public class RegisterMenteeActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(RegisterMenteeActivity.this,
                                                 "Registration Successful", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(RegisterMenteeActivity.this, MenteeMainActivity.class);
+                                        Intent intent = new Intent(RegisterMenteeActivity.this, Access.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                         finish();

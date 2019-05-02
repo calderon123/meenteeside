@@ -29,7 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnswerEquivalent3 extends AppCompatActivity {
+public class Equi3 extends AppCompatActivity {
 
 
     private RecyclerView recyclerView;
@@ -51,9 +51,8 @@ public class AnswerEquivalent3 extends AppCompatActivity {
 
         home = findViewById(R.id.home);
         back = findViewById(R.id.back);
-
-
         home = findViewById(R.id.home);
+
         Toolbar toolbar;
         toolbar = findViewById(R.id.toolbar);
         if (getSupportActionBar() != null){
@@ -66,7 +65,6 @@ public class AnswerEquivalent3 extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -90,13 +88,15 @@ public class AnswerEquivalent3 extends AppCompatActivity {
                 for (DataSnapshot snapshot: dataSnapshot.getChildren()){
                     UserMentor userMentor = snapshot.getValue(UserMentor.class);
 
-                    if (userMentor.getExpertise().equals("Mental Health Counselor")
-                            && userMentor.getRate().equals("500-1500/hour")
-                            && userMentor.getAvailability().equals("Twice a week")){
+                    if (userMentor.getExpertise().equals("Educational Counselor")
+                            && userMentor.getRate().equals("500-1000/hour")
+                            && userMentor.getAvailability().equals("Once a week")){
                         mUsermentor.add(userMentor);
-
+                    }else if (userMentor.getExpertise().equals("Educational Counselor")
+                            && userMentor.getRate().equals("500-1500/hour")
+                            && userMentor.getAvailability().equals("Once a week")){
+                        mUsermentor.add(userMentor);
                     }
-
 
                 }
                 userMentorAdapter = new UserMentorAdapter(getApplicationContext(),mUsermentor);

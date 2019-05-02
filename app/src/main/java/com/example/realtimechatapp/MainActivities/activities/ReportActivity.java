@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -56,6 +58,7 @@ public class ReportActivity extends AppCompatActivity {
     private Uri image_uri;
     private Toolbar toolbar;
     static int PreqCode =1;
+    private ProgressDialog dialog;
     private  static int REQUESCODE = 1;
     private ProgressBar progressBar;
     private StorageTask uploadTask;
@@ -71,6 +74,7 @@ public class ReportActivity extends AppCompatActivity {
         btn_send_report = findViewById(R.id.btn_send_report);
         report_dscrpt = findViewById(R.id.report_dscrpt);
         report_type = findViewById(R.id.report_type);
+        progressBar  = findViewById(R.id.progressBar);
 
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -89,6 +93,12 @@ public class ReportActivity extends AppCompatActivity {
                     btn_send_report.setVisibility(View.VISIBLE);
 
                 }else {
+                    btn_send_report.setVisibility(View.GONE);
+                   dialog = new ProgressDialog(ReportActivity.this);
+                    dialog.setMessage("Sending Request..");
+                    dialog.show();
+                    getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE ,
+                            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE );
                     sendReport(txt_report_dscrpt,report_type_);
                 }
             }
@@ -198,7 +208,10 @@ public class ReportActivity extends AppCompatActivity {
                         reference.child(pushid).setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
+                                dialog.dismiss();
+                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                                 if(task.isSuccessful()){
+
                                     Toast.makeText(ReportActivity.this,
                                             "Report Sent" , Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(ReportActivity.this, ReportActivity.class);

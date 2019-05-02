@@ -19,6 +19,7 @@ public class QuestionRate1 extends AppCompatActivity {
 
         btn_ans1 = findViewById(R.id.btn_ans1);
         btn_ans2 = findViewById(R.id.btn_ans2);
+        btn_ans3 = findViewById(R.id.btn_ans3);
 
         btn_ans1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -31,6 +32,13 @@ public class QuestionRate1 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(QuestionRate1.this, AnswerEquivalent3.class));
+
+            }
+        });
+        btn_ans3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(QuestionRate1.this, AnswerEquivalent4.class));
 
             }
         });

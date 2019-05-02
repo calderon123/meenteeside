@@ -106,7 +106,7 @@ public class MentorListFragment extends Fragment {
                     mUsers.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Counselors counselors= snapshot.getValue(Counselors.class);
-                        if (!counselors.getId().equals(firebaseUser.getUid()) && mUsers != null) {
+                        if (!counselors.getId().equals(firebaseUser.getUid())) {
                             find_counselor.setVisibility(View.GONE);
                             mUsers.add(counselors);
                         }else {

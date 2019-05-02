@@ -8,37 +8,40 @@ import android.widget.Button;
 
 import com.example.realtimechatapp.R;
 
-public class Question2_1 extends AppCompatActivity {
+public class RateCounselor1 extends AppCompatActivity {
 
     private Button btn_ans1,btn_ans2,btn_ans3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question2_1);
-
+        setContentView(R.layout.activity_question2_1_1_1_1);
 
         btn_ans1 = findViewById(R.id.btn_ans1);
         btn_ans2 = findViewById(R.id.btn_ans2);
-
+        btn_ans3 = findViewById(R.id.btn_ans3);
 
         btn_ans1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btn_ans1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(Question2_1.this, Question2_1_1.class));
-                    }
-                });
+                startActivity(new Intent(RateCounselor1.this, Equi1.class));
+
             }
         });
         btn_ans2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(RateCounselor1.this, Equi2.class));
 
-                        startActivity(new Intent(Question2_1.this, AvailabilityOnceAWeek.class));
-                    }
+            }
+        });
+        btn_ans3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RateCounselor1.this,Equi3
+                        .class));
+
+            }
         });
     }
 }

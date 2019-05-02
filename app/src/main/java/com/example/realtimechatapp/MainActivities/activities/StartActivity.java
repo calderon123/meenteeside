@@ -116,7 +116,7 @@ public class StartActivity extends AppCompatActivity {
 
                                             progressBar.setVisibility(view.GONE);
                                             if (task.isSuccessful()){
-                                                Intent intent = new Intent(StartActivity.this, MenteeMainActivity.class);
+                                                Intent intent = new Intent(StartActivity.this, Access.class);
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                                 startActivity(intent);
                                                 finish();

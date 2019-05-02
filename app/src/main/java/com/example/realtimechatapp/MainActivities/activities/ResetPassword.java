@@ -1,5 +1,6 @@
 package com.example.realtimechatapp.MainActivities.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,9 @@ public class ResetPassword extends AppCompatActivity {
                 if (email.equals("")){
                     Toast.makeText(ResetPassword.this ,"All fields required", Toast.LENGTH_SHORT).show();
                 }else{
+                    ProgressDialog dialog = new ProgressDialog(ResetPassword.this);
+                    dialog.setMessage("Sending Request..");
+                    dialog.show();
                     firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
