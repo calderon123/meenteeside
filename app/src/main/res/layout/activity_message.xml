@@ -20,14 +20,14 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_account_circle_black_24dp" />
-
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_margin="5dp"
-                android:layout_toEndOf="@+id/profile_image"
-                android:layout_toRightOf="@+id/profile_image"
                 android:orientation="vertical">
 
                 <TextView
@@ -48,6 +48,19 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/videocall"
+                    android:layout_gravity="end"
+                    android:layout_width="50dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_video_call_black_24dp"/>
+            </LinearLayout>
+            </RelativeLayout>
         </android.support.v7.widget.Toolbar>
 
 

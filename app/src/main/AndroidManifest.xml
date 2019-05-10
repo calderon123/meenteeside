@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivities.activities.Access"></activity>
+        <activity android:name=".MainActivities.activities.VideoCall"></activity>
         <activity android:name=".MainActivities.questions.AnswerEquivalent4" />
         <activity android:name=".MainActivities.questions.Equi3" />
         <activity android:name=".MainActivities.questions.Equi2" />
@@ -56,7 +56,7 @@
         <activity android:name=".MainActivities.questions.Question1" />
         <activity android:name=".MainActivities.activities.MenteeMainActivity" />
         <activity android:name=".MainActivities.activities.RegisterMenteeActivity" />
-        <activity android:name=".MainActivities.activities.StartActivity"></activity>
+        <activity android:name=".MainActivities.activities.StartActivity" />
         <activity android:name=".MainActivities.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,6 +65,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivities.activities.Access" />
+
         <service
             android:name=".MainActivities.Notification.MyFirebaseIdService"
             android:enabled="true"

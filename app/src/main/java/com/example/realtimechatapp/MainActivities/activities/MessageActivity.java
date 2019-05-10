@@ -21,6 +21,7 @@ import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -87,7 +88,7 @@ public class MessageActivity extends AppCompatActivity {
     ValueEventListener seenListener;
     Intent intent;
     private DatePickerDialog.OnDateSetListener onDateSetListener;
-
+    ImageView videocall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +113,7 @@ public class MessageActivity extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);
         recyclerView1.setLayoutManager(linearLayoutManager1);
 
-
+        videocall = findViewById(R.id.videocall);
         profile_image = findViewById(R.id.profile_image);
         fullname = findViewById(R.id.fullname);
         expertise = findViewById(R.id.expertise);
@@ -122,6 +123,13 @@ public class MessageActivity extends AppCompatActivity {
 
         final String userid = getIntent().getStringExtra("id");
 
+
+        videocall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MessageActivity.this,VideoCall.class));
+            }
+        });
 
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
 
