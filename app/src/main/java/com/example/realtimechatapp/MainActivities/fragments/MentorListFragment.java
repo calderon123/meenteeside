@@ -102,12 +102,12 @@ public class MentorListFragment extends Fragment {
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                if (search.getText().toString().equals("")) {
                     mUsers.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Counselors counselors= snapshot.getValue(Counselors.class);
                         if (!counselors.getId().equals(firebaseUser.getUid())) {
-                            find_counselor.setVisibility(View.GONE);
+
                             mUsers.add(counselors);
                         }else {
                             find_counselor.setVisibility(View.VISIBLE);
@@ -115,6 +115,7 @@ public class MentorListFragment extends Fragment {
                     }
                     mentorlistAdapter = new MentorlistAdapter(getContext(), mUsers, false);
                     recyclerView.setAdapter(mentorlistAdapter);
+                }
                 }
 
 
@@ -141,10 +142,10 @@ public class MentorListFragment extends Fragment {
                 if (search.getText().toString().equals("")) {
                     mUsers.clear();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                        Counselors counselors = snapshot.getValue(Counselors.class);
-
-                        mUsers.add(counselors);
-
+                        if (isAdded()) {
+                            Counselors counselors = snapshot.getValue(Counselors.class);
+                                mUsers.add(counselors);
+                        }
                     }
                     mentorlistAdapter = new MentorlistAdapter(getContext(), mUsers, true);
                     recyclerView.setAdapter(mentorlistAdapter);

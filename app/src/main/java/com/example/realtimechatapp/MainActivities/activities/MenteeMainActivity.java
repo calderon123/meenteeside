@@ -86,6 +86,13 @@ public class MenteeMainActivity extends AppCompatActivity
         final TabLayout tableLayout = findViewById(R.id.tab_layout);
         final ViewPager viewPager = findViewById(R.id.view_pager);
 
+        View view = navigationView.getHeaderView(0);
+
+        img_off =  view.findViewById(R.id.img_of);
+        img_on = view.findViewById(R.id.img_o);
+        fullname = view.findViewById(R.id.fullnam);
+        email = view.findViewById(R.id.emai);
+        imageView = view.findViewById(R.id.imageView);
 
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
@@ -137,11 +144,7 @@ public class MenteeMainActivity extends AppCompatActivity
                 UserMentee userMentee = dataSnapshot.getValue(UserMentee.class);
 
 
-                img_off = (CircleImageView) findViewById(R.id.img_of);
-                img_on =(CircleImageView) findViewById(R.id.img_o);
-                fullname = findViewById(R.id.fullnam);
-                email = findViewById(R.id.emai);
-                imageView = findViewById(R.id.imageView);
+
 
                 try {
 

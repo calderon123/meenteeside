@@ -64,6 +64,7 @@ public class MentorlistAdapter extends RecyclerView.Adapter<MentorlistAdapter.Vi
                 .child(counselors.getId()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 UserMentor userMentor = dataSnapshot.getValue(UserMentor.class);
                 viewHolder.fullname.setText(userMentor.getFullname());
 
@@ -72,7 +73,7 @@ public class MentorlistAdapter extends RecyclerView.Adapter<MentorlistAdapter.Vi
                 if (userMentor.getImageURL().equals("default")){
                     viewHolder.profile_image.setImageResource(R.mipmap.ic_launcher);
                 }else{
-                    Glide.with(mContext).load(userMentor.getImageURL()).into(viewHolder.profile_image);
+                    Glide.with(mContext.getApplicationContext()).load(userMentor.getImageURL()).into(viewHolder.profile_image);
                 }
 
             }
