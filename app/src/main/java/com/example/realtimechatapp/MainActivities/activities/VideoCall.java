@@ -21,9 +21,9 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class VideoCall extends AppCompatActivity implements Session.SessionListener, PublisherKit.PublisherListener {
 
     private static String API_KEY = "46326572";
-    private static String SESSION_ID = "2_MX40NjMyNjU3Mn5-MTU1NzQ4MTk3MzIzMX52SndNRHRwTlVRbU11YTd0VlNad3BxNlJ-fg";
-    private static String TOKEN = "T1==cGFydG5lcl9pZD00NjMyNjU3MiZzaWc9MDRiM2FmZWY1NzVlN2QwOGNjYmZjMmZmNjNjMDc0NjRkMDkyNTAzZDpzZXNzaW9uX2lkPTJfTVg0ME5qTXlOalUzTW41LU1UVTFOelE0TVRrM016SXpNWDUyU25kTlJIUndUbFZSYlUxMVlUZDBWbE5hZDNCeE5sSi1mZyZjcmVhdGVfdGltZT0xNTU3NDgyMDI4Jm5vbmNlPTAuMzg2Mzc5NzE1NTcxNTYzNiZyb2xlPXB1Ymxpc2hlciZleHBpcmVfdGltZT0xNTU3NTAzNjI3JmluaXRpYWxfbGF5b3V0X2NsYXNzX2xpc3Q9";
-    private static String LOG_TAG = VideoCall.class.getSimpleName();
+    private static String SESSION_ID = "1_MX40NjMyNjU3Mn5-MTU1ODU2Nzg1Mzk2OH5HU09JbDVGNWlpdGpJeUlyc1NaaFhwL3N-fgg";
+    private static String TOKEN = "T1==cGFydG5lcl9pZD00NjMyNjU3MiZzaWc9NTgzYzc5MjBkMzVmOTYyMTI2NTVjY2UxZjkxMTIwN2NmYTdkZTQwMjpzZXNzaW9uX2lkPTFfTVg0ME5qTXlOalUzTW41LU1UVTFPRFUyTnpnMU16azJPSDVIVTA5SmJEVkdOV2xwZEdwSmVVbHljMU5hYUZod0wzTi1mZyZjcmVhdGVfdGltZT0xNTU4NTY3ODk1Jm5vbmNlPTAuODgxNDczMjg4Mjc5MTAzMiZyb2xlPXB1Ymxpc2hlciZleHBpcmVfdGltZT0xNTYxMTU5ODk0JmluaXRpYWxfbGF5b3V0X2NsYXNzX2xpc3Q9";
+     private static String LOG_TAG = VideoCall.class.getSimpleName();
     private static final int RC_SETTINGS= 123;
 
     private Session session;
